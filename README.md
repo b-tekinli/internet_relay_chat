@@ -25,8 +25,53 @@ TCP bağlantı tabanlıdır, UDP bağlantı tabanlı değildir. TCP'de akış ko
 2. **Datagram Soket (SOCK_DGRAM)**: Bu tür soketler, güvenilirlik veya sıralama gerektirmeyen veri iletimi için kullanılır. UDP üzerinden çalışırlar ve bağlantısız bir iletişim modeli sağlarlar.
 
 
-## Kullanılan Tüm Terimler
+## Kullanılan Tüm Fonksiyonlar
 
+```cpp
+
+socket(AF_INET, SOCK_STREAM, 0);
+```
+
+`socket()` fonksiyonu, yeni bir soket oluşturmak için kullanılır.
+
+İlk parametre olarak;
 `AF_INET`: Bir soket oluştururken ağ protokollerini belirlemek için kullanılır. "AF" kısaltması "Address Family" yani "Adres Ailesi" anlamına gelir. AF_INET, IPv4 adres ailesini temsil eder. Bir program ***AF_INET*** kullanarak TCP/IP veya UDP gibi IPv4 tabanlı ağ protokollerini kullanarak ağ üzerinde iletişim kurabilir.
+Kısaca, IPv4 kullanacağını belirtir.
+
+İkinci parametre olarak;
+`SOCK_STREAM`: TCP soketi oluşturulacağını belirtir.
+
+Üçüncü parametre olarak;
+`0`: Default protokol kullanılır.
+
+
+<br />
+
+
+```cpp
+
+listen(int sockfd, int backlog);
+```
+
+`listen()` fonksiyonu, bir soketi belirli bağlantı taleplerini dinlemek için kullanılan sokete dönüştürür.
+
+- `sockfd`: Dinlemek istediğiniz soketin tanımlayıcısı (soket dosya tanımlayıcısı).
+
+- `backlog`: Gelen bağlantı taleplerinin kuyruğunda bekleyebilecek maksimum sayı. Bu, aynı anda kabul edilebilecek bağlantı sayısını belirtir.
+
+
+<br /> 
+
+
+```cpp
+
+accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
+```
+
+- `sockfd`: Dinlemek istediğiniz soketin tanımlayıcısı (soket dosya tanımlayıcısı).
+
+- `addr`: Yeni bağlantının adres bilgilerini tutar. Bağlantıyı sağlayan clientın IP adresi ve port numarası gibi bilgileri almak için kullanılabilir. Bu parametreyi NULL olarak belirtebilirsiniz.
+
+- `addrlen`: addr boyutunu tutar. Bu parametreyi NULL olarak belirtebilirsiniz.
 
 
