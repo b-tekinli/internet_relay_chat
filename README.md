@@ -2,33 +2,31 @@
 
 IRC, internet üzerindeki metin tabanlı iletişim protokolüdür ve gerçek zamanlı iletişim sağlar. IRC kullanıcıları, doğrudan mesaj alışverişi yapabilir ve grup kanallarına katılabilir. IRC istemcileri, IRC sunucusuna bağlanarak kanallara katılır. IRC sunucuları, bir ağ oluşturmak için birbirine bağlanır.
 
-Projenin amacı, C++ 98 kullanarak bir IRC sunucusu geliştirmektir. Proje, bir istemci geliştirme gerektirmez ve sunucu-sunucu iletişimini ele almanız gerekmez.
 
-Projede istenen özellikler şunlardır:
+## İnternet Protokolleri Nelerdir?
 
-1. Sunucunun aynı anda birden fazla istemciyi işleyebilmesi ve asla donmaması gerekmektedir.
-2. Forking (çatallanma) kullanılmamalıdır. Tüm I/O işlemleri bloke etmeyen (non-blocking) olmalıdır.
-3. Tüm işlemlerin (okuma, yazma, dinleme vb.) tek bir poll() (veya eşdeğer) işlevi ile yönetilmesi gerekmektedir.
-4. İstemciler arasındaki iletişim TCP/IP (v4 veya v6) üzerinden gerçekleştirilmelidir.
-5. Referans istemci ile sunucunuz arasındaki iletişim, resmi bir IRC sunucusu ile kullanırkenki gibi olmalıdır. Ancak, sadece aşağıdaki özellikleri uygulamanız gerekmektedir:
-  - Kimlik doğrulama yapabilme, takma ad ve kullanıcı adı belirleyebilme, bir kanala katılabilme, referans istemci kullanarak özel mesajlar gönderme ve alma.
-  - Bir istemciden kanala gönderilen tüm mesajlar, kanala katılan diğer tüm istemcilere iletilmelidir.
-  - Operator ve normal kullanıcılar olmalıdır.
-  - Ardından operatorlere özgü komutları uygulamanız gerekmektedir.
+Ağ protokolü, 2 ya da daha fazla bilgisayar arasındaki iletişimi sağlamak amacıyla verileri düzenlemeye yarayan, standart olarak kabul edilmiş kurallar dizisidir.
 
-Ayrıca sunucunun doğru şekilde işlem yaptığını doğrulamak için yapılması gereken bir test örneği de içermektedir. Test, nc (netcat) kullanılarak gerçekleştirilebilir ve sunucuya gönderilen her şeyin doğru bir şekilde işlendiğini kontrol eder.
+**TCP**, kayıpsız veri gönderimi sağlayabilmek için kullanılan protokoldür. Gönderilen veriler için özel bir TCP kabul paketi (TCP ACK) gönderilir ve gelmiş olan paketlerin doğruluğu kontrol edilir. Gönderen taraf, kabul gelmediği sürece paketi tekrar gönderir, böylece gönderim sağlanmış olur.
+
+**UDP**, veri gönderimini bağlantısız şekilde gerçekleştirmesidir. Ses ve video gönderiminde kullanılır. TCP'ye göre daha hızlıdır fakat güvenli değildir.
+
+
+### TCP ve UDP Arasındaki Fark Nedir?
+TCP bağlantı tabanlıdır, UDP bağlantı tabanlı değildir. TCP'de akış kontrolü vardır, UDP'de akış kontrolü yoktur. TCP başlığı (header) 20 bayttır, UDP başlığı 8 bayttır. TCP, UDP'den daha yavaştır, çünkü verinin karşı tarafa ulaşıp ulaşmadığını kontrol eder.
+
 
 ## Soketler ve Çeşitleri
 
 4 farklı soket çeşidi vardır fakat genel olarak 2 tanesi kullanılır. Bunlar:
 
-1. Stream Soket (SOCK_STREAM): Bu tür soketler, güvenilir, veri iletimi için kullanılır. TCP üzerinden verinin doğru ve sıralı bir şekilde iletilmesini sağlarlar.
+1. **Stream Soket (SOCK_STREAM)**: Bu tür soketler, güvenilir, veri iletimi için kullanılır. TCP üzerinden verinin doğru ve sıralı bir şekilde iletilmesini sağlarlar.
 
-2. Datagram Soket (SOCK_DGRAM): Bu tür soketler, güvenilirlik veya sıralama gerektirmeyen veri iletimi için kullanılır. UDP üzerinden çalışırlar ve bağlantısız bir iletişim modeli sağlarlar.
+2. **Datagram Soket (SOCK_DGRAM)**: Bu tür soketler, güvenilirlik veya sıralama gerektirmeyen veri iletimi için kullanılır. UDP üzerinden çalışırlar ve bağlantısız bir iletişim modeli sağlarlar.
 
 
 ## Kullanılan Tüm Terimler
 
-`AF_INET`: Bir soket oluştururken ağ protokollerini belirlemek için kullanılır. "AF" kısaltması "Address Family" yani "Adres Ailesi" anlamına gelir. AF_INET, IPv4 adres ailesini temsil eder. Bir program `AF_INET` kullanarak TCP/IP veya UDP gibi IPv4 tabanlı ağ protokollerini kullanarak ağ üzerinde iletişim kurabilir.
+`AF_INET`: Bir soket oluştururken ağ protokollerini belirlemek için kullanılır. "AF" kısaltması "Address Family" yani "Adres Ailesi" anlamına gelir. AF_INET, IPv4 adres ailesini temsil eder. Bir program ***AF_INET*** kullanarak TCP/IP veya UDP gibi IPv4 tabanlı ağ protokollerini kullanarak ağ üzerinde iletişim kurabilir.
 
-`SOCK_STREAM`: 
+
