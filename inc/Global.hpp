@@ -3,11 +3,12 @@
 
 #include "Socket.hpp"
 
-int MAX_CLIENT = 50;
-
 using std::cout;
 using std::endl;
 using std::string;
+
+int MAX_CLIENT = 50;
+
 
 
 #endif
