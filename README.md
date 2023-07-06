@@ -17,3 +17,18 @@ Projede istenen özellikler şunlardır:
   - Ardından operatorlere özgü komutları uygulamanız gerekmektedir.
 
 Ayrıca sunucunun doğru şekilde işlem yaptığını doğrulamak için yapılması gereken bir test örneği de içermektedir. Test, nc (netcat) kullanılarak gerçekleştirilebilir ve sunucuya gönderilen her şeyin doğru bir şekilde işlendiğini kontrol eder.
+
+## Soketler ve Çeşitleri
+
+4 farklı soket çeşidi vardır fakat genel olarak 2 tanesi kullanılır. Bunlar:
+
+1. Stream Soket (SOCK_STREAM): Bu tür soketler, güvenilir, veri iletimi için kullanılır. TCP üzerinden verinin doğru ve sıralı bir şekilde iletilmesini sağlarlar.
+
+2. Datagram Soket (SOCK_DGRAM): Bu tür soketler, güvenilirlik veya sıralama gerektirmeyen veri iletimi için kullanılır. UDP üzerinden çalışırlar ve bağlantısız bir iletişim modeli sağlarlar.
+
+
+## Kullanılan Tüm Terimler
+
+`AF_INET`: Bir soket oluştururken ağ protokollerini belirlemek için kullanılır. "AF" kısaltması "Address Family" yani "Adres Ailesi" anlamına gelir. AF_INET, IPv4 adres ailesini temsil eder. Bir program `AF_INET` kullanarak TCP/IP veya UDP gibi IPv4 tabanlı ağ protokollerini kullanarak ağ üzerinde iletişim kurabilir.
+
+`SOCK_STREAM`: 
