@@ -32,6 +32,6 @@ public:
     bool Send();
     int Receive();
     void Close();
-}
+};
 
 #endif
