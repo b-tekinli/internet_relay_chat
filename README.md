@@ -115,5 +115,20 @@ accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 - `addrlen`: addr boyutunu tutar. Bu parametreyi NULL olarak belirtebilirsiniz.
 
 
+<br />
+
+
+- `struct sockaddr_in`: Bu struct yapısı bir server soketi oluştururken veya bir client soketine bağlanırken kullanılan adres bilgilerini içerir. Aşağıdaki struct yapısının üyeleri de ağ adres bilgilerini temsil ederler.
+
+- `sin_family`: Adres ailesini belirtir. `AF_INET` kullanarak IPv4 adres ailesini belirtmiş olur.
+
+- `sin_addr`: IP adresini tutar. IP adresi ise `in_addr_t` türündeki `s_addr` ile temsil edilir.
+
+- `sin_port`: Port numarasını tutar. Port numarası, ağ byte sırasına dönüştürülmeden saklanır.
+
+        :exclamation: Ağ byte sırasına dönüştürmek, bellekte çok byte'lık veri türleri (örneğin, 16 bit veya 32 bit) genellikle ardışık bellek hücrelerinde saklanır. Byte sıralama düzeni, bu bellek hücrelerinin hangi sıra ile sıralandığını belirler. Bunlar Big-endian ve Little-endian olarak 2'ye ayrılır. (Dilerseniz ayrıntılı bir şekilde araştırabilirsiniz.)
+        
+        Bir veri değerini ağ byte sırasına dönüştürmek, küçük endian düzeninde tutulan bir değeri büyük endian düzenine dönüştürmeyi ifade eder. Bu genellikle ağ protokollerinde veya farklı sistemler arasında veri alışverişinde kullanılan bir standartlaştırma yöntemidir. htons() (host to network short) ve htonl() (host to network long) gibi işlevler, bir veri değerini ağ byte sırasına dönüştürmek için kullanılır.
+
 
 
