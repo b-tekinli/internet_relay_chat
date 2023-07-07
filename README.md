@@ -196,9 +196,72 @@ int main() {
 
     return 0;
 }
-
 ```
 
 `c.str()` fonksiyonu, C-style (null-terminated) bir karakter dizisi olarak döndürür. Stringin içeriğini C diline ait fonksiyonlara veya C dilinde çalışan kütüphanelere aktarmak için kullanılır.
+
+
+<br />
+
+
+```cpp
+ssize_t recv(int sockfd, void *buf, size_t len, int flags);
+```
+
+`recv()` fonksiyonu, soketten veri almak için kullanılır. Client ve server tarafında veri alışverişi sağlar.
+
+
+- `sockfd`: Dinlemek istediğiniz soketin tanımlayıcısı (soket fd).
+
+- `buf`: Alınan verinin hedef bellek alanını temsil eden bir pointer.
+    
+- `len`: buf bellek alanının boyutu (byte cinsinden).
+    
+- `flags`: İsteğe bağlı. Özel bir işlem yapmak için kullanılabilir veya 0 olarak belirtilebilir.
+
+
+<br />
+
+
+`fctnl()` fonksiyonu, soketin fd üzerindeki dosya özelliklerini değiştirmek için kullanılır.
+
+- `F_GETFL`: Mevcut dosya özelliklerini alır.
+
+- `O_NONBLOCK`: Engellenmeyen modda açmak için kullanılan bir dosya açma flagidir.
+
+        :exclamation: Proje özelinde fcntl() fonksiyonunu kullanacaksak sadece F_SETFL VE O_NONBLOCK flagleriyle kullanabiliyoruz bunlar dışında bir kullanım yasak.
+
+
+<br />
+
+
+```cpp
+int poll(struct pollfd *fds, nfds_t nfds, int timeout);
+```
+
+`poll()` fonksiyonu, çoklu soket girişini aynı anda takip etmek ve olayları yönetmek için kullanılır. Bir dizi soketi izleyerek belirli bir olayın gerçekleşip gerçekleşmediğini kontrol eder. 
+
+- `fds`: struct pollfd türünden bir dizi, izlenecek soketlerin ve beklenen olayların bilgisini içerir.
+    
+- `nfds`: fds dizisinin boyutu, izlenecek soket sayısını belirtir.
+    
+- `timeout`: İşlemin zaman aşımı süresini belirtir. Bu süre milisaniye cinsinden ifade edilir. Negatif değerler süresiz beklemeyi, 0 değeri anında dönüşü sağlar.
+
+
+<br />
+
+
+## Netcat Nedir?
+
+Ağ iletişimi için kullanılan bir araçtır. Açılımı "networking Swiss Army knife" olarak adlandırılır. Temel olarak, TCP veya UDP üzerinden ağ bağlantıları kurmak, veri göndermek veya almak, port dinlemek gibi işlemleri gerçekleştirebilir. Netcat, hem bir server hem de bir client olarak çalışabilir. Server modunda, belirli bir portu dinleyerek gelen bağlantıları kabul eder. Client modunda ise belirli bir hedefe bağlanır. Netcat komutları da, server veya client modunu belirlemek, bağlantıları yönetmek, veri iletmek gibi çeşitli işlemleri gerçekleştirmek için kullanılır.
+
+- `nc -l 8080` :arrow_right: 8080 portunu dinlemek için netcat'i server modunda çalıştırır.
+
+- `nc 127.0.0.1 8080` :arrow_right: Client modunda çalıştırır.
+
+- `nc 192.168.0.1 3030 < irc.txt` :arrow_right: Belirtilen ip adres ve portuna irc.txt dosyasının içeriğini gönderir.
+
+- `nc -l 3030 > irc.txt` :arrow_right: 3030 portunu dinleyerek gelen veriyi irc.txt dosyasına kaydeder.
+
 
 
