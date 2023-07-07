@@ -68,7 +68,6 @@ TCP bağlantı tabanlıdır, UDP bağlantı tabanlı değildir. TCP'de akış ko
 ## Kullanılan Tüm Fonksiyonlar
 
 ```cpp
-
 socket(AF_INET, SOCK_STREAM, 0);
 ```
 
@@ -89,7 +88,22 @@ Kısaca, IPv4 kullanacağını belirtir.
 
 
 ```cpp
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+```
 
+`bind()` fonksiyonu, bir soketi belirli bir adres ve port numarasına bağlamak için kullanılır.
+
+- `sockfd`: Dinlemek istediğiniz soketin tanımlayıcısı (soket fd).
+
+- `addr`: Bu parametre, IPv4 için struct sockaddr_in veya IPv6 için struct sockaddr_in6 yapılarından birini işaret edebilir.
+
+- `addrlen`: addr yapısının boyutunu belirten bir socklen_t türünde bir değer.
+
+
+<br />
+
+
+```cpp
 listen(int sockfd, int backlog);
 ```
 
@@ -104,9 +118,10 @@ listen(int sockfd, int backlog);
 
 
 ```cpp
-
 accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 
 ```
+
+`accept()` fonksiyonu, yeni bir client bağlantısını kabul etmek için kullanılır. Bağlantıyı oluşturan clientın soket dosya tanımlayıcısını (clientSocket) döndürür.
 
 - `sockfd`: Dinlemek istediğiniz soketin tanımlayıcısı (soket fd).
 
@@ -116,6 +131,22 @@ accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 
 
 <br />
+
+
+```cpp
+#include <netinet/in.h>
+
+struct sockaddr_in {
+    short            sin_family;   // AF_INET
+    unsigned short   sin_port;     // htons(3490)
+    struct in_addr   sin_addr;     // see struct in_addr, below
+    char             sin_zero[8];  // zero this if you want to
+};
+
+struct in_addr {
+    unsigned long s_addr;  // load with inet_aton()
+};
+```
 
 
 - `struct sockaddr_in`: Bu struct yapısı bir server soketi oluştururken veya bir client soketine bağlanırken kullanılan adres bilgilerini içerir. Aşağıdaki struct yapısının üyeleri de ağ adres bilgilerini temsil ederler.
@@ -130,5 +161,44 @@ accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
         
         Bir veri değerini ağ byte sırasına dönüştürmek, küçük endian düzeninde tutulan bir değeri büyük endian düzenine dönüştürmeyi ifade eder. Bu genellikle ağ protokollerinde veya farklı sistemler arasında veri alışverişinde kullanılan bir standartlaştırma yöntemidir. htons() (host to network short) ve htonl() (host to network long) gibi işlevler, bir veri değerini ağ byte sırasına dönüştürmek için kullanılır.
 
+- `INADDR_ANY`: Local IP adreslerini kabul etmek için kullanılır.
+
+
+<br />
+
+
+```cpp
+int inet_pton(int af, const char *src, void *dst);
+```
+
+`inet_pton()` fonksiyonu, IPv4 veya IPv6 adreslerini metin formatından ikili formata dönüştürmek için kullanılır. "pton", "presentation to numeric" anlamına gelir.
+
+- `af`: Adres ailesini (AF_INET veya AF_INET6) belirten bir tam sayı. IPv4 için AF_INET kullanılırken, IPv6 için AF_INET6 kullanılır.
+
+- `src`: Dönüştürülmek istenen IP adresini içeren bir C-style string (null-terminated string).
+
+-`dst`: Dönüştürülmüş IP adresinin hedef bellek alanını temsil eden bir pointer.
+
+
+<br />
+
+
+```cpp
+#include <string>
+
+int main() {
+    std::string str = "Merhaba";
+
+    const char* cstr = str.c_str();
+
+    // C-style karakter dizisini kullanma
+    // ...
+
+    return 0;
+}
+
+```
+
+`c.str()` fonksiyonu, C-style (null-terminated) bir karakter dizisi olarak döndürür. Stringin içeriğini C diline ait fonksiyonlara veya C dilinde çalışan kütüphanelere aktarmak için kullanılır.
 
 
