@@ -11,27 +11,30 @@
 #include <sstream>
 #include <unistd.h>
 #include <vector>
+#include <cstring>
 
 #include "Global.hpp"
 
+
 class Socket
 {
-private:
-    int fd_socket;
+    private:
+        int         fd_socket;
+        sockaddr_in connect_int; // soketin bağlanacağı adres ve port bilgilerini almak için
 
-public:
-    Socket();
-    ~Socket();
+    public:
+        Socket(int port);
+        ~Socket();
 
-    bool Create();
-    bool Bind(int port);
-    bool Listen();
-    bool Accept(Socket &newSocket);
-    bool Connect();
-    void SetNonBlocking();
-    bool Send();
-    int Receive();
-    void Close();
-};
+        bool    Create();
+        bool    Bind();
+        bool    Listen();
+        bool    Accept(Socket &newSocket);
+        bool    Connect(string &ipAdress);
+        bool    Send(string &message);
+        void    SetNonBlocking();
+        int     Receive();
+        void    Close();
+    };
 
 #endif
