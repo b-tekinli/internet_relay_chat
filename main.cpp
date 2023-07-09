@@ -27,6 +27,8 @@ int main(int ac, char **av)
     Socket sc(atoi(av[1]));
 
     sc.Create(atoi(av[1]));
+
+
     if (!sc.Bind())
     {
         cout << "bind" << endl;
