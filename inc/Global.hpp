@@ -1,8 +1,8 @@
 #ifndef GLOBAL_HPP
 #define GLOBAL_HPP 
 
-#include <netinet/in.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include <arpa/inet.h>
 #include <poll.h>
 #include <iostream>
@@ -20,6 +20,5 @@ using std::ifstream;
 using std::ofstream;
 
 #include "Socket.hpp"
-
 
 #endif
