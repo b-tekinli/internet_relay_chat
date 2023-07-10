@@ -87,6 +87,11 @@ bool Socket::Send(string &message)
     return (sendResult != -1);
 }
 
+void SetNonBlocking()
+{
+    
+}
+
 /*
 soketten veri almak için kullanılır. gelen verileri message parametresine atar
 ve alınan bayt sayısını döndürür.
