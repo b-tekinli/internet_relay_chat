@@ -45,6 +45,9 @@ int main(int ac, char **av)
         cout << "Sunucuya bağlandı!" << endl;
     }
 
+    clientSocket.SetNonBlocking(true);
+    if()
+
     string go;
 
     while (go[0] != '.')
