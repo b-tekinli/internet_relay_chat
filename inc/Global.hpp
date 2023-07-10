@@ -19,6 +19,7 @@ using std::string;
 using std::ifstream;
 using std::ofstream;
 using std::cin;
+using std::getline;
 
 #include "Socket.hpp"
 
