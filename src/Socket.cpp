@@ -87,9 +87,22 @@ bool Socket::Send(string &message)
     return (sendResult != -1);
 }
 
-void SetNonBlocking()
+// emin değiliz çalıştırılması gerek
+// The poll() function identifies those file descriptors on which an application can read or write data, or on which an error event has occurred.
+void Socket::SetNonBlocking(bool isNonBlocking)
 {
-    
+    struct pollfd pfd;
+
+    pfd.fd = fd_socket;
+    pfd.events = POLLIN | POLLOUT; // dinleme ve yazma olaylarını kontrol etmek için
+
+    int timeout = 0; // zaman aşımı olmadan poll çağırmak için
+
+    if (isNonBlocking)
+        pfd.revents = 0; // eğer geri dönen olayları burada sıfırlamazsak poll'un bir önceki çağrısından kalan eventleri saklıyor.
+
+    if (poll(&pfd, 1, timeout) == -1)
+        perror("poll() fail");
 }
 
 /*
