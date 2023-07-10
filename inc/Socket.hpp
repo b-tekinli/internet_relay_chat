@@ -19,7 +19,7 @@ class Socket
         bool    Accept(Socket &newSocket);
         bool    Connect(string &ipAdress);
         bool    Send(string &message);
-        void    SetNonBlocking();
+        void    SetNonBlocking(bool isNonBlocking);
         int     Receive(string &message);
         void    Close();
     };
