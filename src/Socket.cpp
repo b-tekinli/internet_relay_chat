@@ -1,6 +1,6 @@
 #include "../inc/Global.hpp"
 
-int MAX_CLIENT = 2;
+int MAX_CLIENT = 10;
 
 /*
 burada fd değerinin başlangıç değerini 0 ile başlatmamızın sebebi,
@@ -27,12 +27,12 @@ gerekli hataların uygulanmasına olanak sağlayacak.
 bool Socket::Create(int port)
 {
     int opt = 1;
+
     cout << port << endl;
+
     fd_socket = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (setsockopt(fd_socket, SOL_SOCKET,
-                   SO_REUSEADDR | SO_REUSEPORT, &opt,
-                   sizeof(opt)))
+    if (setsockopt(fd_socket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
     {
         perror("setsockopt");
         exit(EXIT_FAILURE);
@@ -40,7 +40,6 @@ bool Socket::Create(int port)
     connect_int.sin_family = AF_INET;
     connect_int.sin_addr.s_addr = inet_addr("127.0.0.1");
     connect_int.sin_port = htons(port);
-    cout << opt << endl;
     return (fd_socket != -1);
 }
 
@@ -49,9 +48,6 @@ bir soketi, argümandan gelecek olan portla bağlamak için kullanacağımız fo
 */
 bool Socket::Bind()
 {
-    /*connect_int.sin_family = AF_INET;
-    connect_int.sin_port = htons(port);
-    connect_int.sin_addr.s_addr = INADDR_ANY;*/
     return (bind(fd_socket, (struct sockaddr *)&connect_int, sizeof(connect_int)) != -1);
 }
 
