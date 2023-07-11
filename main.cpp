@@ -45,8 +45,16 @@ int main(int ac, char **av)
         cout << "Sunucuya bağlandı!" << endl;
     }
 
+
     clientSocket.SetNonBlocking(true);
-    if()
+
+    int flags = fcntl(clientSocket.getSocketFd(), F_GETFL, 0);
+
+    if(flags && O_NONBLOCK)
+        cout << "Bloklayıcı olmayan mod başarılı!" << endl;
+    else
+        cout << "Bloklayıcı olmayan mod başarısız!" << endl;
+
 
     string go;
 
