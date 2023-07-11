@@ -22,6 +22,8 @@ public:
     void SetNonBlocking(bool isNonBlocking);
     int Receive(string &message);
     void Close();
+
+    int getSocketFd();
 };
 
 #endif
