@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <vector>
 #include <cstring>
+#include <fcntl.h>
 
 using std::cout;
 using std::endl;
