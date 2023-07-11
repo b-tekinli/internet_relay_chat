@@ -130,3 +130,8 @@ void Socket::Close()
         fd_socket = 0;
     }
 }
+
+int Socket::getSocketFd()
+{
+    return this->fd_socket;
+}
