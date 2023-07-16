@@ -10,7 +10,7 @@ private:
     sockaddr_in connect_int; // soketin bağlanacağı adres ve port bilgilerini almak için
 
 public:
-    Socket(int port);
+    Socket();
     ~Socket();
 
     bool Create(int port);

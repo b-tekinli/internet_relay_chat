@@ -13,6 +13,7 @@
 #include <vector>
 #include <cstring>
 #include <fcntl.h>
+#include <map>
 
 using std::cout;
 using std::endl;

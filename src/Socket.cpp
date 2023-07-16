@@ -1,6 +1,6 @@
 #include "../inc/Global.hpp"
 
-int MAX_CLIENT = 10;
+int MAX_CLIENT = 50;
 
 /*
 burada fd değerinin başlangıç değerini 0 ile başlatmamızın sebebi,
@@ -8,7 +8,7 @@ soketin oluşmadığını ya da bir hata olduğunu belirleyebilmek.
 çünkü bir soket oluştuğunda zaten fd_socket değişkeni
 atanan soketin file descriptorını içerecek.
 */
-Socket::Socket(int port) : fd_socket(0) {}
+Socket::Socket() : fd_socket(0) {}
 
 /*
 soket yok edildiğinde kapatılması gerektiğinden direkt olarak
@@ -26,19 +26,26 @@ gerekli hataların uygulanmasına olanak sağlayacak.
 */
 bool Socket::Create(int port)
 {
-    int opt = 1;
-
-    cout << port << endl;
+    int opt = 1;//sorulacak???
 
     fd_socket = socket(AF_INET, SOCK_STREAM, 0);
 
+    cout << fd_socket << endl;
+    if (fd_socket == -1)
+    {
+        perror("Socket function doesn't work");
+        exit (EXIT_FAILURE);
+    }
+    //reuse içeriden veya dışarıdan alınanların yeniden kullanılabileceğini söylüyo
+    //bazı eski pc lerde socket oluşumunda port eklemelerinde sorun olabiliyo
+    //portları birbirine bağlarken sorun çıkmaması adına boru örneği bu kontrol yapılıyor
     if (setsockopt(fd_socket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
     {
         perror("setsockopt");
         exit(EXIT_FAILURE);
     }
     connect_int.sin_family = AF_INET;
-    connect_int.sin_addr.s_addr = inet_addr("127.0.0.1");
+    connect_int.sin_addr.s_addr = inet_addr("127.0.0.1"); 
     connect_int.sin_port = htons(port);
     return (fd_socket != -1);
 }
@@ -59,7 +66,7 @@ bool Socket::Listen()
 bool Socket::Accept(Socket &newSocket)
 {
     socklen_t clientSize = sizeof(connect_int);
-    int clientSocket = accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize);
+    int clientSocket = accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize);//loop a alıp veri bekliyor.
 
     if (clientSocket != -1)
     {
@@ -71,7 +78,7 @@ bool Socket::Accept(Socket &newSocket)
 
 bool Socket::Connect(string &ipAdress)
 {
-    inet_pton(AF_INET, ipAdress.c_str(), &(connect_int.sin_addr));
+    inet_pton(AF_INET, ipAdress.c_str(), &(connect_int.sin_addr)); //verilen Ip adresini binary formatına çevirir
 
     return (connect(fd_socket, (sockaddr *)&connect_int, sizeof(connect_int)) != -1);
 }
@@ -111,6 +118,7 @@ belirlemek için kullanabiliriz.
 
 mesela byte sayısı 0'sa bağlantının kapandığını ya da hiç veri almadığımızı gösterebiliriz.
 */
+
 int Socket::Receive(string &message)
 {
     char buffer[4096] = {0};
