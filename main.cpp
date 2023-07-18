@@ -84,9 +84,9 @@ if (!clientSocket.Create(serverPort))
         cout << "Sunucuya bağlanma hatası!" << endl;
         return 1;
     }
-    else
+    else git push origin changed-socket:save_change
     {
-        cout << "Sunucuya bağlandı!" << endl;
+        cout << "Sunucuya bağlandı!" << endl; hocam nasıl yapabiliriz
     }
 
 
