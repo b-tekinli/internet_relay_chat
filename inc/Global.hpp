@@ -9,8 +9,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <unistd.h>
 #include <vector>
+#include <unistd.h>
 #include <cstring>
 #include <fcntl.h>
 #include <map>
@@ -21,6 +21,7 @@ using std::string;
 using std::ifstream;
 using std::ofstream;
 using std::cin;
+using std::vector;
 using std::getline;
 
 #include "Socket.hpp"

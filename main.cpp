@@ -1,4 +1,4 @@
-#include "./inc/Global.hpp"
+#include "inc/Global.hpp"
 
 /*
     Negatif bir değere sahip bir port numarası kullanmak,
@@ -17,45 +17,61 @@ bool control(char **av)
     return false;
 }
 
-int main(int ac, char **av)
+void    setUpSocket(int port)
+{
+    Socket clientSocket;
+    vector<struct pollfd> pollfds;
+    struct pollfd socket_fd;
+    
+    clientSocket.init(port);
+
+    socket_fd.fd = clientSocket.getSocketFd();
+    socket_fd.events = POLLIN;
+
+    pollfds.push_back(socket_fd);
+    
+    if (poll(&pollfds[0], pollfds.size(), -1)){
+        for (int i = 0; i < pollfds.size(); i++){
+            if(pollfds[i].revents & POLLIN){
+                if (pollfds[i].fd == socket_fd.fd){
+                    int fd = accept();
+                    struct pollfd new_fd;
+                    new_fd.fd = fd;
+                    new_fd.event = POLLIN | POLLOUT;
+                    pollfds.push_back(new_fd);
+                }
+                else {
+
+                }
+            }
+        }
+    }
+    while (1) // fix while
+    {
+        clientSocket.Accept(clientSocket);
+        cout << "s out" << endl;
+        break;
+    }
+}
+
+int main(int ac, char **av) // 8080 emakas
 {
     if (ac != 3 || !control(av))
     {
         cout << "You have entered the missing argument!" << endl;
+        cout << "./irc <password> <port>" << endl;
         return (1);
     }
 
     string serverIP = av[1];
     int serverPort = atoi(av[2]);
-    Socket clientSocket;
 
-    clientSocket.Create(serverPort);
-    while (1) // fix while
-    {
-        if (clientSocket.getSocketFd() < 0)
-        {
-            cout << "Cannot open the socket file " << endl;
-            return 1;
-        }
-        clientSocket.Bind();
-        clientSocket.Listen();
-        //clientSocket.Accept(); 
+    setUpSocket(serverPort);
+   
 
-        clientSocket.Receive(ms);
-        parser(ms);
-        
-        break;
-    }
-
-    // a = ahmet, mehmet, ceren
-    // c = ahmet, kaan
-    // d = ceren mehmet
-    
     return (0);
 }
 
-// create (socket);
-//
 
 
 
@@ -95,3 +111,8 @@ if (!clientSocket.Create(serverPort))
         getline(cin, go);
         clientSocket.Send(go);
     */
+
+
+// main düzelt
+// fcntl yi entegre edeceğiz
+// her revc gibi kullanılan fonksiyonda poll kullanılacak
