@@ -30,27 +30,24 @@ void    setUpSocket(int port)
 
     pollfds.push_back(socket_fd);
     
-    if (poll(&pollfds[0], pollfds.size(), -1)){
+    cout << "girdi" << endl;
+    while (poll(&pollfds[0], pollfds.size(), -1)){
         for (int i = 0; i < pollfds.size(); i++){
             if(pollfds[i].revents & POLLIN){
+                
                 if (pollfds[i].fd == socket_fd.fd){
-                    int fd = accept();
+                    int fd =  clientSocket.Accept();
                     struct pollfd new_fd;
                     new_fd.fd = fd;
-                    new_fd.event = POLLIN | POLLOUT;
+                    new_fd.events = POLLIN | POLLOUT;
                     pollfds.push_back(new_fd);
                 }
                 else {
-
+                    char input[50] = {0};
+                    read(pollfds[i].fd,input, 50);
                 }
             }
         }
-    }
-    while (1) // fix while
-    {
-        clientSocket.Accept(clientSocket);
-        cout << "s out" << endl;
-        break;
     }
 }
 

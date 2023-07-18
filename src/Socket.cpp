@@ -62,7 +62,7 @@ bool Socket::Listen()
     return (listen(fd_socket, MAX_CLIENT) != -1);
 }
 
-int Socket::Accept(Socket &newSocket)
+int Socket::Accept()
 {
     socklen_t clientSize = sizeof(connect_int); //loop a alıp veri bekliyor.
 

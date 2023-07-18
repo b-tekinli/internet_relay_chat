@@ -17,7 +17,7 @@ class Socket
         bool Create(int port);
         bool Bind();
         bool Listen();
-        bool Accept(Socket &newSocket);
+        int Accept();
         bool Connect(string &ipAdress);
         bool Send(string &message);
         void SetNonBlocking(bool isNonBlocking);
