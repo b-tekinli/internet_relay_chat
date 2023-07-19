@@ -1,4 +1,5 @@
 #include "inc/Global.hpp"
+#include <unistd.h>
 
 /*
     Negatif bir değere sahip bir port numarası kullanmak,
@@ -17,38 +18,106 @@ bool control(char **av)
     return false;
 }
 
+typedef int (*fp_command)(const vector<string> &input, const User &user);
+
+fp_command selCommand(const vector<string> &input) //büyük harf olması gerekiyor
+{
+    string *str = {"JOIN", "NICK", "QUIT", };
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (input[i] == "JOIN")
+        {
+
+        }
+        else if (input[i] == "NICK")
+        {
+
+        }
+        else if (input[i] == "QUIT")
+        {
+
+        }
+        else if (input[i] == "KILL")
+        {
+
+        }
+        else if (input[i] == "PING")
+        {
+
+        }
+        else if (input[i] == "PONG")
+        {
+
+        }
+        else if (input[i] == "WHO")
+        {
+
+        }
+        else if (input[i] == "USER")
+        {
+
+        }
+        else if (input[i] == "PASS")
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+}
+
+
+void handleInput(const string &input){
+    string s;
+    stringstream sstream(input);
+    vector<string> commands;
+
+    while (getline(sstream, s, ' ')){
+        commands.push_back(s);
+    }
+    // create command from input
+    selCommand(command);
+    
+}
+
 void    setUpSocket(int port)
 {
     Socket clientSocket;
     vector<struct pollfd> pollfds;
-    struct pollfd socket_fd;
     
     clientSocket.init(port);
-
-    socket_fd.fd = clientSocket.getSocketFd();
-    socket_fd.events = POLLIN;
-
-    pollfds.push_back(socket_fd);
-    
-    cout << "girdi" << endl;
+    pollfds.push_back((struct pollfd){clientSocket.getSocketFd(), POLLIN});
     while (poll(&pollfds[0], pollfds.size(), -1)){
-        for (int i = 0; i < pollfds.size(); i++){
+
+        for (int i = 0; i < pollfds.size(); i++){   
+
             if(pollfds[i].revents & POLLIN){
                 
-                if (pollfds[i].fd == socket_fd.fd){
-                    int fd =  clientSocket.Accept();
-                    struct pollfd new_fd;
-                    new_fd.fd = fd;
-                    new_fd.events = POLLIN | POLLOUT;
-                    pollfds.push_back(new_fd);
+                if (pollfds[i].fd == clientSocket.getSocketFd()){ // Connected to socket
+                    /**
+                    * yeni bir bağlantı oluşturulup oluşturulmadığını kontorl edecek ve eğer yeni
+                    * bir bağlantı varsa fonsiyonun içerisine girip acceptleyecek
+                    * yeni bağlnatı olduğunu nasıl anlıyor? 
+                    */
+                    int clientFd =  clientSocket.Accept();
+    				fcntl(clientFd, F_SETFL, O_NONBLOCK);
+                    pollfds.push_back((struct pollfd){clientFd, POLLIN | POLLOUT});
+                    cout << "New client connected!" << endl;
                 }
-                else {
-                    char input[50] = {0};
-                    read(pollfds[i].fd,input, 50);
+                else { // Connected to client
+                    char input[512] = {0};
+                    int	readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
+					if (readed <= 1)
+						close(pollfds[i].fd);
+                    handleInput(string(input));
                 }
             }
         }
     }
+	exit (0);
 }
 
 int main(int ac, char **av) // 8080 emakas
@@ -59,57 +128,21 @@ int main(int ac, char **av) // 8080 emakas
         cout << "./irc <password> <port>" << endl;
         return (1);
     }
-
     string serverIP = av[1];
     int serverPort = atoi(av[2]);
 
     setUpSocket(serverPort);
-   
-
     return (0);
 }
 
 
+// main düzelt (little part) + 
+// fcntl yi entegre edeceğiz (we can learn) +?
+// her revc gibi kullanılan fonksiyonda poll kullanılacak () +
 
 
-/*
-if (!clientSocket.Create(serverPort))
-    {
-        cout << "Soket oluşturma hatası!" << endl;
-        return 1;
-    }
+// fonkisyon pointerları ayaralayacağız
+// map üzerinden ayar yapacağız
+// murathanın fonksiyonlarına bakacağız
+// 
 
-    if (!clientSocket.Connect(serverIP))
-    {
-        cout << "Sunucuya bağlanma hatası!" << endl;
-        return 1;
-    }
-    else git push origin changed-socket:save_change
-    {
-        cout << "Sunucuya bağlandı!" << endl; hocam nasıl yapabiliriz
-    }
-
-
-    clientSocket.SetNonBlocking(true);
-
-    int flags = 0;
-    
-    flags = fcntl(clientSocket.getSocketFd(), F_GETFL, 100); // 0000 0000 0000 1000
-
-    if(flags && O_NONBLOCK) //flags = 0000 0000 0000 0000 && O_NONBLOCK == 0000 0000 0001 0000
-        cout << "Bloklayıcı olmayan mod başarılı!" << endl;
-    else
-        cout << "Bloklayıcı olmayan mod başarısız!" << endl;
-
-    string go;
-
-    while (go[0] != '.')
-    {
-        getline(cin, go);
-        clientSocket.Send(go);
-    */
-
-
-// main düzelt
-// fcntl yi entegre edeceğiz
-// her revc gibi kullanılan fonksiyonda poll kullanılacak
