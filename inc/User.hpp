@@ -1,7 +1,9 @@
 #ifndef USER_HPP
 #define USER_HPP
 
-#include "./Global.hpp"
+#include <string>
+
+using std::string;
 
 class User
 {

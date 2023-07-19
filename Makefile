@@ -14,9 +14,9 @@ INCS			=	$(shell find inc -type f -name "*.hpp")
 OBJS			=	$(SRCS:src/%.cpp=src/bin/%.o)
 HOBJS			=	$(INCS:inc/%.hpp)
 
-CC				=	@c++
-RM				=	@rm -rf
-CPPFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CC				=	c++
+RM				=	rm -rf
+CPPFLAGS		=	-std=c++98 #-Wall -Wextra -Werror 
 
 all:			$(NAME)
 

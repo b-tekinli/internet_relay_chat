@@ -14,6 +14,7 @@
 #include <cstring>
 #include <fcntl.h>
 #include <map>
+#include "Commands.hpp"
 #include "User.hpp"
 
 using std::cout;

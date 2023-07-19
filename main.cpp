@@ -18,59 +18,25 @@ bool control(char **av)
     return false;
 }
 
-typedef int (*fp_command)(const vector<string> &input, const User &user);
+
+void asd(string &a);
+
+void second(){
+    string ms = "";
+    asd(ms);
+}
 
 fp_command selCommand(const vector<string> &input) //büyük harf olması gerekiyor
 {
-    string *str = {"JOIN", "NICK", "QUIT", };
+	string		*str = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "PASS"};
+	fp_command	*result = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::pass};
+	int			i;
 
-    for (int i = 0; i < 2; i++)
-    {
-        if (input[i] == "JOIN")
-        {
+	for (i = 0; i < 9 && input[0] != str[i] && input[1] != str[i]; i++);
+    return result[i];
+}//l value d value (const)
 
-        }
-        else if (input[i] == "NICK")
-        {
-
-        }
-        else if (input[i] == "QUIT")
-        {
-
-        }
-        else if (input[i] == "KILL")
-        {
-
-        }
-        else if (input[i] == "PING")
-        {
-
-        }
-        else if (input[i] == "PONG")
-        {
-
-        }
-        else if (input[i] == "WHO")
-        {
-
-        }
-        else if (input[i] == "USER")
-        {
-
-        }
-        else if (input[i] == "PASS")
-        {
-
-        }
-        else
-        {
-
-        }
-    }
-}
-
-
-void handleInput(const string &input){
+void handleInput(int fd, const string &input){
     string s;
     stringstream sstream(input);
     vector<string> commands;
@@ -80,7 +46,7 @@ void handleInput(const string &input){
     }
     // create command from input
     selCommand(command);
-    
+    USERS[fd];
 }
 
 void    setUpSocket(int port)
@@ -112,7 +78,7 @@ void    setUpSocket(int port)
                     int	readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
 					if (readed <= 1)
 						close(pollfds[i].fd);
-                    handleInput(string(input));
+                    handleInput(pollfds[i].fd,string(input));
                 }
             }
         }
