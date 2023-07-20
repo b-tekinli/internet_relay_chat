@@ -1,5 +1,4 @@
-#include "inc/Global.hpp"
-#include <unistd.h>
+#include "../inc/Global.hpp"
 
 /*
     Negatif bir değere sahip bir port numarası kullanmak,
@@ -18,18 +17,10 @@ bool control(char **av)
     return false;
 }
 
-
-void asd(string &a);
-
-void second(){
-    string ms = "";
-    asd(ms);
-}
-
 fp_command selCommand(const vector<string> &input) //büyük harf olması gerekiyor
 {
-	string		*str = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "PASS"};
-	fp_command	*result = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::pass};
+	string		str[] = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "PASS"};
+	fp_command	result[] = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::pass};
 	int			i;
 
 	for (i = 0; i < 9 && input[0] != str[i] && input[1] != str[i]; i++);
@@ -45,8 +36,8 @@ void handleInput(int fd, const string &input){
         commands.push_back(s);
     }
     // create command from input
-    selCommand(command);
-    USERS[fd];
+    selCommand(commands);
+    //USERS[fd];
 }
 
 void    setUpSocket(int port)

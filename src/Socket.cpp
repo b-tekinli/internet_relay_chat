@@ -1,4 +1,4 @@
-#include "../inc/Global.hpp"
+#include "../inc/Socket.hpp"
 
 int MAX_CLIENT = 50;
 

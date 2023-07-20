@@ -1,9 +1,8 @@
 #ifndef Commands_HPP
 #define Commands_HPP
 
+#include "DefineMod.hpp"
 #include "User.hpp"
-#include <vector>
-#include <unistd.h>
 
 typedef int (*fp_command)(const vector<string> &input, const User &user);
 

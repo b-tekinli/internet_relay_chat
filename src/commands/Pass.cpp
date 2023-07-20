@@ -2,7 +2,6 @@
 
 int cmd::pass(const vector<string> &input, const User &user)
 {
-	cout << "ping" << endl;
+	cout << "pass" << endl;
 	return (0);
-
 }
