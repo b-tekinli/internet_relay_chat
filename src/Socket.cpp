@@ -1,4 +1,4 @@
-#include "../inc/Global.hpp"
+#include "../inc/Socket.hpp"
 
 int MAX_CLIENT = 50;
 
@@ -30,7 +30,6 @@ bool Socket::Create(int port)
 
     fd_socket = socket(AF_INET, SOCK_STREAM, 0);
 
-    cout << fd_socket << endl;
     if (fd_socket == -1)
     {
         perror("Socket function doesn't work");
@@ -63,17 +62,11 @@ bool Socket::Listen()
     return (listen(fd_socket, MAX_CLIENT) != -1);
 }
 
-bool Socket::Accept(Socket &newSocket)
+int Socket::Accept()
 {
-    socklen_t clientSize = sizeof(connect_int);
-    int clientSocket = accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize);//loop a alıp veri bekliyor.
+    socklen_t clientSize = sizeof(connect_int); //loop a alıp veri bekliyor.
 
-    if (clientSocket != -1)
-    {
-        newSocket.fd_socket = clientSocket;
-        return true;
-    }
-    return false;
+    return (accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize));
 }
 
 bool Socket::Connect(string &ipAdress)
@@ -118,6 +111,19 @@ belirlemek için kullanabiliriz.
 
 mesela byte sayısı 0'sa bağlantının kapandığını ya da hiç veri almadığımızı gösterebiliriz.
 */
+
+bool Socket::init(int port)
+{
+    Create(port);
+    if (getSocketFd() < 0)
+    {
+        cout << "Cannot open the socket file " << endl;
+        return false;
+    }
+    Bind();
+    Listen();
+    return true;
+}
 
 int Socket::Receive(string &message)
 {
