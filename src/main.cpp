@@ -10,20 +10,37 @@
 
 bool control(char **av)
 {
-    int port = atoi(av[2]);
+    int port = atoi(av[1]);
 
     if (port >= 1024 && port <= 65535)
         return true;
     return false;
 }
 
-fp_command selCommand(const vector<string> &input) //büyük harf olması gerekiyor
+bool sameOrNot(string &test, string &aim, int enter)
+{
+    if (enter == 0)
+        return (false);
+    int size = aim.size();
+    int i;
+
+    for (i = 0; i < size && aim[i] == test[i]; ++i);
+
+    if (size == i)
+        return (true);
+    return (false);
+}
+
+fp_command selCommand(vector<string> &input) //büyük harf olması gerekiyor
 {
 	string		str[] = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "PASS"};
-	fp_command	result[] = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::pass};
+	fp_command	result[] = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::pass, 0};
 	int			i;
 
-	for (i = 0; i < 9 && input[0] != str[i] && input[1] != str[i]; i++);
+	for (i = -1; i < 9; ++i)
+        if (sameOrNot(input[0], str[i], input.size() >= 1) || 
+                sameOrNot(input[1], str[i], input.size() >= 2))
+            break;
     return result[i];
 }//l value d value (const)
 
@@ -82,11 +99,10 @@ int main(int ac, char **av) // 8080 emakas
     if (ac != 3 || !control(av))
     {
         cout << "You have entered the missing argument!" << endl;
-        cout << "./irc <password> <port>" << endl;
+        cout << "./irc <port> <password>" << endl;
         return (1);
     }
-    string serverIP = av[1];
-    int serverPort = atoi(av[2]);
+    int serverPort = atoi(av[1]);
 
     setUpSocket(serverPort);
     return (0);
