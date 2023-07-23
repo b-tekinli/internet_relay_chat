@@ -3,26 +3,45 @@
 
 #include "DefineMod.hpp"
 
+enum e_type
+{
+	FALSE = 0,
+	HALF = 1,
+	ACTIVE = 2
+};
+
 class User
 {
 	private:
-		string user_name;
-		string host_name;
-		string serv_name;
-		string real_name;
-		string nick_name;
-		int grade;
+		string	user_name;
+		string	host_name;
+		string	serv_name;
+		string	real_name;
+		string	nick_name;
+		int		grade;
+		int		fd;
+		int		active;
+		bool	oper;
+
 	public:
 		User();
-		User(string user_name, string host_name, string serv_name, string real_name, string nick_name);
+		User(int fd);
 		User(const User &user);
 		~User();
-		User& operator=(const User &user);
-		const string& getUserName() const;
-		const string& getHostName() const;
-		const string& getServName() const;
-		const string& getRealName() const;
-		const string& getNickName() const;
+
+		User& 			operator=(const User &user);
+		const string&	getUserName() const;
+		const string&	getHostName() const;
+		const string&	getServName() const;
+		const string&	getRealName() const;
+		const string&	getNickName() const;
+		const int		getActive() const;
+		void			setActive(int choose);
+		void			setUserName(const string& set);
+		void			setHostName(const string& set);
+		void			setServName(const string& set);
+		void			setRealName(const string& set);
+		void			setNickName(const string& set);
 };
 
 #endif
