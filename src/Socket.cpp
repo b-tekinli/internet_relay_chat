@@ -72,7 +72,7 @@ int Socket::Accept()
 bool Socket::Connect(string &ipAdress)
 {
     inet_pton(AF_INET, ipAdress.c_str(), &(connect_int.sin_addr)); //verilen Ip adresini binary formatına çevirir
-
+//inet_pton için bir izin göremedim //inet_ntoa bu kod kullanılabilir
     return (connect(fd_socket, (sockaddr *)&connect_int, sizeof(connect_int)) != -1);
 }
 
