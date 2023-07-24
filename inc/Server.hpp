@@ -6,12 +6,12 @@
 class Server
 {
 	private:
-		int&				port;
-		string&				password;
-		map <string, User>	group;
-		vector<User>		all_user;
+		int					port;
+		string				password;
+		multimap <string, User>	group;
+		map <int, User>		all_user;
 	public:
-		Server(int port, string password);
+		Server(int new_port, string new_password);
 		~Server();
 
 		void    setUpSocket();

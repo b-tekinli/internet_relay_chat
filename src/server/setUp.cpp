@@ -34,16 +34,16 @@ void	Server::handleInput(int fd, const string &input)
     stringstream	sstream(input);
     vector<string>	commands;
 
-    while (getline(sstream, str, ' ')){
-        commands.push_back(str);
+    while (getline(sstream, str, ' '))
+    {
+        if (str[0] > 33)
+            commands.push_back(str);
     }
     // create command from input
-    cout << all_user[fd].getUserName() << endl;
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
         func(commands, all_user[fd]);
     else
-        cout << "at here" << endl;
-	//USERS[fd];
+        cout << "at here" << endl; //return come of the text to the client
 }
 
 void    Server::setUpSocket()
@@ -70,14 +70,13 @@ void    Server::setUpSocket()
 
     				fcntl(clientFd, F_SETFL, O_NONBLOCK);
                     pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT} );
-                    all_user.push_back(person);
-                    cout << "New client connected!" << endl;
+                    all_user[clientFd] = person;
                 }
                 else // Connected to client
                 {
                     char input[512] = {0};
                     int	readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
-					if (readed <= 1)
+					if (readed <= 1) // user_close
 						close(pollfds[i].fd);
 					handleInput(pollfds[i].fd, string(input));
 				}

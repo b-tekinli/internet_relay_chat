@@ -1,12 +1,7 @@
 #include "../../inc/Server.hpp"
 
-Server::Server(int port, string password): port(port), password(password)
+Server::Server(int new_port, string new_password): port(new_port), password(new_password)
 {
-	for (int i = 0; i < 3; i++)
-	{
-		User person(0);
-		all_user.push_back(person);
-	}
 	setUpSocket();
 }
 

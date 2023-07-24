@@ -1,33 +1,35 @@
 #include "../inc/User.hpp"
 
-User::User()
-{
-
-}
+User::User() {}
 
 User::User(int fd): fd(fd), active(FALSE), oper(false)
 {
 	stringstream convert;
 
+	cout << "created" << endl;
 	convert << fd;
-	user_name = "kvirc" + convert.str();
-	host_name = user_name;
-	serv_name = user_name;
-	real_name = user_name;
+	this->user_name= "kvirc" + convert.str();
+	this->host_name = this->user_name;
+	this->serv_name = this->user_name;
+	this->real_name = this->user_name;
 }
 
 User::User(const User &user)
 {
-
+	*this = user;
 }
 
-User::~User()
-{
-
-}
+User::~User() {}
 
 User&			User::operator=(const User &user)
 {
+	if (this != &user)
+	{
+		this->user_name = user.user_name;
+		this->host_name = user.host_name;
+		this->serv_name = user.serv_name;
+		this->real_name = user.real_name;	
+	}
 	return (*this);
 }
 
@@ -61,9 +63,9 @@ const int		User::getActive() const
 	return (active);
 }
 
-void			User::setActive(int choose)   { active = choose; }
+void			User::setActive(int choose)			 { active = choose; }
 
-void			User::setUserName(const string& set) {string a = set, user_name = a; }
+void			User::setUserName(const string& set) { user_name = set; }
 
 void			User::setHostName(const string& set) { host_name = set; }
 

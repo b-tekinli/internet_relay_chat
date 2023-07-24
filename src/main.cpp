@@ -46,3 +46,7 @@ int main(int ac, char **av) // 8080 emakas
 // kullanıcı oluşturalım
 // kanallara kullanıcı eklemeye çalışalım (map kullanarak)
 // bazı basit commandları yazmaya çalışalım
+
+//"a " olma durumu                          (OK)
+//join ve multiclass                        ()
+//kvirc ye yazı gönder                      ()

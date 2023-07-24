@@ -38,7 +38,7 @@ bool Socket::Create(int port)
     //reuse içeriden veya dışarıdan alınanların yeniden kullanılabileceğini söylüyo
     //bazı eski pc lerde socket oluşumunda port eklemelerinde sorun olabiliyo
     //portları birbirine bağlarken sorun çıkmaması adına boru örneği bu kontrol yapılıyor
-    if (setsockopt(fd_socket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
+    if (setsockopt(fd_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)))
     {
         perror("setsockopt");
         exit(EXIT_FAILURE);
