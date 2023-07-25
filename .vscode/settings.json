@@ -6,6 +6,7 @@
         "string": "cpp",
         "map": "cpp",
         "utility": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iosfwd": "cpp"
     }
 }

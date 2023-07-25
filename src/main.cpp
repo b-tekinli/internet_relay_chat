@@ -48,5 +48,5 @@ int main(int ac, char **av) // 8080 emakas
 // bazı basit commandları yazmaya çalışalım
 
 //"a " olma durumu                          (OK)
-//join ve multiclass                        ()
+//join                                      ()
 //kvirc ye yazı gönder                      ()

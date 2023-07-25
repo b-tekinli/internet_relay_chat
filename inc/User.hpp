@@ -20,7 +20,7 @@ class User
 		string	nick_name;
 		int		grade;
 		int		fd;
-		int		active;
+		e_type	active;
 		bool	oper;
 
 	public:
@@ -36,7 +36,8 @@ class User
 		const string&	getRealName() const;
 		const string&	getNickName() const;
 		const int		getActive() const;
-		void			setActive(int choose);
+		const int		getFd() const;
+		void			setActive(e_type choose);
 		void			setUserName(const string& set);
 		void			setHostName(const string& set);
 		void			setServName(const string& set);

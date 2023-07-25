@@ -1,6 +1,8 @@
 #include "../../inc/Server.hpp"
+#include "../../inc/Commands.hpp"
 
-bool sameOrNot(string &test, string &aim, int enter)
+
+bool isEqual(string &test, string &aim, int enter)
 {
     if (enter == 0)
         return (false);
@@ -14,19 +16,30 @@ bool sameOrNot(string &test, string &aim, int enter)
     return (false);
 }
 
-fp_command selCommand(vector<string> &input) //büyük harf olması gerekiyor
+/**
+ * selcommand used for select command for given input
+ * @param input: Input string
+ * @return fp_command is the type of the function that represents 
+ */
+fp_command selCommand(vector<string> &input)
 {
 	string		str[] = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "PASS"};
 	fp_command	result[] = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::pass, 0};
 	int			i;
 
 	for (i = -1; i < 9; ++i)
-        if (sameOrNot(input[0], str[i], input.size() >= 1) || 
-                sameOrNot(input[1], str[i], input.size() >= 2))
+        if (isEqual
+    (input[0], str[i], input.size() >= 1) || 
+                isEqual
+            (input[1], str[i], input.size() >= 2))
             break;
     return result[i];
-}//l value d value (const)
+}
 
+
+/// @brief handles input
+/// @param fd 
+/// @param input 
 void	Server::handleInput(int fd, const string &input)
 {
     fp_command 		func;
@@ -41,7 +54,7 @@ void	Server::handleInput(int fd, const string &input)
     }
     // create command from input
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
-        func(commands, all_user[fd]);
+        func(commands, *this, all_user[fd]);
     else
         cout << "at here" << endl; //return come of the text to the client
 }
@@ -76,6 +89,7 @@ void    Server::setUpSocket()
                 {
                     char input[512] = {0};
                     int	readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
+                    
 					if (readed <= 1) // user_close
 						close(pollfds[i].fd);
 					handleInput(pollfds[i].fd, string(input));

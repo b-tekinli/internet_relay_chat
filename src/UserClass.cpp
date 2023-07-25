@@ -63,7 +63,13 @@ const int		User::getActive() const
 	return (active);
 }
 
-void			User::setActive(int choose)			 { active = choose; }
+
+const int		User::getFd() const
+{
+	return (fd);
+}
+
+void			User::setActive(e_type choose)			 { active = choose; }
 
 void			User::setUserName(const string& set) { user_name = set; }
 

@@ -28,6 +28,5 @@ using std::vector;
 using std::getline;
 using std::stringstream;
 using std::map;
-usign std::multimap;
 
 #endif

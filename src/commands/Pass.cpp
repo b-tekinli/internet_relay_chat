@@ -1,6 +1,9 @@
-#include "../../inc/Global.hpp"
+#include "../../inc/Commands.hpp"
 
-int cmd::pass(const vector<string> &input, User &user)
+void write_fd(int fd, const string &msg){
+	write(fd,msg.c_str(),msg.length());
+}
+int cmd::pass(const vector<string> &input, Server &srv, User& user)
 {
 	string pasword = "";
 	cout << "girdi" << endl;
@@ -9,6 +12,7 @@ int cmd::pass(const vector<string> &input, User &user)
 	if (input[1] == pasword)
 	{
 		user.setActive(HALF);
+		write_fd(user.getFd(),"MESAJ");
 		cout << "Password is correct" << endl;
 		return (1);
 	}

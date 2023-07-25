@@ -1,6 +1,6 @@
-#include "../../inc/Server.hpp"
+#include "../../inc/Commands.hpp"
 
-int cmd::nick(const vector<string> &input, User &user)
+int cmd::nick(const vector<string> &input, Server &srv, User& user)
 {
 	if (user.getActive() <= HALF)
 		return (-1);
