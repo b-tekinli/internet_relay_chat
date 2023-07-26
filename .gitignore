@@ -2,3 +2,4 @@ a.out
 *.o
 map.cpp
 learn_poll.cpp
+.vscode/*
