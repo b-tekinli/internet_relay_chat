@@ -2,7 +2,7 @@
 #include "../../inc/Commands.hpp"
 
 
-bool isEqual(string &test, string &aim, int enter)
+bool    isEqual(const string &test, const string &aim, int enter)
 {
     if (enter == 0)
         return (false);
@@ -28,10 +28,8 @@ fp_command selCommand(vector<string> &input)
 	int			i;
 
 	for (i = -1; i < 9; ++i)
-        if (isEqual
-    (input[0], str[i], input.size() >= 1) || 
-                isEqual
-            (input[1], str[i], input.size() >= 2))
+        if (isEqual(input[0], str[i], input.size() >= 1) || 
+                isEqual(input[1], str[i], input.size() >= 2))
             break;
     return result[i];
 }
@@ -54,7 +52,7 @@ void	Server::handleInput(int fd, const string &input)
     }
     // create command from input
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
-        func(commands, *this, all_user[fd]);
+        func(commands, *this, *users[fd]);
     else
         cout << "at here" << endl; //return come of the text to the client
 }
@@ -83,15 +81,21 @@ void    Server::setUpSocket()
 
     				fcntl(clientFd, F_SETFL, O_NONBLOCK);
                     pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT} );
-                    all_user[clientFd] = person;
+                    cout << "SEE_fd = " << clientFd << endl;
+                    cout << "SEE_pollfd = " << pollfds[clientFd].fd << endl;
+                    cout << HALF << FALSE << ACTIVE << endl;
+                    users[clientFd] = &person;
                 }
                 else // Connected to client
                 {
                     char input[512] = {0};
                     int	readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
-                    
+
 					if (readed <= 1) // user_close
 						close(pollfds[i].fd);
+                    cout << pollfds[i].fd << endl;
+                    cout << users.size() << endl;
+                    cout << "Message\n" << users[pollfds[i].fd]->getActive() << endl;
 					handleInput(pollfds[i].fd, string(input));
 				}
             }

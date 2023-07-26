@@ -33,43 +33,21 @@ User&			User::operator=(const User &user)
 	return (*this);
 }
 
-const string&	User::getUserName() const
-{
-	return (user_name);
-}
+const string&	User::getUserName() const { return (user_name); }
 
-const string&	User::getHostName() const
-{
-	return (host_name);
-}
+const string&	User::getHostName() const { return (host_name); }
 
-const string&	User::getServName() const
-{
-	return (serv_name);
-}
+const string&	User::getServName() const { return (serv_name); }
 
-const string&	User::getRealName() const
-{
-	return (real_name);	
-}
+const string&	User::getRealName() const { return (real_name);	}
 
-const string&	User::getNickName() const
-{
-	return (nick_name);
-}
+const string&	User::getNickName() const { return (nick_name); }
 
-const int		User::getActive() const
-{
-	return (active);
-}
+const int		User::getActive() const { return (active); }
 
+const int		User::getFd() const { return (fd); }
 
-const int		User::getFd() const
-{
-	return (fd);
-}
-
-void			User::setActive(e_type choose)			 { active = choose; }
+void			User::setActive(e_active choose)			 { active = choose; }
 
 void			User::setUserName(const string& set) { user_name = set; }
 

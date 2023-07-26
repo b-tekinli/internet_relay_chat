@@ -1,7 +1,7 @@
 NAME			=	ircserv
 
-INC				=	./inc/
-BIN				=	./src/bin
+INC				=	inc/
+BIN				=	src/bin
 
 RESET			=	\033[0m
 GREEN			=	\033[32m

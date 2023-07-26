@@ -30,20 +30,9 @@ int main(int ac, char **av) // 8080 emakas
 }
 
 
-// main düzelt (little part) + 
-// fcntl yi entegre edeceğiz (we can learn) +?
-// her revc gibi kullanılan fonksiyonda poll kullanılacak () +
 
-
-// fonkisyon pointerları ayaralayacağız
-// map üzerinden ayar yapacağız
-// murathanın fonksiyonlarına bakacağız
-// 
-
-
-
-// password almaya çalışalım
 // kullanıcı oluşturalım
+// get set fonksiyonları daha profosyonel yapmaya çalışacağız
 // kanallara kullanıcı eklemeye çalışalım (map kullanarak)
 // bazı basit commandları yazmaya çalışalım
 

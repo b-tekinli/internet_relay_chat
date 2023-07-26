@@ -3,7 +3,7 @@
 
 #include "DefineMod.hpp"
 
-enum e_type
+enum e_active
 {
 	FALSE = 0,
 	HALF = 1,
@@ -13,15 +13,15 @@ enum e_type
 class User
 {
 	private:
-		string	user_name;
-		string	host_name;
-		string	serv_name;
-		string	real_name;
-		string	nick_name;
-		int		grade;
-		int		fd;
-		e_type	active;
-		bool	oper;
+		string		user_name;
+		string		host_name;
+		string		serv_name;
+		string		real_name;
+		string		nick_name;
+		int			grade;
+		int			fd;
+		e_active	active;
+		bool		oper;
 
 	public:
 		User();
@@ -37,7 +37,7 @@ class User
 		const string&	getNickName() const;
 		const int		getActive() const;
 		const int		getFd() const;
-		void			setActive(e_type choose);
+		void			setActive(e_active choose);
 		void			setUserName(const string& set);
 		void			setHostName(const string& set);
 		void			setServName(const string& set);
