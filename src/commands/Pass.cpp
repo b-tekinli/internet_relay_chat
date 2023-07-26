@@ -1,8 +1,10 @@
 #include <Commands.hpp>
 
-void write_fd(int fd, const string &msg){
-	write(fd,msg.c_str(),msg.length());
+void write_fd(int fd, const string &msg)
+{
+	write(fd,msg.c_str(), msg.length());
 }
+
 int cmd::pass(const vector<string> &input, Server &srv, User& user)
 {
 	if (user.getActive() == true || input.size() != 2)

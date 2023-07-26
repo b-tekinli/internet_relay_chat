@@ -40,6 +40,7 @@ fp_command selCommand(vector<string> &input)
 /// @param input 
 void	Server::handleInput(int fd, const string &input)
 {
+	//User user = getOrCreateUser(fd);
     fp_command 		func;
     string			str;
     stringstream	sstream(input);
@@ -54,7 +55,7 @@ void	Server::handleInput(int fd, const string &input)
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
         func(commands, *this, *users[fd]);
     else
-        cout << "at here" << endl; //return come of the text to the client
+        write_fd(fd, "RAW problem"); //return come of the text to the client
 }
 
 void    Server::setUpSocket()

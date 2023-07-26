@@ -21,5 +21,6 @@ namespace cmd
 }
 
 bool isEqual(const string &test, const string &aim, int enter);
+void write_fd(int fd, const string &msg);
 
 #endif

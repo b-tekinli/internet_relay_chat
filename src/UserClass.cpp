@@ -47,7 +47,7 @@ const int		User::getActive() const { return (active); }
 
 const int		User::getFd() const { return (fd); }
 
-void			User::setActive(e_active choose)			 { active = choose; }
+void			User::setActive(e_active choose)	{ active = choose; }
 
 void			User::setUserName(const string& set) { user_name = set; }
 

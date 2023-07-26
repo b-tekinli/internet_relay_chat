@@ -1,15 +1,16 @@
 {
     "files.associations": {
-        "vector": "cpp",
-        "__split_buffer": "cpp",
-        "deque": "cpp",
-        "string": "cpp",
-        "map": "cpp",
-        "utility": "cpp",
-        "ostream": "cpp",
-        "iosfwd": "cpp",
-        "__locale": "cpp",
-        "__string": "cpp",
-        "string_view": "cpp"
-    }
+		"vector": "cpp",
+		"__split_buffer": "cpp",
+		"deque": "cpp",
+		"string": "cpp",
+		"map": "cpp",
+		"utility": "cpp",
+		"ostream": "cpp",
+		"iosfwd": "cpp",
+		"__locale": "cpp",
+		"__string": "cpp",
+		"string_view": "cpp",
+		"iterator": "cpp"
+	}
 }

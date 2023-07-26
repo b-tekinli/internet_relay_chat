@@ -7,14 +7,18 @@
 class Server
 {
 	private:
+		static	Server					*single_instance;
 		int								port;
 		string							password;
 		map < string, vector<User*> >	group;
 		vector <User*>					users;
 	public:
+		Server();
 		Server(int new_port, string new_password);
+		////Server(const Server &server);
+		////Server& operator=(const Server &server);
 		~Server();
-
+		static Server&	getInstance();
 		void			handleInput(int fd, const string &input);
 		User			allUser();
 		void			setUpSocket();
@@ -24,16 +28,5 @@ class Server
 
 };
 
-/*
-User *getUser(int fd);
 
-int saveUser(User user);
-
-int new_user(int fd) {
-	users.assign(fd,new User);
-}
-
-int new_user(int fd) {
-	users.assign(fd,new User);
-}*/
 #endif

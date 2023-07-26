@@ -39,3 +39,5 @@ int main(int ac, char **av) // 8080 emakas
 //"a " olma durumu                          (OK)
 //join                                      ()
 //kvirc ye yazı gönder                      ()
+
+// 
