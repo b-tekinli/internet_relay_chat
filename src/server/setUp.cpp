@@ -51,12 +51,16 @@ void	Server::handleInput(int fd, const string &input)
         if (str[0] > 33)
             commands.push_back(str);
     }
-    // create command from input
-	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
-        func(commands, *this, *users[fd]);
-    else
-        write_fd(fd, "RAW problem"); //return come of the text to the client
+	// [<prefix>] <numeric_code> <param1> <param2>
+	write(fd," 001 amy :Welcome to the Internet Relay Network borja!borja@polaris.cs.uchicago.edu\n",100);
+    //// create command from input
+	//if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
+    //    func(commands, *this, *users[fd]);
+    //else
+    //    write_fd(fd, "RAW problem"); //return come of the text to the client
 }
+
+const string& generateReply(int code, User, string message);
 
 void    Server::setUpSocket()
 {

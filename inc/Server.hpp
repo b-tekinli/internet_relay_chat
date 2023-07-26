@@ -18,6 +18,7 @@ class Server
 		////Server(const Server &server);
 		////Server& operator=(const Server &server);
 		~Server();
+		static void		init_server(int new_port, string new_password);
 		static Server&	getInstance();
 		void			handleInput(int fd, const string &input);
 		User			allUser();
