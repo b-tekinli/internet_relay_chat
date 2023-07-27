@@ -53,7 +53,6 @@ void	Server::handleInput(int fd, const string &input)
     }
 	// [<prefix>] <numeric_code> <param1> <param2>
 	write(fd,"001 amy :Ahmet naber\n",100);
-    cout << "not enter : " << fd << endl;
     //// create command from input
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
         func(commands, *users[fd]);
@@ -72,9 +71,6 @@ void    Server::setUpSocket()
 
     clientSocket.init(port);
     pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
-    cout << pollfds[0].fd << endl;
-    cout << clientSocket.getSocketFd() << endl;
-    cout << pollfds.size() << endl;
     while (poll(&pollfds[0], pollfds.size(), -1))
     {   
         for (int i = 0; i < pollfds.size(); i++)
@@ -88,19 +84,15 @@ void    Server::setUpSocket()
                     * yeni bağlnatı olduğunu nasıl anlıyor? 
                     */
                     int     clientFd =  clientSocket.Accept();
-                    User    person(clientFd);
 
     				fcntl(clientFd, F_SETFL, O_NONBLOCK);
                     pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT} );
-                    cout << "SEE_fd = " << clientFd << endl;
-                    cout << "SEE_pollfd = " << pollfds[clientFd].fd << endl;
-                    cout << HALF << FALSE << ACTIVE << endl;
-                    users[clientFd] = &person;
+                    users::getOrCreateUser(clientFd, this->users);
                 }
                 else // Connected to client
                 {
-                    char input[512] = {0};
-                    int	readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
+                    char    input[512] = {0};
+                    int     readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
 
 					if (readed <= 1) // user_close
 						close(pollfds[i].fd);
