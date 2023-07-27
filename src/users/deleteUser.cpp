@@ -1,6 +1,6 @@
-#include <User.hpp>
+#include <Commands.hpp>
 
-void deleteUser(int fd, vector <User*> users)
+void users::deleteUser(int fd, vector <User*> users)
 {
     if (users[fd] != 0)
     {    

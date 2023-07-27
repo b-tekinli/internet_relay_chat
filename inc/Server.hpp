@@ -23,26 +23,6 @@ class Server
 		void			setPassword(string pass);
 };
 
-namespace users{
- 
-	/// @brief gets user from list or creates new one and inserts into the list
-	/// @param fd 
-	/// @return 
-	User* getOrCreateUser(int fd, vector <User*> &users);
-	
-	void deleteUser(int fd, vector <User*> users);
-
-	//vector<User> getAllUsers();
-
-	void addUserTo(const string &group, const User &user, map<string, vector<User *> > &channels);
-
-	void removeUserFrom(const string &group, const User &user, map<string, vector<User *> > &channels);
-
-	//map<string, string> getChannelList();
-	
-};
-
-
 extern Server start;
 
 #endif

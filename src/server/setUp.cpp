@@ -1,7 +1,6 @@
 #include "../../inc/Server.hpp"
 #include "../../inc/Commands.hpp"
 
-
 bool    isEqual(const string &test, const string &aim, int enter)
 {
     if (enter == 0)
@@ -40,7 +39,6 @@ fp_command selCommand(vector<string> &input)
 /// @param input 
 void	Server::handleInput(int fd, const string &input)
 {
-	//User user = getOrCreateUser(fd);
     fp_command 		func;
     string			str;
     stringstream	sstream(input);
@@ -52,13 +50,13 @@ void	Server::handleInput(int fd, const string &input)
             commands.push_back(str);
     }
 	// [<prefix>] <numeric_code> <param1> <param2>
-	write(fd,"001 amy :Ahmet naber\n",100);
+	//write(fd,"001 amy :Ahmet naber\n",100);
     //// create command from input
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
         func(commands, *users[fd]);
     else
     {
-        write(fd," 001 amy :Welcome to the Internet Relay Network borja!borja@polaris.cs.uchicago.edu\n",100); //return come of the text to the client
+        //write(fd," 001 amy :Welcome to the Internet Relay Network borja!borja@polaris.cs.uchicago.edu\n",100); //return come of the text to the client
     }
 }
 
