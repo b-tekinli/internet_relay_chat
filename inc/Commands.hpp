@@ -4,20 +4,20 @@
 #include "Server.hpp"
 #include "DefineMod.hpp"
 
-typedef int (*fp_command)(const vector<string> &input, Server& srv, User& user);
+typedef int (*fp_command)(const vector<string> &input, User& user);
 
 
 namespace cmd
 {
-	int join(const vector<string> &input, Server& srv, User& user);
-	int nick(const vector<string> &input, Server& srv, User& user);
-	int quit(const vector<string> &input, Server& srv, User& user);
-	int kill(const vector<string> &input, Server& srv, User& user);
-	int ping(const vector<string> &input, Server& srv, User& user);
-	int pong(const vector<string> &input, Server& srv, User& user);
-	int	who(const  vector<string> &input, Server& srv, User& user);
-	int	user(const vector<string> &input, Server& srv, User& user);
-	int	pass(const vector<string> &input, Server& srv, User& user);
+	int join(const vector<string> &input, User& user);
+	int nick(const vector<string> &input, User& user);
+	int quit(const vector<string> &input, User& user);
+	int kill(const vector<string> &input, User& user);
+	int ping(const vector<string> &input, User& user);
+	int pong(const vector<string> &input, User& user);
+	int	who(const  vector<string> &input, User& user);
+	int	user(const vector<string> &input, User& user);
+	int	pass(const vector<string> &input, User& user);
 }
 
 bool isEqual(const string &test, const string &aim, int enter);

@@ -1,6 +1,6 @@
 #include "../../inc/Commands.hpp"
 
-int cmd::user(const vector<string> &input, Server &srv, User& user) // boşluk olunca farklı sonuç
+int cmd::user(const vector<string> &input, User& user) // boşluk olunca farklı sonuç
 {
 	if (user.getActive() < HALF || input.size() != 5)
 		return (-1);

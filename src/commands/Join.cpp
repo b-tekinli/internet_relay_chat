@@ -1,6 +1,6 @@
 #include "../../inc/Commands.hpp"
 
-int cmd::join(const vector<string> &input, Server &srv, User& user)
+int cmd::join(const vector<string> &input, User& user)
 {
 	cout << "girdi" << endl;
 	cout << user.getActive() << endl;

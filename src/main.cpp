@@ -1,5 +1,7 @@
 #include "../inc/Server.hpp"
 
+Server start;
+
 /*
     Negatif bir değere sahip bir port numarası kullanmak,
     ağ iletişimi standartlarına uygun olmadığı için hatalara
@@ -24,7 +26,9 @@ int main(int ac, char **av) // 8080 emakas
         cout << "./irc <port> <password>" << endl;
         return (1);
     }
-    Server start(atoi(av[1]), av[2]);
+    start.setPort(atoi(av[1]));
+    start.setPassword(av[2]);
+    start.toBegin();
 
     return (0);
 }

@@ -29,7 +29,6 @@ bool Socket::Create(int port)
     int opt = 1;//sorulacak???
 
     fd_socket = socket(AF_INET, SOCK_STREAM, 0);
-
     if (fd_socket == -1)
     {
         perror("Socket function doesn't work");
@@ -97,8 +96,8 @@ void Socket::SetNonBlocking(bool isNonBlocking)
     if (isNonBlocking)
         pfd.revents = 0; // eğer geri dönen olayları burada sıfırlamazsak poll'un bir önceki çağrısından kalan eventleri saklıyor.
 
-    if (poll(&pfd, 1, timeout) == -1)
-        perror("poll() fail");
+   // if (poll(&pfd, 1, timeout) == -1)
+     //   perror("poll() fail");
 }
 
 /*
