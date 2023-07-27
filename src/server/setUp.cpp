@@ -52,10 +52,11 @@ void	Server::handleInput(int fd, const string &input)
             commands.push_back(str);
     }
     // create command from input
+    cout << input[0] << endl;
 	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
         func(commands, *this, *users[fd]);
     else
-        write_fd(fd, "RAW problem"); //return come of the text to the client
+        write_fd(fd, "421"); //return come of the text to the client
 }
 
 void    Server::setUpSocket()
@@ -94,9 +95,6 @@ void    Server::setUpSocket()
 
 					if (readed <= 1) // user_close
 						close(pollfds[i].fd);
-                    cout << pollfds[i].fd << endl;
-                    cout << users.size() << endl;
-                    cout << "Message\n" << users[pollfds[i].fd]->getActive() << endl;
 					handleInput(pollfds[i].fd, string(input));
 				}
             }

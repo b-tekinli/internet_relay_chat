@@ -2,7 +2,9 @@
 
 void write_fd(int fd, const string &msg)
 {
-	write(fd,msg.c_str(), msg.length());
+	cout << "user fd: " << fd << endl;
+	cout << "msg: " << msg.c_str() << "   "  << msg.length() << endl;
+	write(fd, msg.c_str(), msg.length());
 }
 
 int cmd::pass(const vector<string> &input, Server &srv, User& user)
