@@ -9,7 +9,7 @@ const std::string generateReply(Reply reply,std::string params[]){
 	message += ":prefix"; //TODO: implement prefix generator
 	message += " ";
 	message += std::to_string(reply);
-	
+	message += " ";
 
 	return message;
 }
