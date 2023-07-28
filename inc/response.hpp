@@ -5,16 +5,10 @@
 
 enum Reply
 {
-	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
+	
 	RPL_WELCOME = 1,
-	
-	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_YOURHOST = 2,
-	
-	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_CREATED = 3,
-	
-	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_MYINFO = 4,
 	RPL_BOUNCE = 5,
 	RPL_TOPIC = 332,
