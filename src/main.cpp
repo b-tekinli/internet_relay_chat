@@ -31,12 +31,12 @@ int main(int ac, char **av) // 8080 emakas
 	start.toBegin();
 
 
-	User u;
-	u.setNickName("nick");
-	std::string content = "Example reply content";
+	//User u;
+	//u.setNickName("nick");
+	//std::string content = "Example reply content";
 
-	std::string numeric = generateReply(RPL_WELCOME, u, content);
-	std::string normal = generateReply(RPL_TOPIC, u, content);
+	//std::string numeric = generateReply(RPL_WELCOME, u, content);
+	//std::string normal = generateReply(RPL_TOPIC, u, content);
 
 
 	return (0);

@@ -17,7 +17,7 @@ class User
 		string		host_name;
 		string		serv_name;
 		string		real_name;
-		string		nick_name;
+		string		nick_n ame;
 		int			grade;
 		int			fd;
 		e_active	active;
