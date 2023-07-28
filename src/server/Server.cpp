@@ -1,26 +1,25 @@
-#include "../../inc/Server.hpp"
+#include <Server.hpp>
 
-Server* Server::single_instance = NULL;
+Server::Server() {}
 
-Server::Server(int new_port, string new_password): port(new_port), password(new_password)
+void	Server::toBegin()
 {
 	for (int i = 0; i < 5; i++)
 		users.push_back(0);
-	single_instance = this;
 	setUpSocket();
 }
-
 
 Server::~Server()
 {
 	cout << "it is not done but work destructor" << endl;
 }
 
-Server& Server::getInstance(){
-	return *(single_instance);
-}
-
 const string	Server::getPassword() const { return (this->password); }
+
+map< string, vector<User*> >& Server::getGroup() { return (this->group); }
 
 vector<User*>	Server::getChannel(const string &channel) { return (this->group[channel]); }
 
+void			Server::setPort(int port) { this->port = port; }
+
+void			Server::setPassword(string pass) { this->password = pass; }
