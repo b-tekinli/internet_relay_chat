@@ -42,7 +42,7 @@ enum Reply
 	ERR_NOTOPLEVEL = 413,
 	ERR_WILDTOPLEVEL = 414,
 	ERR_TOOMANYTARGETS = 407,
-
+	
 };
 
 typedef enum Reply Reply;

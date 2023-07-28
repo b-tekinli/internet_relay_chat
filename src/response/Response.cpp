@@ -3,7 +3,11 @@
 #include <cstdlib>
 
 
-
+/// @brief  generated response :<prefix> <number>
+/// @param reply 
+/// @param target 
+/// @param content 
+/// @return 
 const std::string generateReply(Reply reply, const User &target, const std::string &content){
 	std::string message = "";
 	
