@@ -1,10 +1,5 @@
 #include <Commands.hpp>
 
-void write_fd(int fd, const string &msg)
-{
-	write(fd,msg.c_str(), msg.length());
-}
-
 int cmd::pass(const vector<string> &input, User& user)
 {
 	cout << "PASS entered" << endl;
