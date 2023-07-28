@@ -3,6 +3,7 @@
 
 #include <Server.hpp>
 #include <DefineMod.hpp>
+#include <Error.hpp>
 
 typedef int (*fp_command)(const vector<string> &input, User& user);
 

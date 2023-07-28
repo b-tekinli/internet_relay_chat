@@ -137,14 +137,14 @@ accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 #include <netinet/in.h>
 
 struct sockaddr_in {
-    short            sin_family;   // AF_INET
-    unsigned short   sin_port;     // htons(3490)
-    struct in_addr   sin_addr;     // see struct in_addr, below
-    char             sin_zero[8];  // zero this if you want to
+	short			sin_family;   // AF_INET
+	unsigned short   sin_port;	 // htons(3490)
+	struct in_addr   sin_addr;	 // see struct in_addr, below
+	char			 sin_zero[8];  // zero this if you want to
 };
 
 struct in_addr {
-    unsigned long s_addr;  // load with inet_aton()
+	unsigned long s_addr;  // load with inet_aton()
 };
 ```
 
@@ -157,9 +157,9 @@ struct in_addr {
 
 - `sin_port`: Port numarasını tutar. Port numarası, ağ byte sırasına dönüştürülmeden saklanır.
 
-        :exclamation: Ağ byte sırasına dönüştürmek, bellekte çok byte'lık veri türleri (örneğin, 16 bit veya 32 bit) genellikle ardışık bellek hücrelerinde saklanır. Byte sıralama düzeni, bu bellek hücrelerinin hangi sıra ile sıralandığını belirler. Bunlar Big-endian ve Little-endian olarak 2'ye ayrılır. (Dilerseniz ayrıntılı bir şekilde araştırabilirsiniz.)
-        
-        Bir veri değerini ağ byte sırasına dönüştürmek, küçük endian düzeninde tutulan bir değeri büyük endian düzenine dönüştürmeyi ifade eder. Bu genellikle ağ protokollerinde veya farklı sistemler arasında veri alışverişinde kullanılan bir standartlaştırma yöntemidir. htons() (host to network short) ve htonl() (host to network long) gibi işlevler, bir veri değerini ağ byte sırasına dönüştürmek için kullanılır.
+		:exclamation: Ağ byte sırasına dönüştürmek, bellekte çok byte'lık veri türleri (örneğin, 16 bit veya 32 bit) genellikle ardışık bellek hücrelerinde saklanır. Byte sıralama düzeni, bu bellek hücrelerinin hangi sıra ile sıralandığını belirler. Bunlar Big-endian ve Little-endian olarak 2'ye ayrılır. (Dilerseniz ayrıntılı bir şekilde araştırabilirsiniz.)
+		
+		Bir veri değerini ağ byte sırasına dönüştürmek, küçük endian düzeninde tutulan bir değeri büyük endian düzenine dönüştürmeyi ifade eder. Bu genellikle ağ protokollerinde veya farklı sistemler arasında veri alışverişinde kullanılan bir standartlaştırma yöntemidir. htons() (host to network short) ve htonl() (host to network long) gibi işlevler, bir veri değerini ağ byte sırasına dönüştürmek için kullanılır.
 
 - `INADDR_ANY`: Local IP adreslerini kabul etmek için kullanılır.
 
@@ -187,14 +187,14 @@ int inet_pton(int af, const char *src, void *dst);
 #include <string>
 
 int main() {
-    std::string str = "Merhaba";
+	std::string str = "Merhaba";
 
-    const char* cstr = str.c_str();
+	const char* cstr = str.c_str();
 
-    // C-style karakter dizisini kullanma
-    // ...
+	// C-style karakter dizisini kullanma
+	// ...
 
-    return 0;
+	return 0;
 }
 ```
 
@@ -214,9 +214,9 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 - `sockfd`: Dinlemek istediğiniz soketin tanımlayıcısı (soket fd).
 
 - `buf`: Alınan verinin hedef bellek alanını temsil eden bir pointer.
-    
+	
 - `len`: buf bellek alanının boyutu (byte cinsinden).
-    
+	
 - `flags`: İsteğe bağlı. Özel bir işlem yapmak için kullanılabilir veya 0 olarak belirtilebilir.
 
 
@@ -229,7 +229,7 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 
 - `O_NONBLOCK`: Engellenmeyen modda açmak için kullanılan bir dosya açma flagidir.
 
-        :exclamation: Proje özelinde fcntl() fonksiyonunu kullanacaksak sadece F_SETFL VE O_NONBLOCK flagleriyle kullanabiliyoruz bunlar dışında bir kullanım yasak.
+		:exclamation: Proje özelinde fcntl() fonksiyonunu kullanacaksak sadece F_SETFL VE O_NONBLOCK flagleriyle kullanabiliyoruz bunlar dışında bir kullanım yasak.
 
 
 <br />
@@ -242,9 +242,9 @@ int poll(struct pollfd *fds, nfds_t nfds, int timeout);
 `poll()` fonksiyonu, çoklu soket girişini aynı anda takip etmek ve olayları yönetmek için kullanılır. Bir dizi soketi izleyerek belirli bir olayın gerçekleşip gerçekleşmediğini kontrol eder. 
 
 - `fds`: struct pollfd türünden bir dizi, izlenecek soketlerin ve beklenen olayların bilgisini içerir.
-    
+	
 - `nfds`: fds dizisinin boyutu, izlenecek soket sayısını belirtir.
-    
+	
 - `timeout`: İşlemin zaman aşımı süresini belirtir. Bu süre milisaniye cinsinden ifade edilir. Negatif değerler süresiz beklemeyi, 0 değeri anında dönüşü sağlar.
 
 
