@@ -18,6 +18,8 @@ namespace cmd
 	int	who(const  vector<string> &input, User& user);
 	int	user(const vector<string> &input, User& user);
 	int	pass(const vector<string> &input, User& user);
+	int	part(const vector<string> &input, User& user);
+	int privmsg(const vector<string> &input, User& user);
 }
 
 bool isEqual(const string &test, const string &aim, int enter);
@@ -34,9 +36,9 @@ namespace users{
 
 	//vector<User> getAllUsers();
 
-	void addUserTo(const string &group, const User &user, map<string, vector<User *> > &channels);
+	void addUserTo(const string &group, User &user, map<string, vector<User *> > &channels);
 
-	void removeUserFrom(const string &group, const User &user, map<string, vector<User *> > &channels);
+	void removeUserFrom(const string &group, User &user, map<string, vector<User *> > &channels);
 
 	//map<string, string> getChannelList();
 	

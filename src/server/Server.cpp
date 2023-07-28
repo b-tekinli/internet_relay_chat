@@ -1,4 +1,4 @@
-#include "../../inc/Server.hpp"
+#include <Server.hpp>
 
 Server::Server() {}
 
@@ -16,8 +16,12 @@ Server::~Server()
 
 const string	Server::getPassword() const { return (this->password); }
 
+map< string, vector<User*> >	&getGroup() { return (this->group); }
+
 vector<User*>	Server::getChannel(const string &channel) { return (this->group[channel]); }
 
 void			Server::setPort(int port) { this->port = port; }
 
 void			Server::setPassword(string pass) { this->password = pass; }
+
+map< string, vector<User*> >	&getGroup() { return (this->group); }

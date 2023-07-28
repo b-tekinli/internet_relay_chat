@@ -92,9 +92,12 @@ void    Server::setUpSocket()
                     char    input[512] = {0};
                     int     readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
 
-					if (readed <= 1) // user_close
+					if (readed <= 1)
+                    {
 						close(pollfds[i].fd);
-					handleInput(pollfds[i].fd, string(input));
+                        users::deleteUser(pollfds[i].fd, this->users);
+                    }
+                    handleInput(pollfds[i].fd, string(input));
 				}
             }
         }

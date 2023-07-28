@@ -1,4 +1,4 @@
-#include "../../inc/Commands.hpp"
+#include <Commands.hpp>
 
 int cmd::join(const vector<string> &input, User& user)
 {
@@ -7,5 +7,6 @@ int cmd::join(const vector<string> &input, User& user)
 	if (user.getActive() != ACTIVE)
 		return (-1);
 	write(user.getFd(), "join", 4);
+	addUserTo(input[1], user, start.getChannel());
 	return (0);
 }

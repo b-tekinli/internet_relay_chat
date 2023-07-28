@@ -1,4 +1,4 @@
-#include "../inc/Server.hpp"
+#include <Server.hpp>
 
 Server start;
 
@@ -30,10 +30,17 @@ int main(int ac, char **av) // 8080 emakas
     start.setPassword(av[2]);
     start.toBegin();
 
+
+    User u;
+	u.setNickName("nick");
+    std::string content = "Example reply content";
+
+    std::string numeric = generateReply(RPL_WELCOME, u, content);
+    std::string normal = generateReply(RPL_TOPIC, u, content);
+
+
     return (0);
 }
-
-
 
 // kullanıcı oluşturalım
 // get set fonksiyonları daha profosyonel yapmaya çalışacağız
@@ -41,7 +48,6 @@ int main(int ac, char **av) // 8080 emakas
 // bazı basit commandları yazmaya çalışalım
 
 //"a " olma durumu                          (OK)
-//join                                      ()
-//kvirc ye yazı gönder                      ()
+// join                                      ()
+// kvirc ye yazı gönder                      ()
 
-// 

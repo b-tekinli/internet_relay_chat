@@ -3,6 +3,7 @@
 
 #include "DefineMod.hpp"
 #include "Global.hpp"
+#include "Response.hpp"
 
 class Server
 {
@@ -14,13 +15,14 @@ class Server
 	public:
 		Server();
 		~Server();
-		void			toBegin();
-		void			handleInput(int fd, const string &input);
-		void			setUpSocket();
-		const string	getPassword() const;
-		vector<User*>	getChannel(const string &channel);
-		void			setPort(int port);
-		void			setPassword(string pass);
+		void							toBegin();
+		void							handleInput(int fd, const string &input);
+		void							setUpSocket();
+		const string					getPassword() const;
+		vector<User*>					getChannel(const string &channel);
+		void							setPort(int port);
+		void							setPassword(string pass);
+		map< string, vector<User*> >	&getGroup();
 };
 
 extern Server start;

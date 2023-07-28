@@ -25,7 +25,7 @@ class Socket
         int		Receive(string &message);
         void	Close();
 
-        int getSocketFd();
+        int     getSocketFd();
 };
 
 #endif
