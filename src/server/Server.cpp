@@ -16,10 +16,36 @@ Server::~Server()
 
 const string	Server::getPassword() const { return (this->password); }
 
-map< string, vector<User*> >& Server::getGroup() { return (this->group); }
+map< string, vector<User*> >& Server::getChannels() { return (this->channels); }
 
-vector<User*>	Server::getChannel(const string &channel) { return (this->group[channel]); }
+vector<User*>	Server::getChannel(const string &channel) { return (this->channels[channel]); }
 
 void			Server::setPort(int port) { this->port = port; }
 
 void			Server::setPassword(string pass) { this->password = pass; }
+
+void Server::addUserTo(const string &group, User &user) { channels[group].push_back((User *)&user); }
+
+User*   Server::getOrCreateUser(int fd)
+{
+	if (users.size() < fd || users[fd] == 0)
+		users.insert(users.begin() + fd, new User(fd));
+	return (users[fd]);
+}
+
+void Server::deleteUser(int fd)
+{
+	if (this->users[fd] != 0)
+	{	
+		delete this->users[fd];
+		this->users[fd] = 0;
+	}
+}
+
+void Server::removeUserFrom(const string &channel, User &user)
+{
+	int fd = user.getFd();
+
+	delete channels[channel][fd];
+	channels[channel][fd] = NULL;
+}

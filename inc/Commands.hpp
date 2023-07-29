@@ -27,23 +27,6 @@ namespace cmd
 bool isEqual(const string &test, const string &aim, int enter);
 void write_fd(int fd, const string &msg);
 
-namespace users{
- 
-	/// @brief gets user from list or creates new one and inserts into the list
-	/// @param fd 
-	/// @return 
-	User* getOrCreateUser(int fd, vector <User*> &users);
-	
-	void deleteUser(int fd, vector <User*> users);
 
-	//vector<User> getAllUsers();
-
-	void addUserTo(const string &group, User &user, map<string, vector<User *> > &channels);
-
-	void removeUserFrom(const string &group, User &user, map<string, vector<User *> > &channels);
-
-	//map<string, string> getChannelList();
-	
-};
 
 #endif

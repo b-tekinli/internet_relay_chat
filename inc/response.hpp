@@ -15,6 +15,9 @@ enum Reply
 	RPL_AWAY = 301,
 	RPL_WHOREPLY = 352,
 	RPL_ENDOFWHO = 315,
+	RPL_LISTSTART = 321,
+	RPL_LIST = 322,
+	RPL_LISTEND = 323,
 	ERR_NOSUCHNICK = 401,
 	ERR_NEEDMOREPARAMS = 461,
 	ERR_BANNEDFROMCHAN = 474,
@@ -48,4 +51,5 @@ enum Reply
 typedef enum Reply Reply;
 
 const std::string generateReply(Reply reply, const User &target, const std::string &content);
+int sendReply();
 #endif

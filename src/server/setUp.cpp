@@ -85,7 +85,7 @@ void	Server::setUpSocket()
 
 					fcntl(clientFd, F_SETFL, O_NONBLOCK);
 					pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT} );
-					users::getOrCreateUser(clientFd, this->users);
+					getOrCreateUser(clientFd);
 				}
 				else // Connected to client
 				{
@@ -95,7 +95,7 @@ void	Server::setUpSocket()
 					if (readed <= 1)
 					{
 						close(pollfds[i].fd);
-						users::deleteUser(pollfds[i].fd, this->users);
+						deleteUser(pollfds[i].fd);
 					}
 					handleInput(pollfds[i].fd, string(input));
 				}
