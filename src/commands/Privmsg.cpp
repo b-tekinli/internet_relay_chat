@@ -1,41 +1,47 @@
-#include "../../inc/Commands.hpp"
+#include <Commands.hpp>
 
-void	sendGroup(const User user, string n_channel, int num, int cod ,string msg)
+void	sendGroup(const User& user, string n_channel, Reply res ,string msg)
 {
 	vector<User*>	group = start.getChannel(n_channel);
 
 	for (int i = 0; group[i]; i++)
 	{
-		write_fd(group[i]->getFd(), generateReply(cod, user, n_channel + ""));
+		Response::create().from(user).to(*group[i]).code(res).content(msg).send();
 	}
 }
 
 string	str_merge(const vector<string> &input)
 {
 	int		i = 2;
-	string	merge;
+	string	merge = "";
 
-	for (; input[i]; i++)
+	for (; i < input.size(); i++)
 	{
 		merge += input[i];
+		if (i < input.size() - 1)
+		merge += " ";
 	}
 	return (merge);
 }
 
-int cmd::privmsg(const vector<string> &input, User& user)
+int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı && kullanıcı mı var mı
 {
-	if (input.size() > 2 && user.getActive() != ACTIVE)
+	if (input.size() > 2 && from.getActive() != ACTIVE)
 	{
+		Response::create().to(from).code()
 		return (-1);
 	}
 	string	who = input[1];
-	string msg = str_merge(input);
+	string	msg = str_merge(input);
 
 	if (who[0] == '#')
-		sendGroup(user, who, 2, ERR_NORECIPIENT, msg);
+		sendGroup(from, who, ERR_NORECIPIENT, msg);
 	else
 	{
-		write_fd(start.getUserNick(who)->getFd(), NO_PASS);
+		User *to = start.getUserNick(input[1]);
+
+		Response::create().from(from).to(*to).code(ERR_NORECIPIENT).content(msg).send();
+		//write_fd(start.getUserNick(who)->getFd(), NO_PASS);
 	}
 	return (0);
 }
