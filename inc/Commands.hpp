@@ -20,12 +20,12 @@ namespace cmd
 	int	user(const vector<string> &input, User& user);
 	int	pass(const vector<string> &input, User& user);
 	int	part(const vector<string> &input, User& user);
-	int privmsg(const vector<string> &input, User& user);
 	int list(const vector<string> &input, User &user);
+	int	notice(const vector<string> &input, User& user);
+	int privmsg(const vector<string> &input, User& user);
 }
 
 bool isEqual(const string &test, const string &aim, int enter);
-void write_fd(int fd, const string &msg);
 
 
 
