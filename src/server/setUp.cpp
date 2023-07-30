@@ -22,7 +22,7 @@ bool	isEqual(const string &test, const string &aim, int enter)
  */
 fp_command selCommand(vector<string> &input)
 {
-	string		str[] = {"JOIN", "NICK", "*", "KILL", "PING", "PONG", "WHO", "USER", "LIST", "PASS"};
+	string		str[] = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "LIST", "PASS"};
 	fp_command	result[] = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::list, cmd::pass, NULL};
 	int			i;
 

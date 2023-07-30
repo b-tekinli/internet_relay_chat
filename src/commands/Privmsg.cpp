@@ -28,7 +28,7 @@ int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı
 {
 	if (input.size() > 2 && from.getActive() != ACTIVE)
 	{
-		Response::create().to(from).code()
+		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NT_ENHP).send();
 		return (-1);
 	}
 	string	who = input[1];
@@ -41,7 +41,6 @@ int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı
 		User *to = start.getUserNick(input[1]);
 
 		Response::create().from(from).to(*to).code(ERR_NORECIPIENT).content(msg).send();
-		//write_fd(start.getUserNick(who)->getFd(), NO_PASS);
 	}
 	return (0);
 }

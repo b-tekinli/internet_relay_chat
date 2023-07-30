@@ -4,6 +4,6 @@
 #define WR_PASS	"Incorrect Password\n"
 #define NO_PASS	"Your Connections Is Restricted"
 #define CH_NAME	"Channel name fist characther must be '#'"
-
+#define NT_ENHP ":Not enough parameters"
 
 #endif
