@@ -18,15 +18,15 @@ namespace cmd
 	int pong(const vector<string> &input, User& user);
 	int	who(const  vector<string> &input, User& user);
 	int	user(const vector<string> &input, User& user);
-	int	pass(const vector<string> &input, User& user);
+	int	pass(const vector<string> &input, User& from);
 	int	part(const vector<string> &input, User& user);
 	int list(const vector<string> &input, User &user);
-	int	notice(const vector<string> &input, User& user);
+	int	notice(const vector<string> &input, User& from);
 	int privmsg(const vector<string> &input, User& user);
 }
 
-bool isEqual(const string &test, const string &aim, int enter);
-
-
+bool	isEqual(const string &test, const string &aim, int enter);
+void	sendGroup(const User& user, string n_channel, Reply res ,string msg);
+string	str_merge(const vector<string> &input);
 
 #endif

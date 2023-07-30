@@ -19,23 +19,23 @@ string	str_merge(const vector<string> &input)
 	{
 		merge += input[i];
 		if (i < input.size() - 1)
-		merge += " ";
+			merge += " ";
 	}
 	return (merge);
 }
 
 int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı && kullanıcı mı var mı
 {
-	if (input.size() > 2 && from.getActive() != ACTIVE)
+	if (input.size() > 2)
 	{
-		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NT_ENHP).send();
+		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
 		return (-1);
 	}
 	string	who = input[1];
 	string	msg = str_merge(input);
 
 	if (who[0] == '#')
-		sendGroup(from, who, ERR_NORECIPIENT, msg);
+		sendGroup(from, who, ERR_NORECIPIENT, msg); //ERR_NORECIPIENT = look at this
 	else
 	{
 		User *to = start.getUserNick(input[1]);

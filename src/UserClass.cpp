@@ -6,7 +6,6 @@ User::User(int fd): fd(fd), active(FALSE), oper(false)
 {
 	stringstream convert;
 
-	cout << "created" << endl;
 	convert << fd;
 	this->user_name= "kvirc" + convert.str();
 	this->host_name = this->user_name;
@@ -14,10 +13,7 @@ User::User(int fd): fd(fd), active(FALSE), oper(false)
 	this->real_name = this->user_name;
 }
 
-User::User(const User &user)
-{
-	*this = user;
-}
+User::User(const User &user) { *this = user; }
 
 User::~User() {}
 

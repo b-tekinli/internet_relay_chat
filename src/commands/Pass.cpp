@@ -1,21 +1,25 @@
 #include <Commands.hpp>
 
 
-int cmd::pass(const vector<string> &input, User& user)
+int cmd::pass(const vector<string> &input, User& from)
 {
-	if (user.getActive() == true)
+	if (input.size() < 2)
+	{
+		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
 		return (-1);
-	cout << "TABLE" << endl;
-	cout << "password: " << start.getPassword() << endl;
-	cout << "password: " << input[1] << endl;
+	}
+	if (from.getActive() != FALSE)
+	{
+		Response::create().to(from).code(ERR_ALREADYREGISTRED).content(A_REGIST).send();
+		return (-1);
+	}
 	if (isEqual(input[1], start.getPassword(), 1))
 	{
-		user.setActive(HALF);
-		//write_fd(user.getFd(), "MESA\n");
-		cout << "Password is correct" << endl;
+		from.setActive(HALF);
+		Response::create().to(from).content("Password is correct").send();
 		return (1);
 	}
 	else
-		//write_fd(user.getFd(), WR_PASS);
+		Response::create().to(from).content("Incorrect Password!").send();
 	return (0);
 }

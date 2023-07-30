@@ -20,16 +20,22 @@ bool	isEqual(const string &test, const string &aim, int enter)
  * @param input: Input string
  * @return fp_command is the type of the function that represents 
  */
-fp_command selCommand(vector<string> &input)
+fp_command selCommand(vector<string> &input, const User &user)
 {
-	string		str[] = {"JOIN", "NICK", "QUIT", "KILL", "PING", "PONG", "WHO", "USER", "LIST", "PASS"};
-	fp_command	result[] = {cmd::join, cmd::nick, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::user, cmd::list, cmd::pass, NULL};
+	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KILL", "PING", "PONG", "WHO", "LIST"};
+	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kill, cmd::ping, cmd::pong, cmd::who, cmd::list,  NULL};
 	int			i;
 
 	for (i = -1; i < 10; ++i)
 		if (isEqual(input[0], str[i], input.size() >= 1) || 
 				isEqual(input[1], str[i], input.size() >= 2))
 			break;
+	if ((user.getActive() == FALSE && i != 0) || (user.getActive() == HALF && i > 2))
+	{
+		Response::create().to(user).content(ND_ACTIVE).send();
+		return (0);
+	}
+
 	return result[i];
 }
 
@@ -52,7 +58,7 @@ void	Server::handleInput(int fd, const string &input)
 	// [<prefix>] <numeric_code> <param1> <param2>
 	//write(fd,"001 amy :Ahmet naber\n",100);
 	//// create command from input
-	if (commands.size() >= 2 && (func = selCommand(commands)) != 0)
+	if (commands.size() >= 2 && (func = selCommand(commands, *users[fd])) != 0)
 		func(commands, *users[fd]);
 	else
 	{
