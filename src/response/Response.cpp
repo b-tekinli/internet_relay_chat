@@ -1,6 +1,8 @@
 #include <Response.hpp>
+#include <Commands.hpp>
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 
 
 /// @brief  generated response :<prefix> <number>
@@ -24,13 +26,21 @@ const std::string generateReply(Reply reply, const User &target, const std::stri
 }
 
 Response::Response(){
-	// set from string as prefix of server
-	this->mFrom= "";
+	this->mFrom= "Server";
 }
 
-Response::Response(const Response &response) {}
+Response::Response(const Response &response) {
+	*this = response;
+}
 
-Response& Response::operator=(const Response &response){}
+Response& Response::operator=(const Response &response){
+	mFrom = response.mFrom;
+	mTo = response.mTo;
+	mFd = response.mFd;
+	mCode = response.mCode;
+	mContent = response.mContent;
+	return *this;
+}
 
 Response::~Response(){}
 
@@ -40,16 +50,33 @@ Response Response::create()
 	return response;
 }
 
-Response& Response::from(const User &from){}
+Response& Response::from(const User &from) { 
+	mFrom = from.getNickName();
+	return *this;
+ }
 
-Response& Response::to(const User &user){}
+Response& Response::to(const User &user) {
+	mFd = user.getFd();
+	mTo = user.getNickName();
+	return *this;
+}
 
-Response& Response::code(const Reply &reply){}
+Response& Response::code(const Reply &reply) {
+	mCode = reply;
+	return *this;
+}
+
+Response& Response::content(const string &content){
+	mContent = content;
+	return *this;
+}
 
 void Response::send(){
 	std::stringstream stream;
 	string code_str;
 	stream << mCode;
 	stream >> code_str;
-	string message = ":" + mFrom + " " + code_str + 
+	string message = ":" + mFrom + " " + code_str + " " + mTo + " " + mContent;
+	//write_fd(mFd, message);
+	write(mFd, message.c_str(), message.length());
 }

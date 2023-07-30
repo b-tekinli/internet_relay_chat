@@ -50,14 +50,11 @@ enum Reply
 	ERR_CANNOTSENDTOCHAN = 404,
 	ERR_NOTOPLEVEL = 413,
 	ERR_WILDTOPLEVEL = 414,
-	ERR_TOOMANYTARGETS = 407,
+	ERR_TOOMANYTARGETS = 407
 
 };
 
-typedef enum Reply Reply;
-
-const std::string generateReply(Reply reply, const User &target, const std::string &content);
-
+/// @brief Response class (Chain of responsibility)
 class Response {
 	private:
 		string mFrom;
@@ -66,6 +63,7 @@ class Response {
 		Reply mCode;
 		string mContent;
 	public:
+
 		Response();
 		Response(const Response& response);
 		~Response();
@@ -74,7 +72,10 @@ class Response {
 		Response& from(const User &from);
 		Response& to(const User& user);
 		Response& code(const Reply &reply);
+		Response& content(const string &content);
 		void send();
 };
 
+
+const std::string generateReply(Reply reply, const User &target, const std::string &content);
 #endif
