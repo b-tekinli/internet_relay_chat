@@ -15,8 +15,8 @@ int cmd::list(const vector<string> &input, User& user)
 
 	for (; it != group.end(); it++) //we have to fix because of it's not enough work for client.
 	{
-		cout << it->first << endl;
+		write_fd(user.getFd(), generateReply(RPL_LIST, user, it->first + " :No topic"));
 	}
-	write_fd(user.getFd(),)
+	write_fd(user.getFd(),generateReply(RPL_LISTEND,user, "End of list"));
 	return (0);
 }

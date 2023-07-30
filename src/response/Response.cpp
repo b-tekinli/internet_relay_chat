@@ -10,14 +10,46 @@
 /// @return 
 const std::string generateReply(Reply reply, const User &target, const std::string &content){
 	std::string message = "";
-	
+	char reply_str[4];
+	sprintf(reply_str,"%d",reply);
 	message += ":<hostname>"; //TODO: implement prefix generator
 	message += " ";
-	message += std::to_string(reply);
+	message += reply_str;
 	message += " ";
 	message += target.getNickName();
 	message += " :";
 	message += content;
 
 	return message;
+}
+
+Response::Response(){
+	// set from string as prefix of server
+	this->mFrom= "";
+}
+
+Response::Response(const Response &response) {}
+
+Response& Response::operator=(const Response &response){}
+
+Response::~Response(){}
+
+Response Response::create()
+{
+	Response response;
+	return response;
+}
+
+Response& Response::from(const User &from){}
+
+Response& Response::to(const User &user){}
+
+Response& Response::code(const Reply &reply){}
+
+void Response::send(){
+	std::stringstream stream;
+	string code_str;
+	stream << mCode;
+	stream >> code_str;
+	string message = ":" + mFrom + " " + code_str + 
 }

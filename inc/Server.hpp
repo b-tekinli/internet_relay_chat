@@ -24,6 +24,7 @@ class Server
 		void							setPassword(string pass);
 		map< string, vector<User*> >	&getChannels();
 		const vector<User*>				getUsers() const;
+		User*							getUserNick(string nick);
 
 		/// @brief gets user from list or creates new one and inserts into the list
 		/// @param fd 

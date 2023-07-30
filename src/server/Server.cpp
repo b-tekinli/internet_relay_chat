@@ -24,7 +24,17 @@ void			Server::setPort(int port) { this->port = port; }
 
 void			Server::setPassword(string pass) { this->password = pass; }
 
-void Server::addUserTo(const string &group, User &user) { channels[group].push_back((User *)&user); }
+void			Server::addUserTo(const string &group, User &user) { channels[group].push_back((User *)&user); }
+
+User*			Server::getUserNick(string nick)
+{
+	for (int i = 0; i < users.size(); i++)
+	{
+		if (users[i]->getNickName() == nick)
+			return (users[i]);
+	}
+	return (0);
+}
 
 User*   Server::getOrCreateUser(int fd)
 {

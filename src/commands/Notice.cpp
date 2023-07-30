@@ -7,6 +7,5 @@ int cmd::notice(const vector<string> &input, User& user)
         write_fd(user.getFd(), NO_PASS);
         return (-1);
     }
-    for (int i)
     return (0);
 }

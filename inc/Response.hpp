@@ -7,18 +7,21 @@ enum Reply
 {
 	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_WELCOME = 1,
-	
+
 	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_YOURHOST = 2,
-	
+
 	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_CREATED = 3,
-	
+
 	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_MYINFO = 4,
 	RPL_BOUNCE = 5,
 	RPL_TOPIC = 332,
 	RPL_AWAY = 301,
+	RPL_LISTSTART = 321,
+	RPL_LIST = 322,
+	RPL_LISTEND = 323,
 	RPL_WHOREPLY = 352,
 	RPL_ENDOFWHO = 315,
 	ERR_NOSUCHNICK = 401,
@@ -54,4 +57,24 @@ enum Reply
 typedef enum Reply Reply;
 
 const std::string generateReply(Reply reply, const User &target, const std::string &content);
+
+class Response {
+	private:
+		string mFrom;
+		string mTo;
+		int mFd;
+		Reply mCode;
+		string mContent;
+	public:
+		Response();
+		Response(const Response& response);
+		~Response();
+		Response& operator=(const Response& response);
+		static Response create();
+		Response& from(const User &from);
+		Response& to(const User& user);
+		Response& code(const Reply &reply);
+		void send();
+};
+
 #endif
