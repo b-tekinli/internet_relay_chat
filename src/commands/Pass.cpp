@@ -11,11 +11,11 @@ int cmd::pass(const vector<string> &input, User& user)
 	if (isEqual(input[1], start.getPassword(), 1))
 	{
 		user.setActive(HALF);
-		write_fd(user.getFd(), "MESA\n");
+		//write_fd(user.getFd(), "MESA\n");
 		cout << "Password is correct" << endl;
 		return (1);
 	}
 	else
-		write_fd(user.getFd(), WR_PASS);
+		//write_fd(user.getFd(), WR_PASS);
 	return (0);
 }
