@@ -1,9 +1,9 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
-#include "DefineMod.hpp"
-#include "Global.hpp"
-#include "Response.hpp"
+#include <DefineMod.hpp>
+#include <Global.hpp>
+#include <Response.hpp>
 
 class Server
 {
@@ -18,13 +18,13 @@ class Server
 		void							toBegin();
 		void							handleInput(int fd, const string &input);
 		void							setUpSocket();
-		const string					getPassword() const;
-		vector<User*>					getChannel(const string &channel);
+		const string					getPassword() const;	
 		void							setPort(int port);
 		void							setPassword(string pass);
 		map< string, vector<User*> >	&getChannels();
 		const vector<User*>				getUsers() const;
 		User*							getUserNick(string nick);
+		vector<User*>					getChannel(const string &channel);
 
 		/// @brief gets user from list or creates new one and inserts into the list
 		/// @param fd 
