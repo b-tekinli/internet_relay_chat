@@ -9,5 +9,6 @@ int cmd::nick(const vector<string> &input, User& user)
 	}
 	user.setActive(ACTIVE);
 	user.setNickName(input[1]);
+	Response::create().to(user).code(RPL_WELCOME).content(WELCOME + user.getNickName() + "!kvirc@127.0.0.1").send();
 	return (0);
 }

@@ -8,7 +8,7 @@ int cmd::pass(const vector<string> &input, User& from)
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
 		return (-1);
 	}
-	if (from.getActive() != FALSE)
+	else if (from.getActive() != FALSE)
 	{
 		Response::create().to(from).code(ERR_ALREADYREGISTRED).content(A_REGIST).send();
 		return (-1);

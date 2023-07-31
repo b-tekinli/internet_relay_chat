@@ -42,12 +42,8 @@ int main(int ac, char **av) // 8080 emakas
 	return (0);
 }
 
-// kullanıcı oluşturalım
-// get set fonksiyonları daha profosyonel yapmaya çalışacağız
-// kanallara kullanıcı eklemeye çalışalım (map kullanarak)
-// bazı basit commandları yazmaya çalışalım
 
-//"a " olma durumu						  (OK)
-// join									  ()
-// kvirc ye yazı gönder					  ()
-
+//komutları yazacağız
+//private message check işlemlerini halletmem gerekiyor.
+//numeric bir şekilde kodu göndereceğiz
+//Kvirc'de test edeceğiz

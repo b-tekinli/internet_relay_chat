@@ -11,7 +11,6 @@ int cmd::list(const vector<string> &input, User& user)
 	map < string, vector<User*> >	&group = start.getChannels();
 	std::map<std::string, vector<User*> >::iterator it = group.begin();
 
-	
 	Response::create().to(user).code(RPL_LISTSTART).content("").send();
 
 	for (; it != group.end(); it++) //we have to fix because of it's not enough work for client.
