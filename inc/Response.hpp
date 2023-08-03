@@ -31,6 +31,7 @@ enum Reply
 	ERR_BADCHANNELKEY = 475,
 	ERR_CHANNELISFULL = 471,
 	ERR_BADCHANMASK = 476,
+	ERR_NOTREGISTERED = 451,
 	ERR_TOOMANYCHANNELS = 405,
 	ERR_NOSUCHCHANNEL = 403,
 	ERR_CHANOPRIVSNEEDED = 482,
@@ -69,6 +70,7 @@ class Response {
 		~Response();
 		Response& operator=(const Response& response);
 		static Response create();
+		static Response withCode(const Reply &reply);
 		Response& from(const User &from);
 		Response& to(const User& user);
 		Response& code(const Reply &reply);

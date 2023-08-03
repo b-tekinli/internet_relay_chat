@@ -50,6 +50,13 @@ Response Response::create()
 	return response;
 }
 
+Response Response::withCode(const Reply &reply)
+{
+	Response response;
+	response.mCode = reply;
+	return response;
+}
+
 Response& Response::from(const User &from) { 
 	mFrom = from.getNickName();
 	return *this;
@@ -73,9 +80,8 @@ Response& Response::content(const string &content){
 
 void Response::send(){
 	std::stringstream stream;
-	string code_str;
-	stream << mCode;
-	stream >> code_str;
-	string message = ":" + mFrom + " " + code_str + " " + mTo + " " + mContent;
+	string message;
+	stream << ":" << mFrom << " " << mCode << " " << mTo << " " << mContent << endl;
+	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
