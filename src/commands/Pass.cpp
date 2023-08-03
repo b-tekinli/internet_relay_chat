@@ -16,10 +16,11 @@ int cmd::pass(const vector<string> &input, User& from)
 	if (isEqual(input[1], start.getPassword(), 1))
 	{
 		from.setActive(HALF);
-		Response::create().to(from).content("Password is correct").send();
+		Response::create().to(from).content("Password is correct\n").send();
+		cout << "correct" << endl;
 		return (1);
 	}
 	else
-		Response::create().to(from).content("Incorrect Password!").send();
+		Response::create().to(from).content("Incorrect Password!\n").send();
 	return (0);
 }

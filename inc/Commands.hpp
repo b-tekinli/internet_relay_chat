@@ -3,7 +3,7 @@
 
 #include <Server.hpp>
 #include <DefineMod.hpp>
-#include <message.hpp>
+#include <Message.hpp>
 
 typedef int (*fp_command)(const vector<string> &input, User& user);
 
@@ -26,7 +26,7 @@ namespace cmd
 }
 
 bool	isEqual(const string &test, const string &aim, int enter);
-void	sendGroup(const User& user, string n_channel, Reply res ,string msg);
+void	sendGroup(const User& user, string n_channel, string msg);
 string	str_merge(const vector<string> &input);
 
 #endif

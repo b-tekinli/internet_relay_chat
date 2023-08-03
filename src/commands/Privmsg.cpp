@@ -1,8 +1,25 @@
 #include <Commands.hpp>
 
-bool	check_channel(string )
+bool	find_channel(string target, User &from)
 {
+	if (target[0] != '#')
+		return (false);
+	map < string, vector<User*> > search = start.getChannels();
+	std::map<std::string, vector <User*> >::iterator it = search.begin();	
 
+	for (; it != search.end(); it++)
+	{
+		if (it->first == target)
+		{
+			for (int i = 0; it->second[i]; i++)
+			{
+				if (it->second[i]->getNickName() == from.getNickName())
+					return (true);
+			}
+			Response::create().content(NO_MEM + target + "\n").send();
+		}
+	}
+	return (false);
 }
 
 void	sendGroup(const User& user, string n_channel, string msg)
@@ -36,15 +53,16 @@ int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
 		return (-1);
 	}
-	if (start.getUserNick(input[1]) == 0 || check_channel())
+	if (start.getUserNick(input[1]) == 0 || !find_channel(input[1], from))
 	{
+		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
+		return (-1);
 	}
-
 	string	who = input[1];
 	string	msg = str_merge(input);
 
 	if (who[0] == '#')
-		sendGroup(from, who, ERR_NORECIPIENT, msg); //ERR_NORECIPIENT = look at this
+		sendGroup(from, who, msg); //ERR_NORECIPIENT = look at this
 	else
 	{
 		User *to = start.getUserNick(input[1]);

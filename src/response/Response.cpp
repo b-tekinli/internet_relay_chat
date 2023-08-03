@@ -77,6 +77,5 @@ void Response::send(){
 	stream << mCode;
 	stream >> code_str;
 	string message = ":" + mFrom + " " + code_str + " " + mTo + " " + mContent;
-	//write_fd(mFd, message);
 	write(mFd, message.c_str(), message.length());
 }
