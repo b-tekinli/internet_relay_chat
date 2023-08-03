@@ -284,5 +284,23 @@ Dynamic Array yapısını temsil eder. Arraylere göre daha esnek ve güvenli bi
 Vector elemanlarına döngü kullanarak veya iteratorlerle erişebiliriz.
 
 
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> myVector;
+
+    myVector.push_back(10);
+    myVector.push_back(20);
+    myVector.push_back(30);
+
+    for (int i = 0; i < myVector.size(); ++i) {
+        std::cout << myVector[i] << " ";
+    }
+
+    return 0;
+}
+```
 
 
