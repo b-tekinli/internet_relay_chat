@@ -53,7 +53,7 @@ int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
 		return (-1);
 	}
-	if (start.getUserNick(input[1]) == 0 || !find_channel(input[1], from))
+	if (start.getUserNick(input[1]) == 0)
 	{
 		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
 		return (-1);
@@ -70,4 +70,19 @@ int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı
 		Response::create().from(from).to(*to).content(msg).send();
 	}
 	return (0);
+}
+
+
+int cmd::privmsg(const vector<string> &input, User& from)
+{
+	if (input.size() > 2)
+	{
+		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
+		return (-1);
+	}
+	if (!find_channel(input[1], from))
+	{
+		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
+		return (-1);
+	}
 }
