@@ -17,7 +17,8 @@ namespace cmd
 	int ping(const vector<string> &input, User& user);
 	int pong(const vector<string> &input, User& user);
 	int	who(const  vector<string> &input, User& user);
-	int	user(const vector<string> &input, User& user);
+	int user(const vector<string> &input, User &user);
+	int mode(const vector<string> &input, User &user);
 	int	pass(const vector<string> &input, User& from);
 	int	part(const vector<string> &input, User& user);
 	int list(const vector<string> &input, User &user);
