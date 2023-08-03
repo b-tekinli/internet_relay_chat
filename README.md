@@ -264,4 +264,25 @@ Ağ iletişimi için kullanılan bir araçtır. Açılımı "networking Swiss Ar
 - `nc -l 3030 > irc.txt` :arrow_right: 3030 portunu dinleyerek gelen veriyi irc.txt dosyasına kaydeder.
 
 
+<br />
+
+
+## Vector Nedir?
+
+Dynamic Array yapısını temsil eder. Arraylere göre daha esnek ve güvenli bir yapı sağlar.
+
+`#include <vector` olarak kullanılır.
+
+`std::vector<T> myVector` :arrow_right: "T" vector'ün içinde depolanacak veri türünü temsil eder. Örnek:
+`std::vector<int>`
+
+Özelliklerinden biri dinamik boyuta sahip olmasıdır. Yani Vector'ün boyu otomatik olarak ayarlanır ve ihtiyaç duyuldukça büyütüp küçültüleiblir. Aynı zamanda elemanlara indeks kullanarak erişebiliriz.
+
+`push_back` :arrow_rigth: Eleman eklemek için kullanılır.
+`pop_back` :arrow_right: Eleman silmek için kullanılır.
+
+Vector elemanlarına döngü kullanarak veya iteratorlerle erişebiliriz.
+
+
+
 
