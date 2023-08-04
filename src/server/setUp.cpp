@@ -67,6 +67,27 @@ void	Server::handleInput(int fd, const string &input)
 	}
 }
 
+
+const string* Server::get_line(int fd){
+	string *line = new string("");
+	char chr[2] = {0};
+	int readed;
+	while ((readed = recv(fd,chr,1,0)) > 0){
+		string append(chr);
+		*line += append;
+		if (chr[0] == '\n')
+			break;
+	}
+	if (readed < 0){
+
+		close(fd);
+		deleteUser(fd);
+		return NULL;
+	}
+
+	return line;
+}
+
 // const string& generateReply(int code, User, string message);
 
 void	Server::setUpSocket()
@@ -98,13 +119,10 @@ void	Server::setUpSocket()
 				{
 					char	input[512] = {0};
 					int	 readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
-
-					if (readed <= 1)
-					{
-						close(pollfds[i].fd);
-						deleteUser(pollfds[i].fd);
+					//const string *line;
+					if (readed > 0){
+						cout << string(input) << endl;
 					}
-					handleInput(pollfds[i].fd, string(input));
 				}
 			}
 		}
