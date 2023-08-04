@@ -1,4 +1,5 @@
 #include <Server.hpp>
+#include <Commands.hpp>
 
 Server::Server() {}
 
@@ -24,7 +25,20 @@ void			Server::setPort(int port) { this->port = port; }
 
 void			Server::setPassword(string pass) { this->password = pass; }
 
-void			Server::addUserTo(const string &group, User &user) { channels[group].push_back((User *)&user); }
+void			Server::addUserTo(const string &group, User &user) 
+{
+	if (channels[group].size() == 0)
+		user.setOper(true);
+	else
+	{
+		vector<string>	send;
+
+		send.push_back("NOTICE");
+		send.push_back(group);
+		cmd::notice(send, user); //every one take a message
+	}
+	channels[group].push_back((User *)&user); 
+}
 
 User*			Server::getUserNick(string nick)
 {

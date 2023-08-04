@@ -2,7 +2,7 @@
 
 int cmd::kick(const vector<string> &input, User& from)
 {
-	if (input.size() == 3)
+	if (input.size() != 3)
 	{
 		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content("KICK usage 'KICK <channel> <user>'").send();
 		return (-1);
