@@ -32,6 +32,5 @@ int cmd::kick(const vector<string> &input, User& from)
 				start.getChannels().erase(input[1]);
 		}
 	}
-	
 	return (0);
 }
