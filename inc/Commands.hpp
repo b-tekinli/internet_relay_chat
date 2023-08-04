@@ -13,7 +13,7 @@ namespace cmd
 	int join(const vector<string> &input, User& user);
 	int nick(const vector<string> &input, User& user);
 	int quit(const vector<string> &input, User& user);
-	int kill(const vector<string> &input, User& user);
+	int kick(const vector<string> &input, User& user);
 	int ping(const vector<string> &input, User& user);
 	int pong(const vector<string> &input, User& user);
 	int	who(const  vector<string> &input, User& user);
@@ -28,5 +28,5 @@ namespace cmd
 bool	isEqual(const string &test, const string &aim, int enter);
 void	sendGroup(const User& user, string n_channel, string msg);
 string	str_merge(const vector<string> &input);
-
+bool	find_channel(string target, User &from);
 #endif

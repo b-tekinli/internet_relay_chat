@@ -41,9 +41,11 @@ const string&	User::getNickName() const { return (nick_name); }
 
 const int		User::getActive() const { return (active); }
 
+const bool		User::getOper() const { return (oper); }
+
 const int		User::getFd() const { return (fd); }
 
-void			User::setActive(e_active choose)	{ active = choose; }
+void			User::setActive(e_active choose)	 { active = choose; }
 
 void			User::setUserName(const string& set) { user_name = set; }
 
@@ -54,3 +56,5 @@ void			User::setServName(const string& set) { serv_name = set; }
 void			User::setRealName(const string& set) { real_name = set; }
 
 void			User::setNickName(const string& set) { nick_name = set; }
+
+void			User::setOper(bool ch) { oper = ch; }

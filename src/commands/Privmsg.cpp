@@ -46,7 +46,7 @@ string	str_merge(const vector<string> &input)
 	return (merge);
 }
 
-int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı && kullanıcı mı var mı
+int cmd::privmsg(const vector<string> &input, User& from) // kanallmı ve var mı && kullanıcı mı var mı
 {
 	if (input.size() > 2)
 	{
@@ -72,7 +72,7 @@ int cmd::privmsg(const vector<string> &input, User& from)// kanallmı ve var mı
 	return (0);
 }
 
-
+/*
 int cmd::privmsg(const vector<string> &input, User& from)
 {
 	if (input.size() > 2)
@@ -85,4 +85,6 @@ int cmd::privmsg(const vector<string> &input, User& from)
 		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
 		return (-1);
 	}
+	return (0);
 }
+*/

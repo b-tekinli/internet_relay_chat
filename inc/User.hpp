@@ -36,6 +36,7 @@ class User
 		const string&	getRealName() const;
 		const string&	getNickName() const;
 		const int		getActive() const;
+		const bool		getOper() const;
 		const int		getFd() const;
 		void			setActive(e_active choose);
 		void			setUserName(const string& set);
@@ -43,6 +44,7 @@ class User
 		void			setServName(const string& set);
 		void			setRealName(const string& set);
 		void			setNickName(const string& set);
+		void			setOper(bool ch);
 };
 
 #endif

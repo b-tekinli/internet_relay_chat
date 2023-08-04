@@ -2,14 +2,19 @@
 #define MESSAGE_HPP
 
 //error
-#define WR_PASS         "Incorrect Password\n"
-#define NO_PASS         "Your Connections Is Restricted\n"
-#define CH_NAME         "Channel name fist characther must be '#'\n"
-#define NOT_ENOUGH      "Not enough parameters\n"
-#define ND_ACTIVE       "You need to be active\n"
-#define A_REGIST        "Unauthorized command\n"
-#define NO_SUCH         "No such nick/channel\n"
+#define WR_PASS         "Incorrect Password "
+#define NO_PASS         "Your Connections Is Restricted "
+#define CH_NAME         "Channel name fist characther must be '#' "
+#define NOT_ENOUGH      "Not enough parameters "
+#define ND_ACTIVE       "You need to be active "
+#define A_REGIST        "Unauthorized command "
+#define NO_SUCH         "No such nick/channel "
 #define NO_MEM			"You are not a memeber this channel => "
+#define NO_OPER			" :You're not on that channel "
+#define NO_CHANNEL		" :No such channel"
+#define KICK_TO			"Kick by the operator"
+
+
 
 //success
 #define WELCOME         "Welcome to the Internet Relay Network "
