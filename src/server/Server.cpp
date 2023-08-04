@@ -28,7 +28,10 @@ void			Server::setPassword(string pass) { this->password = pass; }
 void			Server::addUserTo(const string &group, User &user) 
 {
 	if (channels[group].size() == 0)
+	{
 		user.setOper(true);
+		user.addOperator(group);
+	}
 	else
 	{
 		vector<string>	send;
@@ -60,7 +63,7 @@ User*   Server::getOrCreateUser(int fd)
 void Server::deleteUser(int fd)
 {
 	if (this->users[fd] != 0)
-	{	
+	{
 		delete this->users[fd];
 		this->users[fd] = 0;
 	}
