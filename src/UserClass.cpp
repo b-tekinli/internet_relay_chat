@@ -58,3 +58,20 @@ void			User::setRealName(const string& set) { real_name = set; }
 void			User::setNickName(const string& set) { nick_name = set; }
 
 void			User::setOper(bool ch) { oper = ch; }
+
+void			User::addOperator(string &str) { wh_op.push_back(str); }
+
+void			User::delOperator(const string str) 
+{
+	int	i = 0;
+
+	for (; i < wh_op.size(); i++)
+	{
+		if (wh_op[i] == str)
+		{
+			wh_op.erase(wh_op.begin() + i);
+			if (wh_op.size() == 0)
+				oper = false;
+		}
+	}
+}

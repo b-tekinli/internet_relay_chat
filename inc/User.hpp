@@ -13,15 +13,16 @@ enum e_active
 class User
 {
 	private:
-		string		user_name;
-		string		host_name;
-		string		serv_name;
-		string		real_name;
-		string		nick_name;
-		int			grade;
-		int			fd;
-		e_active	active;
-		bool		oper;
+		string			user_name;
+		string			host_name;
+		string			serv_name;
+		string			real_name;
+		string			nick_name;
+		int				grade;
+		int				fd;
+		e_active		active;
+		bool			oper;
+		vector<string>	wh_op;
 
 	public:
 		User();
@@ -45,6 +46,8 @@ class User
 		void			setRealName(const string& set);
 		void			setNickName(const string& set);
 		void			setOper(bool ch);
+		void			addOperator(string &str);
+		void			delOperator(const string str);
 };
 
 #endif
