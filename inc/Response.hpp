@@ -5,6 +5,8 @@
 
 enum Reply
 {
+	/// @brief Represents no code. Pass it when you don't want to give a code number
+	NONE=0,
 	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_WELCOME = 1,
 
