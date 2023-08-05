@@ -119,7 +119,6 @@ void	Server::setUpSocket()
 						close(pollfds[i].fd);
 						deleteUser(pollfds[i].fd);
 					}
-					handleInput(pollfds[i].fd, input);
 				}
 			}
 		}
