@@ -68,24 +68,18 @@ void	Server::handleInput(int fd, const string &input)
 }
 
 
-const string* Server::get_line(int fd){
-	string *line = new string("");
+static int get_line(int fd, string &line){
 	char chr[2] = {0};
-	int readed;
+	int readed = 0;
+	int total_read = 0;;
 	while ((readed = recv(fd,chr,1,0)) > 0){
+		total_read += readed;
 		string append(chr);
-		*line += append;
+		line += append;
 		if (chr[0] == '\n')
 			break;
 	}
-	if (readed < 0){
-
-		close(fd);
-		deleteUser(fd);
-		return NULL;
-	}
-
-	return line;
+	return total_read;
 }
 
 // const string& generateReply(int code, User, string message);
@@ -115,13 +109,15 @@ void	Server::setUpSocket()
 					pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT} );
 					getOrCreateUser(clientFd);
 				}
-				else // Connected to client
+				else
 				{
-					char	input[512] = {0};
-					int	 readed = recv(pollfds[i].fd, input, sizeof(input) - 1,  0);
-					//const string *line;
-					if (readed > 0){
-						cout << string(input) << endl;
+					string line;
+					int readed = get_line(pollfds[i].fd,line);
+					if (readed > 0)
+						handleInput(pollfds[i].fd,line);
+					else if (readed <= 0){
+						close(pollfds[i].fd);
+						deleteUser(pollfds[i].fd);
 					}
 					handleInput(pollfds[i].fd, input);
 				}
