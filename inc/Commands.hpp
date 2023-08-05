@@ -27,7 +27,7 @@ namespace cmd
 }
 
 bool	isEqual(const string &test, const string &aim, int enter);
-void	sendGroup(const User& user, string n_channel, string msg);
+void	sendGroup(User& user, const string n_channel, const string msg);
 string	str_merge(const vector<string> &input);
 bool	find_channel(string target, User &from);
 #endif

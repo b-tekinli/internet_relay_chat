@@ -38,6 +38,7 @@ void			Server::addUserTo(const string &group, User &user)
 
 		send.push_back("NOTICE");
 		send.push_back(group);
+		send.push_back("JOIN " + user.getNickName() + " in the " + group);
 		cmd::notice(send, user); //every one take a message
 	}
 	channels[group].push_back((User *)&user); 

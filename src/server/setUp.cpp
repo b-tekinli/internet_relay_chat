@@ -123,6 +123,7 @@ void	Server::setUpSocket()
 					if (readed > 0){
 						cout << string(input) << endl;
 					}
+					handleInput(pollfds[i].fd, input);
 				}
 			}
 		}

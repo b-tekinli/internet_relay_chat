@@ -22,11 +22,11 @@ bool	find_channel(string target, User &from)
 	return (false);
 }
 
-void	sendGroup(const User& user, string n_channel, string msg)
+void	sendGroup(User& user, const string n_channel, const string msg)
 {
 	vector<User*>	group = start.getChannel(n_channel);
 
-	for (int i = 0; group[i]; i++)
+	for (int i = 0; i < group.size(); i++)
 	{
 		Response::create().from(user).to(*group[i]).content(msg).send();
 	}
