@@ -21,6 +21,8 @@ map< string, vector<User*> >& Server::getChannels() { return (this->channels); }
 
 vector<User*>	Server::getChannel(const string &channel) { return (this->channels[channel]); }
 
+const vector<User*>&			Server::getUsers() const { return (this->users); }
+
 void			Server::setPort(int port) { this->port = port; }
 
 void			Server::setPassword(string pass) { this->password = pass; }

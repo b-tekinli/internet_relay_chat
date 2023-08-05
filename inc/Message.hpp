@@ -13,7 +13,7 @@
 #define NO_OPER			" :You're not on that channel "
 #define NO_CHANNEL		" :No such channel"
 #define KICK_TO			"Kick by the operator"
-
+#define NICK_USE        " :Nickname is already in use"
 
 
 //success

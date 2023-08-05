@@ -26,7 +26,10 @@ const std::string generateReply(Reply reply, const User &target, const std::stri
 }
 
 Response::Response(){
-	this->mFrom= "Server";
+	this->mFrom = "Server";
+	this->mCode = NONE;
+	this->mTo = "anonymous!anonymous@anonymous";
+	this->mContent = "No Content.";
 }
 
 Response::Response(const Response &response) {
@@ -81,7 +84,7 @@ Response& Response::content(const string &content){
 void Response::send(){
 	std::stringstream stream;
 	string message;
-	stream << ":" << mFrom << " " << mCode << " " << mTo << " " << mContent << endl;
+	stream << ":" << mFrom << " " << std::setw(3) << std::setfill('0') << mCode << " " << mTo << " :" << mContent << endl;
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }

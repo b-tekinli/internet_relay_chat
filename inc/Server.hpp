@@ -22,7 +22,7 @@ class Server
 		void							setPort(int port);
 		void							setPassword(string pass);
 		map< string, vector<User*> >	&getChannels();
-		const vector<User*>				getUsers() const;
+		const vector<User*>				&getUsers() const;
 		User*							getUserNick(string nick);
 		vector<User*>					getChannel(const string &channel);
 
