@@ -12,7 +12,6 @@ class Server
 		string							password;
 		map < string, vector<User*> >	channels;
 		vector <User*>					users;
-		const string* get_line(int fd);
 	public:
 		Server();
 		~Server();
