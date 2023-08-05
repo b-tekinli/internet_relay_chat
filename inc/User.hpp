@@ -46,7 +46,7 @@ class User
 		void			setRealName(const string& set);
 		void			setNickName(const string& set);
 		void			setOper(bool ch);
-		void			addOperator(string &str);
+		void			addOperator(const string &str);
 		void			delOperator(const string str);
 };
 

@@ -59,7 +59,7 @@ void			User::setNickName(const string& set) { nick_name = set; }
 
 void			User::setOper(bool ch) { oper = ch; }
 
-void			User::addOperator(string &str) { wh_op.push_back(str); }
+void			User::addOperator(const string &str) { wh_op.push_back(str); }
 
 void			User::delOperator(const string str) 
 {

@@ -7,14 +7,14 @@ int cmd::kick(const vector<string> &input, User& from)
 		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content("KICK usage 'KICK <channel> <user>'").send();
 		return (-1);
 	}
-	else if (from.getOper() == false)
-	{
-		Response::withCode(ERR_NOTONCHANNEL).to(from).content(input[0] + NO_OPER).send();
-		return (-1);
-	}
 	else if (!find_channel(input[1], from))
 	{
 		Response::withCode(ERR_NOSUCHCHANNEL).to(from).content(input[0] + NO_CHANNEL).send();
+		return (-1);
+	}
+	else if (start.getChannel(input[1])[0]->getNickName() == from.getNickName())
+	{
+		Response::withCode(ERR_NOTONCHANNEL).to(from).content(input[0] + NO_OPER).send();
 		return (-1);
 	}
 	User							*to = start.getUserNick(input[2]);
