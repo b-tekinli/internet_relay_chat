@@ -18,6 +18,9 @@ enum Reply
 
 	/// @brief The server sends Replies 001 to 004 to a user upon successful registration
 	RPL_MYINFO = 4,
+
+	/// @brief Info message
+	RPL_INFO = 371,
 	RPL_BOUNCE = 5,
 	RPL_TOPIC = 332,
 	RPL_AWAY = 301,
@@ -53,7 +56,8 @@ enum Reply
 	ERR_CANNOTSENDTOCHAN = 404,
 	ERR_NOTOPLEVEL = 413,
 	ERR_WILDTOPLEVEL = 414,
-	ERR_TOOMANYTARGETS = 407
+	ERR_TOOMANYTARGETS = 407,
+	ERR_PASSWDMISMATCH = 464
 
 };
 
