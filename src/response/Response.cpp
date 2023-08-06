@@ -84,7 +84,9 @@ Response& Response::content(const string &content){
 void Response::send(){
 	std::stringstream stream;
 	string message;
-	stream << ":" << mFrom << " " << std::setw(3) << std::setfill('0') << mCode << " " << mTo << " :" << mContent << endl;
+	stream << ":" << mFrom << " " 
+		<< std::setw(3) << std::setfill('0') << mCode << " " 
+		<< mTo << " :" << mContent << endl;
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
