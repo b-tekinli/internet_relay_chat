@@ -11,6 +11,7 @@ User::User(int fd): fd(fd), active(FALSE), oper(false)
 	this->host_name = this->user_name;
 	this->serv_name = this->user_name;
 	this->real_name = this->user_name;
+	this->nick_name = " ";
 }
 
 User::User(const User &user) { *this = user; }
@@ -24,7 +25,8 @@ User&			User::operator=(const User &user)
 		this->user_name = user.user_name;
 		this->host_name = user.host_name;
 		this->serv_name = user.serv_name;
-		this->real_name = user.real_name;	
+		this->real_name = user.real_name;
+		this->nick_name = " ";
 	}
 	return (*this);
 }

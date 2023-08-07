@@ -16,11 +16,11 @@ int cmd::pass(const vector<string> &input, User& from)
 	if (isEqual(input[1], start.getPassword(), 1))
 	{
 		from.setActive(HALF);
-		Response::withCode(RPL_INFO).to(from).content("Password is correct\n").send();
+		Response::withCode(RPL_INFO).to(from).content("Password is correct").send();
 		cout << "correct" << endl;
 		return (1);
 	}
 	else
-		Response::withCode(ERR_PASSWDMISMATCH).to(from).content("Incorrect Password!\n").send();
+		Response::withCode(ERR_PASSWDMISMATCH).to(from).content("Incorrect Password!").send();
 	return (0);
 }

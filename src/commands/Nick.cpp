@@ -1,27 +1,27 @@
 #include <Commands.hpp>
 
-bool	nameInUse(const string name)
+bool	nameInUse(string name, int _size)
 {
+	if (_size == 4)
+		return (false);
 	vector<User*>	users = start.getUsers();
 
-	cout << "size: " << users.size() << endl;
-	cout << "name: " << name << endl;
-	for (int i = -1; i < users.size(); ++i)
+	for (int i = 4; i < users.size() && i < _size; i++)
 	{
-		cout << "baktim" << endl;
-		if (users[i]->getNickName() == name)
-		{
-			cout << "girdi" << endl;
+		if (name == users[i]->getNickName())
 			return (true);
-		}
 	}
-	cout << "harbi" << endl;
 	return (false);
 }
 
 int cmd::nick(const vector<string> &input, User& user)
 {
-	if (nameInUse(input[1]))
+	if (input.size() < 2)
+	{
+		Response::withCode(ERR_NONICKNAMEGIVEN).to(user).content(NO_NICK).send();
+		return (-1);
+	}
+	if (nameInUse(input[1], user.getFd()))
 	{
 		Response::withCode(ERR_NICKNAMEINUSE).to(user).content(input[1] + NICK_USE).send();
 		return (-1);

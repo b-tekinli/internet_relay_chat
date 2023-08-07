@@ -16,8 +16,20 @@ bool	find_channel(string target, User &from)
 				if (it->second[i]->getNickName() == from.getNickName())
 					return (true);
 			}
-			Response::create().content(NO_MEM + target + "\n").send();
+			Response::create().content(NO_MEM + target).send();
 		}
+	}
+	return (false);
+}
+
+bool	find_channel(vector <User*> group, string name)
+{
+	if (group.size() == 0)
+		return (false);
+	for (int i = 0; i < group.size(); i++)
+	{
+		if (group[i]->getNickName() == name)
+			return (true);
 	}
 	return (false);
 }
@@ -53,7 +65,7 @@ int cmd::privmsg(const vector<string> &input, User& from) // kanallmÄ± ve var mÄ
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
 		return (-1);
 	}
-	if (start.getUserNick(input[1]) == 0)
+	if (start.getUserNick(input[1]) == 0 && !find_channel(input[1], from))
 	{
 		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
 		return (-1);
@@ -67,24 +79,7 @@ int cmd::privmsg(const vector<string> &input, User& from) // kanallmÄ± ve var mÄ
 	{
 		User *to = start.getUserNick(input[1]);
 
-		Response::create().from(from).to(*to).content(msg).send();
+		Response::withCode(RPL_AWAY).from(from).to(*to).content(msg).send();
 	}
 	return (0);
 }
-
-/*
-int cmd::privmsg(const vector<string> &input, User& from)
-{
-	if (input.size() > 2)
-	{
-		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
-		return (-1);
-	}
-	if (!find_channel(input[1], from))
-	{
-		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
-		return (-1);
-	}
-	return (0);
-}
-*/

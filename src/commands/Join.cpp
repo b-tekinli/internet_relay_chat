@@ -12,8 +12,6 @@ int cmd::join(const vector<string> &input, User& from)
 		Response::create().to(from).content(ND_ACTIVE).send();
 		return (-1);
 	}
-	//Response::withCode(RPL_TOPIC).to(from).content(input[1] +  " " + from.getNickName() + "!" + from.getUserName() + "@127.0.0.1: Welcome to Channel " + input[1]);
-	Response::create().content(input[1] +  " " + from.getNickName() + "!" + from.getUserName() + "@127.0.0.1: Welcome to Channel " + input[1]);
 
 	start.addUserTo(input[1], from);
 	return (0);

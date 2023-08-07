@@ -30,4 +30,5 @@ bool	isEqual(const string &test, const string &aim, int enter);
 void	sendGroup(User& user, const string n_channel, const string msg);
 string	str_merge(const vector<string> &input);
 bool	find_channel(string target, User &from);
+bool	find_channel(vector <User*> group, string name);
 #endif
