@@ -40,6 +40,18 @@ fp_command selCommand(vector<string> &input, const User &user)
 	return result[i];
 }
 
+vector<string> split_input(const string &str){
+	
+	stringstream	sstream(str);
+	string new_str;
+	vector<string> strings;
+	while (getline(sstream, new_str, ' '))
+	{
+		if (str[0] > 33)
+			strings.push_back(str);
+	}
+	return strings;
+}
 
 /// @brief handles input
 /// @param fd 
@@ -48,18 +60,12 @@ void	Server::handleInput(int fd, const string &input)
 {
 	fp_command 		func;
 	string			str;
-	stringstream	sstream(input);
 	vector<string>	commands;
 
-	while (getline(sstream, str, ' '))
-	{
-		if (str[0] > 33)
-			commands.push_back(str);
-	}
-	// [<prefix>] <numeric_code> <param1> <param2>
-	//write(fd,"001 amy :Ahmet naber\n",100);
-	//// create command from input
-	if (commands.size() >= 2 && (func = selCommand(commands, *users[fd])) != 0)
+	commands = split_input(input);
+
+
+	if ((func = selCommand(commands, *users[fd])) != NULL)
 		func(commands, *users[fd]);
 	else
 	{
@@ -91,7 +97,7 @@ void	Server::setUpSocket()
 
 	clientSocket.init(port);
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
-	while (poll(&pollfds[0], pollfds.size(), -1))
+	while (poll(&pollfds[0], pollfds.size(), -1))//alınan inputların durumunu söyler
 	{   
 		for (int i = 0; i < pollfds.size(); i++)
 		{
@@ -113,8 +119,10 @@ void	Server::setUpSocket()
 				{
 					string line;
 					int readed = get_line(pollfds[i].fd,line);
-					if (readed > 0)
+					if (readed > 0){
+						cout << line << endl;
 						handleInput(pollfds[i].fd,line);
+					}
 					else if (readed <= 0){
 						close(pollfds[i].fd);
 						deleteUser(pollfds[i].fd);

@@ -81,12 +81,18 @@ Response& Response::content(const string &content){
 	return *this;
 }
 
+//TODO: generalize responses
+/// General stucture of responses: ":"
 void Response::send(){
 	std::stringstream stream;
 	string message;
-	stream << ":" << mFrom << " " 
-		<< std::setw(3) << std::setfill('0') << mCode << " " 
-		<< mTo << " :" << mContent << endl;
+	if (mFrom != "")
+		stream << ":" << mFrom << " ";
+	if (mCode != NONE) 
+		stream << std::setw(3) << std::setfill('0') << mCode << " ";
+	
+	stream << mTo << " :" << mContent << endl;
+	
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
