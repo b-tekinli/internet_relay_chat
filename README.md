@@ -305,10 +305,10 @@ int main() {
 
 
 <!-- commands table -->
-## COMMANDS
+## KOMUTLAR
 
 
-| Command | Description |
+| Komut | Açıklama |
 | :-----------: | :----------- |
 | Join | Client'ın verilen kanala katılmak istediğini, her kanalın kendisi için verilen anahtarı kullandığını belirtir.  |
 | Kick | Kullanıcının bir kanaldan zorla çıkarılmasını talep etmek için kullanılabilir.  |
