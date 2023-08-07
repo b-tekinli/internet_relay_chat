@@ -28,7 +28,7 @@ class Server
 
 		/// @brief gets user from list or creates new one and inserts into the list
 		/// @param fd 
-		/// @return 
+		/// @return User in the system
 		User*	getOrCreateUser(int fd);
 		void	deleteUser(int fd);
 		void	addUserTo(const string &group, User &user);
