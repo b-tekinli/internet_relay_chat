@@ -16,7 +16,3 @@ int cmd::join(const vector<string> &input, User& from)
 	start.addUserTo(input[1], from);
 	return (0);
 }
-//
-// welcome channel message
-// if first channel member then we can turn on oper
-//

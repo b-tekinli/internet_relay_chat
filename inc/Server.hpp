@@ -33,7 +33,6 @@ class Server
 		void	deleteUser(int fd);
 		void	addUserTo(const string &group, User &user);
 		void	removeUserFrom(const string &group, User &user);
-		//map<string, string> getChannelList();
 };
 
 extern Server start;
