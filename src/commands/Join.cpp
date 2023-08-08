@@ -4,7 +4,7 @@ int cmd::join(const vector<string> &input, User& from)
 {
 	if (input.size() != 2)
 	{
-		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content(NOT_ENOUGH).send();
+		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content(JOIN_USE).send();
 		return (-1);
 	}
 	if (from.getActive() < HALF)

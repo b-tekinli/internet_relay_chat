@@ -21,14 +21,14 @@ int cmd::nick(const vector<string> &input, User& user)
 		Response::create().to(user).content(FIRST_USERSET).send();
 		return (-1);
 	}
-	if (input.size() < 2)
+	if (input.size() != 2)
 	{
-		Response::withCode(ERR_NONICKNAMEGIVEN).to(user).content(NO_NICK).send();
+		Response::withCode(ERR_NONICKNAMEGIVEN).to(user).content(NICK_USE).send();
 		return (-1);
 	}
 	if (nameInUse(input[1], user.getFd()))
 	{
-		Response::withCode(ERR_NICKNAMEINUSE).to(user).content(input[1] + NICK_USE).send();
+		Response::withCode(ERR_NICKNAMEINUSE).to(user).content(input[1] + ER_NICK_USED).send();
 		return (-1);
 	}
 	if (user.getActive() == U_HALF)

@@ -4,7 +4,7 @@ int cmd::kick(const vector<string> &input, User& from)
 {
 	if (input.size() != 3)
 	{
-		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content("KICK usage 'KICK <channel> <user>'").send();
+		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content(KICK_USE).send();
 		return (-1);
 	}
 	else if (!find_channel(input[1], from))

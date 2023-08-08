@@ -3,9 +3,9 @@
 
 int cmd::pass(const vector<string> &input, User& from)
 {
-	if (input.size() < 2)
+	if (input.size() != 2)
 	{
-		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content(input[0] + NOT_ENOUGH).send();
+		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content(PASS_USE).send();
 		return (-1);
 	}
 	else if (from.getActive() != FALSE)
@@ -16,11 +16,11 @@ int cmd::pass(const vector<string> &input, User& from)
 	if (isEqual(input[1], start.getPassword(), 1))
 	{
 		from.setActive(HALF);
-		Response::withCode(RPL_INFO).to(from).content("Password is correct").send();
+		Response::withCode(RPL_INFO).to(from).content(CORRECT_PASS).send();
 		cout << "correct" << endl;
 		return (1);
 	}
 	else
-		Response::withCode(ERR_PASSWDMISMATCH).to(from).content("Incorrect Password!").send();
+		Response::withCode(ERR_PASSWDMISMATCH).to(from).content(INCORRECT_PASS).send();
 	return (0);
 }

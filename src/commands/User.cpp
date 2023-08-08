@@ -4,7 +4,7 @@ int cmd::user(const vector<string> &input, User& user) // boşluk olunca farklı
 {
 	if (input.size() != 5)
 	{
-		Response::create().to(user).code(ERR_NEEDMOREPARAMS).content(input[0] + NOT_ENOUGH).send();
+		Response::create().to(user).code(ERR_NEEDMOREPARAMS).content(USER_USE).send();
 		return (-1);
 	}
 	else if (user.getActive() == HALF)

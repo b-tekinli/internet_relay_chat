@@ -2,7 +2,6 @@
 
 int cmd::ping(const vector<string> &input, User &user)
 {
-
 	if (input.size() < 2)
 	{
 		cout << "Usage: PING <nickName>" << endl;
