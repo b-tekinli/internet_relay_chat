@@ -16,7 +16,7 @@ bool	find_channel(string target, User &from)
 				if (it->second[i]->getNickName() == from.getNickName())
 					return (true);
 			}
-			Response::create().content(NO_MEM + target).send();
+			Response::create().to(from).content(NO_MEM + target).send();
 		}
 	}
 	return (false);
