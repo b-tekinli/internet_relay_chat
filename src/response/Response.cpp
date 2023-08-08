@@ -81,6 +81,7 @@ Response& Response::content(const string &content){
 	return *this;
 }
 
+/*
 //TODO: generalize responses
 /// General stucture of responses: ":"
 void Response::send(){
@@ -96,3 +97,4 @@ void Response::send(){
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
+*/

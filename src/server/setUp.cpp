@@ -22,8 +22,8 @@ bool	isEqual(const string &test, const string &aim, int enter)
  */
 fp_command selCommand(vector<string> &input, const User &user)
 {
-	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KICK", "PING", "PONG", "WHO", "LIST"};
-	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kick, cmd::ping, cmd::pong, cmd::who, cmd::list,  NULL};
+	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KICK", "PING", "PONG", "LIST"};
+	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kick, cmd::ping, cmd::pong, cmd::list,  NULL};
 	int			i;
 
 	for (i = -1; i < 10; ++i)
@@ -43,12 +43,13 @@ fp_command selCommand(vector<string> &input, const User &user)
 vector<string> split_input(const string &str){
 	
 	stringstream	sstream(str);
-	string new_str;
-	vector<string> strings;
+	string			new_str;
+	vector<string>	strings;
+
 	while (getline(sstream, new_str, ' '))
 	{
 		if (str[0] > 33)
-			strings.push_back(str);
+			strings.push_back(new_str);
 	}
 	return strings;
 }
@@ -64,13 +65,8 @@ void	Server::handleInput(int fd, const string &input)
 
 	commands = split_input(input);
 
-
 	if ((func = selCommand(commands, *users[fd])) != NULL)
 		func(commands, *users[fd]);
-	else
-	{
-		//write(fd," 001 amy :Welcome to the Internet Relay Network borja!borja@polaris.cs.uchicago.edu\n",100); //return come of the text to the client
-	}
 }
 
 
