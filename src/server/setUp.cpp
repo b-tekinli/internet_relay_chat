@@ -45,11 +45,13 @@ vector<string> split_input(const string &str){
 	stringstream	sstream(str);
 	string			new_str;
 	vector<string>	strings;
+	int				i = 0;
 
 	while (getline(sstream, new_str, ' '))
 	{
-		if (str[0] > 33)
+		if (new_str[0] > 33)
 			strings.push_back(new_str);
+		i++;
 	}
 	return strings;
 }
