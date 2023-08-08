@@ -60,7 +60,7 @@ string	str_merge(const vector<string> &input)
 
 int cmd::privmsg(const vector<string> &input, User& from) // kanallmı ve var mı && kullanıcı mı var mı
 {
-	if (input.size() > 2)
+	if (input.size() < 3)
 	{
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(PRIVMSG_USE).send();
 		return (-1);
