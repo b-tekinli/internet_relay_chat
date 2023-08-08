@@ -6,9 +6,9 @@
 #include <Response.hpp>
 
 class Client {
-    public:
-        string	get_nickname() const;
-        void	push_to_buffer(const string& message);
+	public:
+		string	get_nickname() const;
+		void	push_to_buffer(const string& message);
 }
 
 #endif

@@ -2,15 +2,15 @@ name: test-irc
 
 on: 
   push:
-    branches: ["main"]
+	branches: ["main"]
   pull_request:
-    branches: ["main"]
+	branches: ["main"]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
-      - name: build application
-        run: make all
+	runs-on: ubuntu-latest
+	steps:
+	  - name: checkout repo
+		uses: actions/checkout@v3
+	  - name: build application
+		run: make all

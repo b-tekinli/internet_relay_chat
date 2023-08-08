@@ -98,3 +98,12 @@ void Response::send(){
 	write(mFd, message.c_str(), message.length());
 }
 */
+
+void Response::send(){
+	std::stringstream stream;
+	string code_str;
+	stream << mCode;
+	stream >> code_str;
+	string message = ":" + mFrom + " " + code_str + " " + mTo + " " + mContent + "\n";
+	write(mFd, message.c_str(), message.length());
+}
