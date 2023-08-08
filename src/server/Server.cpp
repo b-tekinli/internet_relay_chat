@@ -20,6 +20,10 @@ vector<User*>					Server::getChannel(const string &channel) { return (this->chan
 
 vector<User*>&					Server::getUsers() { return (this->users); }
 
+string&	Server::getRawString() { return (raw_string); }
+
+void	Server::setRawString(string set) { raw_string = set; }
+
 void							Server::setPort(int port) { this->port = port; }
 
 void							Server::setPassword(string pass) { this->password = pass; }
@@ -70,7 +74,7 @@ User*   Server::getOrCreateUser(int fd)
 	return (users[fd]);
 }
 
-void Server::deleteUser(int fd)
+void	Server::deleteUser(int fd)
 {
 	if (this->users[fd] != 0)
 	{
@@ -79,7 +83,7 @@ void Server::deleteUser(int fd)
 	}
 }
 
-void Server::removeUserFrom(const string &channel, User &user)
+void	Server::removeUserFrom(const string &channel, User &user)
 {
 	int fd = user.getFd();
 

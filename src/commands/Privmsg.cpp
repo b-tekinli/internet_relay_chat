@@ -44,17 +44,23 @@ void	sendGroup(User& user, const string n_channel, const string msg)
 	}
 }
 
-string	str_merge(const vector<string> &input)
+string	just_text()
 {
-	int		i = 2;
+	int		i = 0;
+	int		key = 0;
+	string	str = start.getRawString();
 	string	merge = "";
 
-	for (; i < input.size(); i++)
+	for (int len = 0; str[i] != '\0'; i++)
 	{
-		merge += input[i];
-		if (i < input.size() - 1)
-			merge += " ";
+		if (len == 2)
+			break;
+		if (str[i] != ' ' && (str[1] == '\0' || str[1] == ' '))
+			len++;
 	}
+
+	for (; i < str.size(); i++)
+		merge += str[i];
 	return (merge);
 }
 
@@ -71,7 +77,7 @@ int cmd::privmsg(const vector<string> &input, User& from) // kanallmÄ± ve var mÄ
 		return (-1);
 	}
 	string	who = input[1];
-	string	msg = str_merge(input);
+	string	msg = just_text();
 
 	if (who[0] == '#')
 		sendGroup(from, who, msg); //ERR_NORECIPIENT = look at this

@@ -24,7 +24,6 @@ class User
 		e_active		active;
 		bool			oper;
 		vector<string>	wh_op;
-
 	public:
 		User();
 		User(int fd);

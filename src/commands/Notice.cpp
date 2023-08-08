@@ -7,7 +7,7 @@ int cmd::notice(const vector<string> &input, User& from)
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(NOTICE_USE).send();
 		return (-1);
 	}
-	string	msg = str_merge(input);
+	string	msg = just_text();
 
 	sendGroup(from, input[1], msg);
 	return (0);

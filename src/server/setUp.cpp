@@ -64,6 +64,7 @@ void	Server::handleInput(int fd, const string &input)
 	vector<string>	commands;
 
 	commands = split_input(input);
+	start.setRawString(input);
 
 	if ((func = selCommand(commands, *users[fd])) != NULL)
 		func(commands, *users[fd]);

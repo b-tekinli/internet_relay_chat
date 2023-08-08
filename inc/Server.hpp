@@ -12,6 +12,7 @@ class Server
 		string							password;
 		map < string, vector<User*> >	channels;
 		vector <User*>					users;
+		string							raw_string;
 	public:
 		Server();
 		~Server();
@@ -25,7 +26,8 @@ class Server
 		vector<User*>					&getUsers();
 		User*							getUserNick(string nick);
 		vector<User*>					getChannel(const string &channel);
-
+		string							&getRawString();
+		void							setRawString(string set);
 		/// @brief gets user from list or creates new one and inserts into the list
 		/// @param fd 
 		/// @return User in the system
