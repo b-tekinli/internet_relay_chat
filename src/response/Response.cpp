@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-
+#include <iomanip>
 
 /// @brief  generated response :<prefix> <number>
 /// @param reply 
@@ -30,6 +30,7 @@ Response::Response(){
 	this->mCode = NONE;
 	this->mTo = "anonymous!anonymous@anonymous";
 	this->mContent = "No Content.";
+	this->mFd = 1;
 }
 
 Response::Response(const Response &response) {
@@ -81,29 +82,19 @@ Response& Response::content(const string &content){
 	return *this;
 }
 
-/*
+
 //TODO: generalize responses
 /// General stucture of responses: ":"
 void Response::send(){
 	std::stringstream stream;
 	string message;
-	if (mFrom != "")
-		stream << ":" << mFrom << " ";
-	if (mCode != NONE) 
-		stream << std::setw(3) << std::setfill('0') << mCode << " ";
 	
-	stream << mTo << " :" << mContent << endl;
+	stream << ":" << mFrom << " "; // prefix
+	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
+	stream << mTo; // Target
+	stream << " :" << mContent << endl; // Content
 	
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
-*/
 
-void Response::send(){
-	std::stringstream stream;
-	string code_str;
-	stream << mCode;
-	stream >> code_str;
-	string message = ":" + mFrom + " " + code_str + " " + mTo + " " + mContent + "\n";
-	write(mFd, message.c_str(), message.length());
-}
