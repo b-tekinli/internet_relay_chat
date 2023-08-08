@@ -16,6 +16,11 @@ bool	nameInUse(string name, int _size)
 
 int cmd::nick(const vector<string> &input, User& user)
 {
+	if (user.getActive() < U_HALF)
+	{
+		Response::create().to(user).content(FIRST_USERSET).send();
+		return (-1);
+	}
 	if (input.size() < 2)
 	{
 		Response::withCode(ERR_NONICKNAMEGIVEN).to(user).content(NO_NICK).send();
@@ -26,7 +31,7 @@ int cmd::nick(const vector<string> &input, User& user)
 		Response::withCode(ERR_NICKNAMEINUSE).to(user).content(input[1] + NICK_USE).send();
 		return (-1);
 	}
-	if (user.getActive() == HALF)
+	if (user.getActive() == U_HALF)
 		Response::create().to(user).code(RPL_WELCOME).content(WELCOME + user.getNickName() + "!"+ user.getUserName() +"@127.0.0.1").send();	
 	user.setActive(ACTIVE);
 	user.setNickName(input[1]);

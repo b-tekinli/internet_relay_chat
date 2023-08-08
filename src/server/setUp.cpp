@@ -31,7 +31,7 @@ fp_command selCommand(vector<string> &input, const User &user)
 				isEqual(input[1], str[i], input.size() >= 2))
 			break;
 	if ((user.getActive() == FALSE && i != 0) || 
-		(user.getActive() == HALF && i > 2))
+		((user.getActive() == HALF || user.getActive() == U_HALF) && i > 2))
 	{
 		Response::create().to(user).content(ND_ACTIVE).send();
 		return (0);

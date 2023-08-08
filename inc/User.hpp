@@ -7,7 +7,8 @@ enum e_active
 {
 	FALSE = 0,
 	HALF = 1,
-	ACTIVE = 2
+	U_HALF = 2,
+	ACTIVE = 3
 };
 
 class User

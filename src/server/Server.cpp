@@ -26,10 +26,17 @@ void							Server::setPassword(string pass) { this->password = pass; }
 
 void							Server::addUserTo(const string &group, User &user) 
 {
-	if (find_channel(channels[group], user.getNickName()))
+	if (!find_channel(channels[group], user.getNickName()))
 		Response::withCode(RPL_AWAY).to(user).content(group +  " " + user.getNickName() + "!" + user.getUserName() + "@127.0.0.1: Welcome to Channel " + group).send();
+	else
+	{
+		Response::create().to(user).content(ER_ALREADY_JOIN).send();
+		return ;
+	}
+	
 	if (channels[group].size() == 0)
 	{
+		cout << "Channel Name: " << group << endl;
 		user.setOper(true);
 		user.addOperator(group);
 	}
@@ -40,7 +47,7 @@ void							Server::addUserTo(const string &group, User &user)
 		send.push_back("NOTICE");
 		send.push_back(group);
 		send.push_back("JOIN " + user.getNickName() + " in the " + group);
-		cmd::notice(send, user); //every one take a message
+		cmd::notice(send, user); //everyone take a message
 	}
 	channels[group].push_back((User *)&user); 
 }

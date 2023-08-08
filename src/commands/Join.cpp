@@ -13,6 +13,9 @@ int cmd::join(const vector<string> &input, User& from)
 		return (-1);
 	}
 
+	cout << "join input[0] : " << input[0] << endl;
+	cout << "join input[1] : " << input[1] << endl;
+
 	start.addUserTo(input[1], from);
 	return (0);
 }
