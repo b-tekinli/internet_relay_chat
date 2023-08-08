@@ -94,14 +94,3 @@ void	Server::removeUserFrom(const string &channel, User &user)
 	channels[channel][fd] = NULL;
 }
 
-bool	Server::searchNick(string nick)
-{
-	if (users.size() == 0)
-		return (false);
-	for (int i = 4; i < users.size(); i++)
-	{
-		if (users[i]->getNickName() == nick)
-			return (true);
-	}
-	return (false);
-}
