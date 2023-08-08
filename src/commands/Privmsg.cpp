@@ -11,7 +11,7 @@ bool	find_channel(string target, User &from)
 	{
 		if (it->first == target)
 		{
-			for (int i = 0; it->second[i]; i++)
+			for (int i = 0; it->second.size(); i++)
 			{
 				if (it->second[i]->getNickName() == from.getNickName())
 					return (true);
