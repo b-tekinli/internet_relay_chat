@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <iomanip>
+#include <arpa/inet.h>
+#include <netdb.h>
 
 /// @brief  generated response :<prefix> <number>
 /// @param reply 
@@ -25,8 +27,26 @@ const std::string generateReply(Reply reply, const User &target, const std::stri
 	return message;
 }
 
+static string getServerHostName(){
+	struct addrinfo hints = {0};
+	struct addrinfo *res;
+	char address[INET_ADDRSTRLEN];
+	char host[] = "localhost";
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = AI_CANONNAME;
+
+	if (getaddrinfo(host,NULL,&hints,&res) == 0){
+		inet_ntop(res->ai_family, &((struct sockaddr_in *)res->ai_addr)->sin_addr, address, INET_ADDRSTRLEN);
+		freeaddrinfo(res);
+		return string(address);
+	}
+	else return "Undefined";
+	return string(address);
+}
+
 Response::Response(){
-	this->mFrom = "Server";
+	this->mFrom = getServerHostName();
 	this->mCode = NONE;
 	this->mTo = "anonymous!anonymous@anonymous";
 	this->mContent = "No Content.";
