@@ -58,18 +58,21 @@ void							Server::addUserTo(const string &group, User &user)
 
 User*			Server::getUserNick(string nick)
 {
-	for (int i = 0; i < users.size(); i++)
+	if (users.size() == 0)
+		return (NULL);
+	for (int i = 4; i < users.size(); i++)
 	{
 		if (users[i]->getNickName() == nick)
 			return (users[i]);
 	}
-	return (0);
+	return (NULL);
 }
 
 User*   Server::getOrCreateUser(int fd)
 {
 	cout << fd << endl;
-	if (users.size() < fd || users[fd] == 0)
+	cout << users.size() << endl;
+	if (users.size() <= fd || users[fd] == 0)
 		users.insert(users.begin() + fd, new User(fd));
 	return (users[fd]);
 }
@@ -89,4 +92,16 @@ void	Server::removeUserFrom(const string &channel, User &user)
 
 	delete channels[channel][fd];
 	channels[channel][fd] = NULL;
+}
+
+bool	Server::searchNick(string nick)
+{
+	if (users.size() == 0)
+		return (false);
+	for (int i = 4; i < users.size(); i++)
+	{
+		if (users[i]->getNickName() == nick)
+			return (true);
+	}
+	return (false);
 }

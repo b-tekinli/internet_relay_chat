@@ -22,6 +22,7 @@ class Server
 		const string					getPassword() const;	
 		void							setPort(int port);
 		void							setPassword(string pass);
+		bool							searchNick(string nick);
 		map< string, vector<User*> >	&getChannels();
 		vector<User*>					&getUsers();
 		User*							getUserNick(string nick);

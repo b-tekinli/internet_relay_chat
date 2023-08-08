@@ -71,6 +71,7 @@ int cmd::privmsg(const vector<string> &input, User& from) // kanallmÄ± ve var mÄ
 		Response::create().to(from).code(ERR_NEEDMOREPARAMS).content(PRIVMSG_USE).send();
 		return (-1);
 	}
+	cout << start.getUsers().size() << endl;
 	if (start.getUserNick(input[1]) == 0 && !find_channel(input[1], from))
 	{
 		Response::create().to(from).code(ERR_NOSUCHNICK).content(NO_SUCH).send();
