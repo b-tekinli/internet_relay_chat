@@ -1,6 +1,6 @@
 #include <Server.hpp>
 
-Server start;
+Server	start;
 
 /*
 	Negatif bir değere sahip bir port numarası kullanmak,
@@ -9,7 +9,7 @@ Server start;
 	Bu nedenle, port numaraları her zaman pozitif tam sayı
 	değerleri olarak kabul edilir.
 */
-bool control(char **av)
+bool	control(char **av)
 {
 	int port = atoi(av[1]);
 
@@ -20,7 +20,7 @@ bool control(char **av)
 
 
 
-int main(int ac, char **av) // 8080 emakas
+int	main(int ac, char **av) // 8080 emakas
 {
 	if (ac != 3 || !control(av))
 	{

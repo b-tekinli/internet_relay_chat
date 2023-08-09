@@ -20,7 +20,7 @@ bool	isEqual(const string &test, const string &aim, int enter)
  * @param input: Input string
  * @return fp_command is the type of the function that represents 
  */
-fp_command selCommand(vector<string> &input, const User &user)
+fp_command	selCommand(vector<string> &input, const User &user)
 {
 	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KICK", "PING", "PONG", "LIST", "PRIVMSG"};
 	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kick, cmd::ping, cmd::pong, cmd::list, cmd::privmsg,  NULL};
@@ -40,7 +40,7 @@ fp_command selCommand(vector<string> &input, const User &user)
 	return result[i];
 }
 
-vector<string> split_input(const string &str){
+vector<string>	split_input(const string &str){
 	
 	stringstream	sstream(str);
 	string			new_str;
@@ -49,6 +49,8 @@ vector<string> split_input(const string &str){
 
 	while (getline(sstream, new_str, ' '))
 	{
+		if (new_str[new_str.size() - 1] == '\n')
+			new_str = new_str.substr(0, new_str.size() - 1);
 		if (new_str[0] > 33)
 			strings.push_back(new_str);
 		i++;
@@ -96,7 +98,7 @@ void	Server::setUpSocket()
 
 	clientSocket.init(port);
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
-	while (poll(&pollfds[0], pollfds.size(), -1))//alınan inputların durumunu söyler
+	while (poll(&pollfds[0], pollfds.size(), -1)) //alınan inputların durumunu söyler
 	{   
 		for (int i = 0; i < pollfds.size(); i++)
 		{
@@ -118,6 +120,7 @@ void	Server::setUpSocket()
 				{
 					string line;
 					int readed = get_line(pollfds[i].fd,line);
+
 					if (readed > 0){
 						cout << line << endl;
 						handleInput(pollfds[i].fd,line);

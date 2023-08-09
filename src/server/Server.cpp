@@ -16,13 +16,13 @@ const string					Server::getPassword() const { return (this->password); }
 
 map< string, vector<User*> >&	Server::getChannels() { return (this->channels); }
 
-vector<User*>					Server::getChannel(const string &channel) { return (this->channels[channel]); }
+vector<User*>&					Server::getChannel(const string &channel) { return (this->channels[channel]); }
 
 vector<User*>&					Server::getUsers() { return (this->users); }
 
-string&	Server::getRawString() { return (raw_string); }
+string&							Server::getRawString() { return (raw_string); }
 
-void	Server::setRawString(string set) { raw_string = set; }
+void							Server::setRawString(string set) { raw_string = set; }
 
 void							Server::setPort(int port) { this->port = port; }
 
@@ -53,7 +53,10 @@ void							Server::addUserTo(const string &group, User &user)
 		send.push_back("JOIN " + user.getNickName() + " in the " + group);
 		cmd::notice(send, user); //everyone take a message
 	}
-	channels[group].push_back((User *)&user); 
+	cout << "channel before: " << channels[group].size() << endl;
+	channels[group].push_back((User *)&user);
+	cout << "channel after: " << channels[group].size() << endl;
+	cout << "channel name: " << group << endl;
 }
 
 User*			Server::getUserNick(string nick)

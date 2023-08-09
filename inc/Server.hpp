@@ -25,7 +25,7 @@ class Server
 		map< string, vector<User*> >	&getChannels();
 		vector<User*>					&getUsers();
 		User*							getUserNick(string nick);
-		vector<User*>					getChannel(const string &channel);
+		vector<User*>					&getChannel(const string &channel);
 		string							&getRawString();
 		void							setRawString(string set);
 		/// @brief gets user from list or creates new one and inserts into the list

@@ -9,12 +9,14 @@ bool	find_channel(string target, User &from)
 
 	for (; it != search.end(); it++)
 	{
-		if (it->first == target)
+		if (isEqual(it->first, target, 1))
 		{
-			for (int i = 0; it->second.size(); i++)
+			for (int i = 0; i < it->second.size(); i++)
 			{
-				if (it->second[i]->getNickName() == from.getNickName())
+				if (isEqual(it->second[i]->getNickName(), from.getNickName(), 1))
+				{
 					return (true);
+				}
 			}
 			Response::create().to(from).content(NO_MEM + target).send();
 		}
@@ -36,7 +38,7 @@ bool	find_channel(vector <User*> group, string name)
 
 void	sendGroup(User& user, const string n_channel, const string msg)
 {
-	vector<User*>	group = start.getChannel(n_channel);
+	vector<User*>	&group = start.getChannel(n_channel);
 
 	for (int i = 0; i < group.size(); i++)
 	{
