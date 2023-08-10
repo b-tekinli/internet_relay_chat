@@ -1,19 +1,5 @@
-#include "../../inc/Server.hpp"
-#include "../../inc/Commands.hpp"
-
-bool	isEqual(const string &test, const string &aim, int enter)
-{
-	if (enter == 0)
-		return (false);
-	int size = aim.size();
-	int i;
-
-	for (i = 0; i < size && aim[i] == test[i]; ++i);
-
-	if (size == i)
-		return (true);
-	return (false);
-}
+#include <Server.hpp>
+#include <Commands.hpp>
 
 /**
  * selcommand used for select command for given input
@@ -49,7 +35,7 @@ vector<string>	split_input(const string &str){
 
 	while (getline(sstream, new_str, ' '))
 	{
-		if (new_str[new_str.size() - 1] == '\n')
+		while (new_str[new_str.size() - 1] < 33)
 			new_str = new_str.substr(0, new_str.size() - 1);
 		if (new_str[0] > 33)
 			strings.push_back(new_str);

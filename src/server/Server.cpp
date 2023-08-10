@@ -40,7 +40,7 @@ void							Server::addUserTo(const string &group, User &user)
 	
 	if (channels[group].size() == 0)
 	{
-		cout << "Channel Name: " << group << endl;
+		cout << "Channel Name: " << group << "." <<endl;
 		user.setOper(true);
 		user.addOperator(group);
 	}
@@ -53,10 +53,10 @@ void							Server::addUserTo(const string &group, User &user)
 		send.push_back("JOIN " + user.getNickName() + " in the " + group);
 		cmd::notice(send, user); //everyone take a message
 	}
-	cout << "channel before: " << channels[group].size() << endl;
+	cout << "channel before: " << channels[group].size() << "." << endl;
 	channels[group].push_back((User *)&user);
-	cout << "channel after: " << channels[group].size() << endl;
-	cout << "channel name: " << group << endl;
+	cout << "channel after: " << channels[group].size() << "." << endl;
+	cout << "channel name: " << group << "." << endl;
 }
 
 User*			Server::getUserNick(string nick)
@@ -84,6 +84,12 @@ void	Server::deleteUser(int fd)
 {
 	if (this->users[fd] != 0)
 	{
+		vector<string>&	wh_op = this->users[fd]->getWhichChannel();
+		
+		for (int i = 0; i < wh_op.size(); i++)
+		{
+			removeUserFrom(wh_op[i], *this->users[fd]);
+		}
 		delete this->users[fd];
 		this->users[fd] = 0;
 	}
@@ -92,8 +98,12 @@ void	Server::deleteUser(int fd)
 void	Server::removeUserFrom(const string &channel, User &user)
 {
 	int fd = user.getFd();
+	int i = 0;
 
-	delete channels[channel][fd];
-	channels[channel][fd] = NULL;
+	for (; i < channels[channel].size(); i++)
+		if (channels[channel][i]->getFd() == fd)
+			break;
+	channels[channel].erase(channels[channel].begin() + i);
 }
+
 

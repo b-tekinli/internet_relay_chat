@@ -1,6 +1,5 @@
 #include <Commands.hpp>
 
-
 int cmd::pass(const vector<string> &input, User& from)
 {
 	if (input.size() != 2)
@@ -27,4 +26,3 @@ int cmd::pass(const vector<string> &input, User& from)
 	}
 	return (0);
 }
-

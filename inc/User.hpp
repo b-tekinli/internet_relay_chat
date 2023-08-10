@@ -31,6 +31,7 @@ class User
 		~User();
 
 		User& 			operator=(const User &user);
+		vector<string>&	getWhichChannel();
 		const string&	getUserName() const;
 		const string&	getHostName() const;
 		const string&	getServName() const;
@@ -48,6 +49,7 @@ class User
 		void			setOper(bool ch);
 		void			addOperator(const string &str);
 		void			delOperator(const string str);
+
 };
 
 #endif

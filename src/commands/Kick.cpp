@@ -12,7 +12,7 @@ int cmd::kick(const vector<string> &input, User& from)
 		Response::withCode(ERR_NOSUCHCHANNEL).to(from).content(input[0] + NO_CHANNEL).send();
 		return (-1);
 	}
-	else if (start.getChannel(input[1])[0]->getNickName() == from.getNickName())
+	else if (!isEqual(start.getChannel(input[1])[0]->getNickName(), from.getNickName(), 1))
 	{
 		Response::withCode(ERR_NOTONCHANNEL).to(from).content(input[0] + NO_OPER).send();
 		return (-1);
@@ -26,11 +26,15 @@ int cmd::kick(const vector<string> &input, User& from)
 	{
 		if (channel[i]->getNickName() == to->getNickName())
 		{
-			delete to;
+			from.delOperator(input[1]);
 			channel.erase(channel.begin()+i);
 			if (channel.size() == 0)
 				start.getChannels().erase(input[1]);
 		}
+		/**
+		 * Channel delete: kanaldan biri silinir ve kanal yok edilebilirni kullanıcıdanda silinir kanal
+		 * User delete: kişi doğrudan silinir 
+		*/
 	}
 	return (0);
 }

@@ -16,7 +16,7 @@ User::User(int fd): fd(fd), active(FALSE), oper(false)
 
 User::User(const User &user) { *this = user; }
 
-User::~User() {}
+User::~User() { cout << "Destructor is work" << endl; }
 
 User&			User::operator=(const User &user)
 {
@@ -30,6 +30,8 @@ User&			User::operator=(const User &user)
 	}
 	return (*this);
 }
+
+vector<string>&	User::getWhichChannel() { return (wh_op); }
 
 const string&	User::getUserName() const { return (user_name); }
 
