@@ -35,7 +35,7 @@ vector<string>	split_input(const string &str){
 
 	while (getline(sstream, new_str, ' '))
 	{
-		while (new_str[new_str.size() - 1] < 33)
+		while (new_str.size() > 0 && new_str[new_str.size() - 1] < 33)
 			new_str = new_str.substr(0, new_str.size() - 1);
 		if (new_str[0] > 33)
 			strings.push_back(new_str);
@@ -85,7 +85,7 @@ void	Server::setUpSocket()
 	clientSocket.init(port);
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
 	while (poll(&pollfds[0], pollfds.size(), -1)) //alınan inputların durumunu söyler
-	{   
+	{
 		for (int i = 0; i < pollfds.size(); i++)
 		{
 			if(pollfds[i].revents & POLLIN)
@@ -105,10 +105,12 @@ void	Server::setUpSocket()
 				else
 				{
 					string line;
-					int readed = get_line(pollfds[i].fd,line);
-
+					char inp[512] = {0};
+					//int readed = get_line(pollfds[i].fd,line);
+					int readed = recv(pollfds[i].fd, inp, 511, 0);
+					line = string(inp);
 					if (readed > 0){
-						cout << line << endl;
+						cout << line << "+ + + + " <<  endl;
 						handleInput(pollfds[i].fd,line);
 					}
 					else if (readed <= 0){

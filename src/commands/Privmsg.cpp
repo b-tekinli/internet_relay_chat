@@ -22,7 +22,7 @@ int cmd::privmsg(const vector<string> &input, User& from) // kanallmÄ± ve var mÄ
 	{
 		User *to = start.getUserNick(input[1]);
 
-		Response::withCode(RPL_AWAY).from(from).to(*to).content(msg).send();
+		Response::withCode(NONE).from(from).to(*to).content(msg).send();
 	}
 	return (0);
 }

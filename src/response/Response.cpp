@@ -117,4 +117,5 @@ void Response::send(){
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
-
+//PONG
+//PING
