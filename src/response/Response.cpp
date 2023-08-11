@@ -3,7 +3,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-
+#include <iomanip>
+#include <arpa/inet.h>
+#include <netdb.h>
 
 /// @brief  generated response :<prefix> <number>
 /// @param reply 
@@ -25,11 +27,30 @@ const std::string generateReply(Reply reply, const User &target, const std::stri
 	return message;
 }
 
+static string getServerHostName(){
+	struct addrinfo hints = {0};
+	struct addrinfo *res;
+	char address[INET_ADDRSTRLEN];
+	char host[] = "localhost";
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = AI_CANONNAME;
+
+	if (getaddrinfo(host,NULL,&hints,&res) == 0){
+		inet_ntop(res->ai_family, &((struct sockaddr_in *)res->ai_addr)->sin_addr, address, INET_ADDRSTRLEN);
+		freeaddrinfo(res);
+		return string(address);
+	}
+	else return "Undefined";
+	return string(address);
+}
+
 Response::Response(){
-	this->mFrom = "Server";
+	this->mFrom = getServerHostName();
 	this->mCode = NONE;
 	this->mTo = "anonymous!anonymous@anonymous";
 	this->mContent = "No Content.";
+	this->mFd = 1;
 }
 
 Response::Response(const Response &response) {
@@ -81,29 +102,19 @@ Response& Response::content(const string &content){
 	return *this;
 }
 
-/*
+
 //TODO: generalize responses
 /// General stucture of responses: ":"
 void Response::send(){
 	std::stringstream stream;
 	string message;
-	if (mFrom != "")
-		stream << ":" << mFrom << " ";
-	if (mCode != NONE) 
-		stream << std::setw(3) << std::setfill('0') << mCode << " ";
 	
-	stream << mTo << " :" << mContent << endl;
+	stream << ":" << mFrom << " "; // prefix
+	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
+	stream << mTo; // Target
+	stream << " :" << mContent << endl; // Content
 	
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
-*/
 
-void Response::send(){
-	std::stringstream stream;
-	string code_str;
-	stream << mCode;
-	stream >> code_str;
-	string message = ":" + mFrom + " " + code_str + " " + mTo + " " + mContent + "\n";
-	write(mFd, message.c_str(), message.length());
-}
