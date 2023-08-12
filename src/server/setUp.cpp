@@ -109,10 +109,9 @@ void	Server::setUpSocket()
 					//int readed = get_line(pollfds[i].fd,line);
 					int readed = recv(pollfds[i].fd, inp, 511, 0);
 					line = string(inp);
-					if (readed > 0){
-						cout << line << "+ + + + " <<  endl;
+					if (readed > 0)
 						handleInput(pollfds[i].fd,line);
-					}
+					
 					else if (readed <= 0){
 						close(pollfds[i].fd);
 						deleteUser(pollfds[i].fd);

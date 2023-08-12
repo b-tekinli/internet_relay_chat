@@ -8,7 +8,7 @@ int cmd::pong(const vector<string> &input, User& user)
 	}
 	string nickName = user.getNickName();
 
-	Response::create().content(user.getFd() +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
+	Response::create().content(to_string(user.getFd()) +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
 	cout << "PONG " << nickName << endl;
 
 	return (0);
