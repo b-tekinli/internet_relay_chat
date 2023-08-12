@@ -15,7 +15,7 @@ int cmd::ping(const vector<string> &input, User &user)
 //        this->send_user(uc->get_fd(), "SERVER :" + uc->getFullname() + " PONG :" + uc->getNickname());
 
 
-
+	user.message = input[2];
 
 
 
