@@ -11,13 +11,17 @@ int cmd::ping(const vector<string> &input, User &user)
 	string nickName = user.getNickName();
 
 	cout << "PING " << nickName << endl;
-	Response::create().content(to_string(user.getFd()) +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
-//        this->send_user(uc->get_fd(), "SERVER :" + uc->getFullname() + " PONG :" + uc->getNickname());
 
+	ostringstream oss;
+	int fd = user.getFd();
+	oss << fd;
+
+	const string strFd = oss.str().c_str();
+
+
+	Response::create().content(strFd +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
 
 	user.message = input[2];
-
-
 
 	return (0);
 }
