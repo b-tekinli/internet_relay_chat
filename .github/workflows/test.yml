@@ -14,6 +14,6 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v2  # Güncellenmiş checkout eylemi
-		
+
       - name: build application
         run: make all
