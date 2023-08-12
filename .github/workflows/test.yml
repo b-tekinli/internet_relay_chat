@@ -1,18 +1,19 @@
 name: test-irc
 
-on: 
+on:
   push:
-	  branches:
+    branches:
       - main
   pull_request:
-	  branches:
+    branches:
       - main
 
 jobs:
   build:
-	runs-on: ubuntu-latest
-	steps:
-	  - name: checkout repo
-		uses: actions/checkout@v3
-	  - name: build application
-		run: make all
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2  # Güncellenmiş checkout eylemi
+		
+      - name: build application
+        run: make all
