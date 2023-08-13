@@ -22,6 +22,19 @@ int cmd::ping(const vector<string> &input, User &user)
 	Response::create().content(strFd +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
 
 	user.message = input[2];
+	/*vector<User *> &group = start.getUsers();
+	for(int  i = 0; group.size() > i ; i++)
+	{
+		int j = 2;
+		group[i]->message = '\0';
+		while (j++ < input.size())
+		{
+
+			group[i]->message += input[j];//biri vektör diğeri normal string burada sorun çıkıyo seg fault alıyom
+
+		}//bunu halledersek kod okki	
+	}*/
+
 
 	return (0);
 }
