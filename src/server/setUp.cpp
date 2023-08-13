@@ -71,6 +71,7 @@ static int get_line(int fd, string &line){
 		line += append;
 		if (chr[0] == '\n')
 			break;
+		memset(chr, 0, 2);
 	}
 	return total_read;
 }
@@ -106,9 +107,9 @@ void	Server::setUpSocket()
 				{
 					string line;
 					char inp[512] = {0};
-					//int readed = get_line(pollfds[i].fd,line);
-					int readed = recv(pollfds[i].fd, inp, 511, 0);
-					line = string(inp);
+					int readed = get_line(pollfds[i].fd,line);
+					//int readed = recv(pollfds[i].fd, inp, 511, 0);
+					//line = string(inp);
 					if (readed > 0)
 						handleInput(pollfds[i].fd,line);
 					

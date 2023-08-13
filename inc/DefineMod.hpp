@@ -16,7 +16,7 @@
 #include <map>
 #include <list>
 #include <unistd.h>
-
+#include <string>
 #include <cstdlib>
 
 using std::cout;
