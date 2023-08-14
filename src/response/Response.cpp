@@ -117,5 +117,15 @@ void Response::send(){
 	message = stream.str();
 	write(mFd, message.c_str(), message.length());
 }
-//PONG
-//PING
+
+// "PRIVMSG kaan :Merhaba Kaan"
+int sendUser(const User *origin, const User &target, const string &message){
+	string buffer = "";
+	if (origin != NULL){
+		buffer = ":" + origin->getNickName() + "!" + origin->getUserName() + "@" + origin->getServName();
+	}
+	buffer += " ";
+	buffer += message;
+
+	return write(target.getFd(), buffer.c_str(), buffer.length());
+}

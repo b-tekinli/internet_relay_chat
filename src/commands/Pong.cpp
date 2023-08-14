@@ -14,7 +14,8 @@ int cmd::pong(const vector<string> &input, User& user)
 
 	const string strFd = oss.str().c_str();
 
-	Response::create().content(strFd + " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
+	sendUser(NULL,user,"PONG");
+	//Response::create().content(strFd + " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
 	
 	cout << "PONG " << user.message << endl;
 	/*vector<User *> &group = start.getUsers();

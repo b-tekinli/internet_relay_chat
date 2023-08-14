@@ -22,7 +22,6 @@ fp_command	selCommand(vector<string> &input, const User &user)
 		Response::create().to(user).content(ND_ACTIVE).send();
 		return (0);
 	}
-
 	return result[i];
 }
 
@@ -63,11 +62,10 @@ void	Server::handleInput(int fd, const string &input)
 	vector<string>	commands;
 
 	commands = split_input(input);
-	print_args(commands);
-	start.setRawString(input);
-
+	
+	//start.setRawString(input);
 	if ((func = selCommand(commands, *users[fd])) != NULL)
-		func(commands, *users[fd]);
+			func(commands, *users[fd]);
 }
 
 
@@ -119,10 +117,9 @@ void	Server::setUpSocket()
 					int readed = get_line(pollfds[i].fd,line);
 					if (readed > 0)
 						handleInput(pollfds[i].fd,line);
-					
 					else if (readed <= 0){
-						close(pollfds[i].fd);
 						deleteUser(pollfds[i].fd);
+						close(pollfds[i].fd);
 					}
 				}
 			}
