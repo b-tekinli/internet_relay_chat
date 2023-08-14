@@ -11,12 +11,29 @@ int cmd::ping(const vector<string> &input, User &user)
 	string nickName = user.getNickName();
 
 	cout << "PING " << nickName << endl;
-	Response::create().content(to_string(user.getFd()) +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
-//        this->send_user(uc->get_fd(), "SERVER :" + uc->getFullname() + " PONG :" + uc->getNickname());
 
+	ostringstream oss;
+	int fd = user.getFd();
+	oss << fd;
+
+	const string strFd = oss.str().c_str();
+
+
+	Response::create().content(strFd +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
 
 	user.message = input[2];
+	/*vector<User *> &group = start.getUsers();
+	for(int  i = 0; group.size() > i ; i++)
+	{
+		int j = 2;
+		group[i]->message = '\0';
+		while (j++ < input.size())
+		{
 
+			group[i]->message += input[j];//biri vektör diğeri normal string burada sorun çıkıyo seg fault alıyom
+
+		}//bunu halledersek kod okki	
+	}*/
 
 
 	return (0);

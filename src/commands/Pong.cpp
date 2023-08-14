@@ -8,8 +8,19 @@ int cmd::pong(const vector<string> &input, User& user)
 	}
 	string nickName = user.getNickName();
 
-	Response::create().content(to_string(user.getFd()) +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
-	cout << "PONG " << user.message << endl;
+	ostringstream oss;
+	int fd = user.getFd();
+	oss << fd;
 
+	const string strFd = oss.str().c_str();
+
+	Response::create().content(strFd + " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
+	
+	cout << "PONG " << user.message << endl;
+	/*vector<User *> &group = start.getUsers();
+	for(int  i = 0; group.size() > i ; i++)
+	{
+		cout << "PONG " << group[i]->message << endl;	
+	}*/
 	return (0);
 }

@@ -49,7 +49,7 @@ class User
 		void			setOper(bool ch);
 		void			addOperator(const string &str);
 		void			delOperator(const string str);
-		string	message;
+		string			message;
 
 };
 

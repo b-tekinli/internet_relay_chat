@@ -12,6 +12,7 @@
 #define NO_MEM			"You are not a memeber this channel => "
 #define NO_OPER			" :You're not on that channel "
 #define NO_CHANNEL		" :No such channel"
+#define	USER_NOT_IN		" :They aren't on that channel"
 
 #define KICK_TO			"Kick by the operator"
 #define ER_NICK_USED	" :Nickname is already in use"
