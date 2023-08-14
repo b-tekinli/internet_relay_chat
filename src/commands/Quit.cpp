@@ -6,12 +6,16 @@ int cmd::quit(const vector <string> &input, User &user)
 	if (input.size() > 1)
 	{
 		string reason = input[1];
-		cout << "User " << user.getNickName() << " is quitting with reason " << reason << endl;
+		
 	}
 	else
-		cout << "User " << user.getNickName() << " is quitting " << endl;
-	
+	{
+		string reason = "QUIT :Gone to have lunch";
+
+		//write(user.getFd(), reason.c_str(), reason.size());
+	}
 	Response::create().to(user).code(RPL_WELCOME).content("GOOD BYE!!").send();
+	start.deleteUser(user.getFd());
 	close(user.getFd());
 	
 	delete &user;

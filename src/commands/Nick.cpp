@@ -31,9 +31,12 @@ int cmd::nick(const vector<string> &input, User& user)
 		Response::withCode(ERR_NICKNAMEINUSE).to(user).content(input[1] + ER_NICK_USED).send();
 		return (-1);
 	}
-	if (user.getActive() == U_HALF)
-		Response::create().to(user).code(RPL_WELCOME).content(WELCOME + user.getNickName() + "!"+ user.getUserName() +"@127.0.0.1").send();	
-	user.setActive(ACTIVE);
 	user.setNickName(input[1]);
+	if (user.getActive() == U_HALF)
+	{
+		Response::create().to(user).code(RPL_WELCOME).content(WELCOME + user.getNickName() + "!" + user.getUserName() + "@127.0.0.1").send();
+
+		user.setActive(ACTIVE);
+	}
 	return (0);
 }

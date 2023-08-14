@@ -85,7 +85,7 @@ void	Server::deleteUser(int fd)
 	if (this->users[fd] != 0)
 	{
 		vector<string>&	wh_op = this->users[fd]->getWhichChannel();
-		
+
 		for (int i = 0; i < wh_op.size(); i++)
 		{
 			removeUserFrom(wh_op[i], *this->users[fd]);

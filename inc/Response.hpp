@@ -85,5 +85,7 @@ class Response {
 };
 
 
+int sendUser(const User *origin, const User &target, const std::string &message);
+
 const std::string generateReply(Reply reply, const User &target, const std::string &content);
 #endif
