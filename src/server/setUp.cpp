@@ -28,7 +28,7 @@ fp_command	selCommand(vector<string> &input, const User &user)
 
 vector<string>	split_input(const string &str){
 	std::size_t		last_index =  str.find_last_of(':');
-	stringstream	sstream(str.substr(0,last_index));
+	stringstream	sstream(str.substr(0,last_index != string::npos ? last_index : str.length()));
 	string			new_str;
 	vector<string>	strings;
 	int				i = 0;
@@ -41,7 +41,7 @@ vector<string>	split_input(const string &str){
 			strings.push_back(new_str);
 		i++;
 	}
-	if (last_index < str.length()){
+	if (last_index != string::npos){
 		strings.push_back(str.substr(last_index));
 	}
 	return strings;
