@@ -1,7 +1,7 @@
 #ifndef REPLY_HPP
 #define REPLY_HPP
 #include <string>
-#include <User.hpp>
+#include <Person.hpp>
 
 enum Reply
 {
@@ -77,15 +77,14 @@ class Response {
 		Response& operator=(const Response& response);
 		static Response create();
 		static Response withCode(const Reply &reply);
-		Response& from(const User &from);
-		Response& to(const User& user);
+		Response& from(const Person &from);
+		Response& to(const Person & user);
 		Response& code(const Reply &reply);
 		Response& content(const string &content);
 		void send();
 };
 
+int sendUser(const Person *origin, const Person &target, const std::string &message);
 
-int sendUser(const User *origin, const User &target, const std::string &message);
-
-const std::string generateReply(Reply reply, const User &target, const std::string &content);
+const std::string generateReply(Reply reply, const Person &target, const std::string &content);
 #endif

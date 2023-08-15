@@ -6,7 +6,7 @@
  * @param input: Input string
  * @return fp_command is the type of the function that represents 
  */
-fp_command	selCommand(vector<string> &input, const User &user)
+fp_command	selCommand(vector<string> &input, const Person &user)
 {
 	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KICK", "PING", "PONG", "LIST", "PRIVMSG"};
 	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kick, cmd::ping, cmd::pong, cmd::list, cmd::privmsg,  NULL};

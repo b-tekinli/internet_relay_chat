@@ -10,8 +10,8 @@ class Server
 	private:
 		int								port;
 		string							password;
-		map < string, vector<User*> >	channels;
-		vector <User*>					users;
+		map < string, vector<Person*> >	channels;
+		vector <Person*>				users;
 		string							raw_string;
 	public:
 		Server();
@@ -22,19 +22,19 @@ class Server
 		const string					getPassword() const;	
 		void							setPort(int port);
 		void							setPassword(string pass);
-		map< string, vector<User*> >	&getChannels();
-		vector<User*>					&getUsers();
-		User*							getUserNick(string nick);
-		vector<User*>					&getChannel(const string &channel);
+		map< string, vector<Person*> >	&getChannels();
+		vector<Person*>					&getUsers();
+		Person*							getUserNick(string nick);
+		vector<Person*>					&getChannel(const string &channel);
 		string							&getRawString();
 		void							setRawString(string set);
 		/// @brief gets user from list or creates new one and inserts into the list
 		/// @param fd 
 		/// @return User in the system
-		User*	getOrCreateUser(int fd);
+		Person*	getOrCreateUser(int fd);
 		void	deleteUser(int fd);
-		void	addUserTo(const string &group, User &user);
-		void	removeUserFrom(const string &group, User &user);
+		void	addUserTo(const string &group, Person &user);
+		void	removeUserFrom(const string &group, Person &user);
 };
 
 extern Server start;

@@ -4,7 +4,7 @@ bool	nameInUse(string name, int _size)
 {
 	if (_size == 4)
 		return (false);
-	vector<User*>	users = start.getUsers();
+	vector<Person *>	users = start.getUsers();
 
 	for (int i = 4; i < users.size() && i < _size; i++)
 	{
@@ -14,7 +14,7 @@ bool	nameInUse(string name, int _size)
 	return (false);
 }
 
-int cmd::nick(const vector<string> &input, User& user)
+int cmd::nick(const vector<string> &input, Person & user)
 {
 	if (user.getActive() < U_HALF)
 	{

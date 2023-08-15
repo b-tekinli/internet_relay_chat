@@ -1,6 +1,6 @@
-#include "../../inc/Commands.hpp"
+#include <Commands.hpp>
 
-int cmd::ping(const vector<string> &input, User &user)
+int cmd::ping(const vector<string> &input, Person &user)
 {
 	if (input.size() < 2)
 	{
@@ -8,21 +8,14 @@ int cmd::ping(const vector<string> &input, User &user)
 		return (1);
 	}
 
-	string nickName = user.getNickName();
+	string	nickName = user.getNickName();
+	string	strFd = to_str(user.getFd());
 
 	cout << "PING " << nickName << endl;
-
-	ostringstream oss;
-	int fd = user.getFd();
-	oss << fd;
-
-	const string strFd = oss.str().c_str();
-
-
 	Response::create().content(strFd +  " SERVER " + user.getUserName() + " PONG " + user.getNickName() ).send();
 
 	user.message = input[2];
-	/*vector<User *> &group = start.getUsers();
+	/*vector<Person *> &group = start.getUsers();
 	for(int  i = 0; group.size() > i ; i++)
 	{
 		int j = 2;

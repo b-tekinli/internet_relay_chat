@@ -1,11 +1,11 @@
 #include <Commands.hpp>
 
-bool	find_channel(string target, User &from)
+bool	find_channel(string target, Person &from)
 {
 	if (target[0] != '#')
 		return (false);
-	map < string, vector<User*> > search = start.getChannels();
-	std::map<std::string, vector <User*> >::iterator it = search.begin();	
+	map < string, vector<Person *> > search = start.getChannels();
+	std::map<std::string, vector <Person *> >::iterator it = search.begin();	
 
 	for (; it != search.end(); it++)
 	{
@@ -24,7 +24,7 @@ bool	find_channel(string target, User &from)
 	return (false);
 }
 
-bool	find_channel(vector <User*> group, string name)
+bool	find_channel(vector <Person *> group, string name)
 {
 	if (group.size() == 0)
 		return (false);

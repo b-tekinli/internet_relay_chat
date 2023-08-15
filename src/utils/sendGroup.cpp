@@ -1,8 +1,8 @@
 #include <Commands.hpp>
 
-void	sendGroup(User& user, const string n_channel, const string msg)
+void	sendGroup(Person & user, const string n_channel, const string msg)
 {
-	vector<User*>	&group = start.getChannel(n_channel);
+	vector<Person *>	&group = start.getChannel(n_channel);
 
 	for (int i = 0; i < group.size(); i++)
 	{

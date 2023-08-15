@@ -1,6 +1,6 @@
 #include <Commands.hpp>
 
-int cmd::join(const vector<string> &input, User& from)
+int cmd::join(const vector<string> &input, Person & from)
 {
 	if (input.size() != 2)
 	{

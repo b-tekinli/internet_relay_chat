@@ -1,6 +1,6 @@
 #include <Commands.hpp>
 
-int cmd::privmsg(const vector<string> &input, User& from) // kanallmı ve var mı && kullanıcı mı var mı
+int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var mı && kullanıcı mı var mı
 {
 	if (input.size() < 3)
 	{
@@ -20,7 +20,7 @@ int cmd::privmsg(const vector<string> &input, User& from) // kanallmı ve var m�
 		sendGroup(from, who, msg); //ERR_NORECIPIENT = look at this
 	else
 	{
-		User *to = start.getUserNick(input[1]);
+		Person *to = start.getUserNick(input[1]);
 
 		if (sendUser(&from, *to, input[0] + " " + input[1] + " " + input[2]) > 0)
 			Response::withCode(RPL_AWAY).to(from).content("Message sent to " + to->getNickName()).send();

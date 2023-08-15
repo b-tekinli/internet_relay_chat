@@ -12,7 +12,7 @@
 /// @param target 
 /// @param content 
 /// @return 
-const std::string generateReply(Reply reply, const User &target, const std::string &content){
+const std::string generateReply(Reply reply, const Person &target, const std::string &content){
 	std::string message = "";
 	char reply_str[4];
 	sprintf(reply_str,"%d",reply);
@@ -81,12 +81,12 @@ Response Response::withCode(const Reply &reply)
 	return response;
 }
 
-Response& Response::from(const User &from) { 
+Response& Response::from(const Person &from) { 
 	mFrom = from.getNickName();
 	return *this;
  }
 
-Response& Response::to(const User &user) {
+Response& Response::to(const Person &user) {
 	mFd = user.getFd();
 	mTo = user.getNickName();
 	return *this;
@@ -115,11 +115,12 @@ void Response::send(){
 	stream << " :" << mContent << endl; // Content
 	
 	message = stream.str();
+	cout << "this is message =  " << message << endl;
 	write(mFd, message.c_str(), message.length());
 }
 
 // "PRIVMSG kaan :Merhaba Kaan"
-int sendUser(const User *origin, const User &target, const string &message){
+int sendUser(const Person *origin, const Person &target, const string &message){
 	string buffer = "";
 	if (origin != NULL){
 		buffer = ":" + origin->getNickName() + "!" + origin->getUserName() + "@" + origin->getServName();

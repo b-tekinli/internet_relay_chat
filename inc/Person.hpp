@@ -1,7 +1,7 @@
 #ifndef USER_HPP
 #define USER_HPP
 
-#include "DefineMod.hpp"
+#include <DefineMod.hpp>
 
 enum e_active
 {
@@ -11,7 +11,7 @@ enum e_active
 	ACTIVE = 3
 };
 
-class User
+class Person
 {
 	private:
 		string			user_name;
@@ -25,12 +25,12 @@ class User
 		bool			oper;
 		vector<string>	wh_op;
 	public:
-		User();
-		User(int fd);
-		User(const User &user);
-		~User();
+		Person();
+		Person(int fd);
+		Person(const Person &user);
+		~Person();
 
-		User& 			operator=(const User &user);
+		Person& 		operator=(const Person &user);
 		vector<string>&	getWhichChannel();
 		const string&	getUserName() const;
 		const string&	getHostName() const;

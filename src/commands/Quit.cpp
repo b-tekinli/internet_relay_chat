@@ -1,7 +1,7 @@
-#include "../../inc/Commands.hpp"
+#include <Commands.hpp>
 
 //normal irc de kullanıcı çıkarken nedenini belirtiyorsa bizim bunu da yazdırmamız gerekiyomuş
-int cmd::quit(const vector <string> &input, User &user)
+int cmd::quit(const vector <string> &input, Person &user)
 {
 	if (input.size() > 1)
 	{
@@ -25,7 +25,7 @@ int cmd::quit(const vector <string> &input, User &user)
 
 /*
 //beyza hocamızın denedigi
-int cmd::quit(const vector<string> &input, User& user)
+int cmd::quit(const vector<string> &input, Person & user)
 {
 	// string text;
 
@@ -49,7 +49,7 @@ int cmd::quit(const vector<string> &input, User& user)
 
 // void client_disconnect(int client_fd) {
 
-// 	User* user = getFd(client_fd);
+// 	Person * user = getFd(client_fd);
 
 // 	if(user != NULL)
 // 		for (const string& channel : user->getChannels())

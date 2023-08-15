@@ -1,8 +1,8 @@
 #ifndef SOCKET_HPP
 #define SOCKET_HPP
 
-#include "User.hpp"
-#include "DefineMod.hpp"
+#include <Person.hpp>
+#include <DefineMod.hpp>
 
 class Socket
 {

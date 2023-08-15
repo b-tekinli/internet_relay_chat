@@ -14,11 +14,11 @@ Server::~Server() { cout << "it is not done but work destructor" << endl; }
 
 const string					Server::getPassword() const { return (this->password); }
 
-map< string, vector<User*> >&	Server::getChannels() { return (this->channels); }
+map< string, vector<Person *> >&	Server::getChannels() { return (this->channels); }
 
-vector<User*>&					Server::getChannel(const string &channel) { return (this->channels[channel]); }
+vector<Person *>&					Server::getChannel(const string &channel) { return (this->channels[channel]); }
 
-vector<User*>&					Server::getUsers() { return (this->users); }
+vector<Person *>&					Server::getUsers() { return (this->users); }
 
 string&							Server::getRawString() { return (raw_string); }
 
@@ -28,7 +28,7 @@ void							Server::setPort(int port) { this->port = port; }
 
 void							Server::setPassword(string pass) { this->password = pass; }
 
-void							Server::addUserTo(const string &group, User &user) 
+void							Server::addUserTo(const string &group, Person &user) 
 {
 	if (!find_channel(channels[group], user.getNickName()))
 		Response::withCode(RPL_AWAY).to(user).content(group +  " " + user.getNickName() + "!" + user.getUserName() + "@127.0.0.1: Welcome to Channel " + group).send();
@@ -54,12 +54,12 @@ void							Server::addUserTo(const string &group, User &user)
 		cmd::notice(send, user); //everyone take a message
 	}
 	cout << "channel before: " << channels[group].size() << "." << endl;
-	channels[group].push_back((User *)&user);
+	channels[group].push_back((Person *)&user);
 	cout << "channel after: " << channels[group].size() << "." << endl;
 	cout << "channel name: " << group << "." << endl;
 }
 
-User*			Server::getUserNick(string nick)
+Person *			Server::getUserNick(string nick)
 {
 	if (users.size() == 0)
 		return (NULL);
@@ -71,12 +71,12 @@ User*			Server::getUserNick(string nick)
 	return (NULL);
 }
 
-User*   Server::getOrCreateUser(int fd)
+Person *   Server::getOrCreateUser(int fd)
 {
 	cout << fd << endl;
 	cout << users.size() << endl;
 	if (users.size() <= fd || users[fd] == 0)
-		users.insert(users.begin() + fd, new User(fd));
+		users.insert(users.begin() + fd, new Person(fd));
 	return (users[fd]);
 }
 
@@ -95,7 +95,7 @@ void	Server::deleteUser(int fd)
 	}
 }
 
-void	Server::removeUserFrom(const string &channel, User &user)
+void	Server::removeUserFrom(const string &channel, Person &user)
 {
 	int fd = user.getFd();
 	int i = 0;

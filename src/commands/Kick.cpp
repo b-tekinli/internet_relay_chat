@@ -1,6 +1,6 @@
-#include "../../inc/Commands.hpp"
+#include <Commands.hpp>
 
-bool	inChannel(vector<User*> users, string name)
+bool	inChannel(vector<Person *> users, string name)
 {
 	int	i = 0;
 
@@ -12,7 +12,7 @@ bool	inChannel(vector<User*> users, string name)
 	return (false);
 }
 
-int cmd::kick(const vector<string> &input, User& from)
+int cmd::kick(const vector<string> &input, Person & from)
 {
 	if (input.size() != 3)
 	{
@@ -34,8 +34,8 @@ int cmd::kick(const vector<string> &input, User& from)
 		Response::withCode(ERR_USERNOTINCHANNEL).to(from).content(input[2] + " " + input[1] + USER_NOT_IN).send();
 		return (-1);
 	}
-	User							*to = start.getUserNick(input[2]);
-	vector<User*>					channel = start.getChannel(input[1]);
+	Person							*to = start.getUserNick(input[2]);
+	vector<Person *>				channel = start.getChannel(input[1]);
 	int								i = 0;
 
 	Response().create().content(KICK_TO).from(from).to(*to).send();
