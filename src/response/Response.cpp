@@ -7,25 +7,6 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-/// @brief  generated response :<prefix> <number>
-/// @param reply 
-/// @param target 
-/// @param content 
-/// @return 
-const std::string generateReply(Reply reply, const Person &target, const std::string &content){
-	std::string message = "";
-	char reply_str[4];
-	sprintf(reply_str,"%d",reply);
-	message += ":<hostname>"; //TODO: implement prefix generator
-	message += " ";
-	message += reply_str;
-	message += " ";
-	message += target.getNickName();
-	message += " :";
-	message += content;
-
-	return message;
-}
 
 static string getServerHostName(){
 	struct addrinfo hints = {0};
@@ -48,8 +29,8 @@ static string getServerHostName(){
 Response::Response(){
 	this->mFrom = getServerHostName();
 	this->mCode = NONE;
-	this->mTo = "anonymous!anonymous@anonymous";
-	this->mContent = "No Content.";
+	this->mTo = "";
+	this->mContent = "";
 	this->mFd = 1;
 }
 
@@ -71,6 +52,15 @@ Response::~Response(){}
 Response Response::create()
 {
 	Response response;
+	response.responseType = REPLY;
+	return response;
+}
+
+
+Response Response::createMessage()
+{
+	Response response;
+	response.responseType = MESSAGE;
 	return response;
 }
 
@@ -78,11 +68,20 @@ Response Response::withCode(const Reply &reply)
 {
 	Response response;
 	response.mCode = reply;
+	response.responseType = REPLY;
+	return response;
+}
+
+Response Response::createReply(const Reply &reply)
+{
+	Response response;
+	response.mCode = reply;
+	response.responseType = REPLY;
 	return response;
 }
 
 Response& Response::from(const Person &from) { 
-	mFrom = from.getNickName();
+	mFrom = from.getNickName() + "!" + from.getUserName() + "@" + from.getHostName();
 	return *this;
  }
 
@@ -102,21 +101,49 @@ Response& Response::content(const string &content){
 	return *this;
 }
 
+Response& Response::addContent(const string &content){
+	mContentExtra << " " << content;
+	return *this;
+}
+
+string Response::generateMessage(){
+	std::stringstream stream;
+
+	if (!mFrom.empty())
+		stream << ":" << mFrom << " "; // prefix
+	stream << mContent;
+	stream << mContentExtra.str();
+	return stream.str();
+}
+
+string Response::generateReply(){
+	std::stringstream stream;
+
+	stream << ":" << mFrom << " "; // prefix
+	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
+	stream << mTo; // Target
+	stream << " :" << mContent << endl; // Content
+	stream << mContentExtra.str();
+	return stream.str();
+}
 
 //TODO: generalize responses
 /// General stucture of responses: ":"
 void Response::send(){
 	std::stringstream stream;
 	string message;
+
+	switch(this->responseType){
+		case MESSAGE:
+			message = generateMessage();
+			break;
+		case REPLY:
+			message = generateReply();
+			break;
+	}
 	
-	stream << ":" << mFrom << " "; // prefix
-	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
-	stream << mTo; // Target
-	stream << " :" << mContent << endl; // Content
-	
-	message = stream.str();
 	cout << "this is message =  " << message << endl;
-	write(mFd, message.c_str(), message.length());
+	::send(mFd, message.c_str(), message.length(),0);
 }
 
 // "PRIVMSG kaan :Merhaba Kaan"

@@ -10,10 +10,11 @@ int cmd::list(const vector<string> &input, Person & user)
 	}
 	map<string, vector<Person *> >	&group = start.getChannels();
 	std::map<std::string, vector<Person *> >::iterator it = group.begin();
-	string		str = "322 channel1 50 :A discussion about programming\r\n";
 	Response::create().to(user).code(RPL_LISTSTART).content("TOPIC: \n").send();
 	for (; it != group.end(); it++) // we have to fix because of it's not enough work for client.
 	{
+
+		string		str = "322 #GamingZone 123 :Let's talk about video games!\n";
 		if (input.size() == 1)
 		{
 			Response::create().to(user).code(RPL_LIST).content(str).send();

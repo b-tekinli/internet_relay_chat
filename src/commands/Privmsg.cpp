@@ -1,5 +1,13 @@
 #include <Commands.hpp>
 
+static string join_input(const vector<string> &input) {
+	string str = "";
+	for (int i = 0; i < input.size(); i++){
+		str += input[i] + " ";
+	}
+	return str;
+}
+
 int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var mı && kullanıcı mı var mı
 {
 	if (input.size() < 3)
@@ -17,7 +25,7 @@ int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var
 	string	msg = just_text();
 
 	if (who[0] == '#')
-		sendGroup(from, who, msg); //ERR_NORECIPIENT = look at this
+		sendGroup(from, who, join_input(input)); //ERR_NORECIPIENT = look at this
 	else
 	{
 		Person *to = start.getUserNick(input[1]);

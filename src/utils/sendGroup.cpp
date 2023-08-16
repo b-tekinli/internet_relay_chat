@@ -6,6 +6,8 @@ void	sendGroup(Person & user, const string n_channel, const string msg)
 
 	for (int i = 0; i < group.size(); i++)
 	{
-		Response::withCode(RPL_AWAY).from(user).to(*group[i]).content(msg).send();
+		cout << "Sending message ("<< msg <<") to: " << (*group[i]).getNickName() << endl;
+		Response::createMessage().from(user).to(*group[i]).content(msg).send();
 	}
+	Response::withCode(RPL_AWAY).to(user).content("Message sent").send();
 }
