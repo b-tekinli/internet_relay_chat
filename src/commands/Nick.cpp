@@ -2,13 +2,11 @@
 
 bool	nameInUse(string name, int _size)
 {
-	if (_size == 4)
-		return (false);
 	vector<Person *>	users = start.getUsers();
 
-	for (int i = 4; i < users.size() && i < _size; i++)
+	for (int i = 0; i < users.size() && i < _size; i++)
 	{
-		if (name == users[i]->getNickName())
+		if (users[i] && name == users[i]->getNickName())
 			return (true);
 	}
 	return (false);

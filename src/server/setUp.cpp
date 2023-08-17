@@ -16,9 +16,9 @@ fp_command	selCommand(vector<string> &input, const Person &user)
 		if (isEqual(input[0], str[i], input.size() >= 1) || 
 				isEqual(input[1], str[i], input.size() >= 2))
 			break;
-	if ((user.getActive() == FALSE && i != 0) || 
-		((user.getActive() == HALF || user.getActive() == U_HALF) && i > 2))
+	if ((user.getActive() == FALSE || user.getActive() == HALF || user.getActive() == U_HALF) && i > 2)
 	{
+		cout << input[0] << endl;
 		Response::create().to(user).content(ND_ACTIVE).send();
 		return (0);
 	}
@@ -64,8 +64,9 @@ void	Server::handleInput(int fd, const string &input)
 	commands = split_input(input);
 	
 	//start.setRawString(input);
-	if ((func = selCommand(commands, *users[fd])) != NULL)
-			func(commands, *users[fd]);
+	cout << "INPUT: " << input << endl;
+	if ((func = selCommand(commands, *(users[fd]))) != NULL)
+			func(commands, *(users[fd]));
 }
 
 

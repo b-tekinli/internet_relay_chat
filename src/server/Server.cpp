@@ -5,8 +5,7 @@ Server::Server() {}
 
 void	Server::toBegin()
 {
-	for (int i = 0; i < 4; i++)
-		users.push_back(0);
+	
 	setUpSocket();
 }
 
@@ -18,7 +17,17 @@ map< string, vector<Person *> >&	Server::getChannels() { return (this->channels)
 
 vector<Person *>&					Server::getChannel(const string &channel) { return (this->channels[channel]); }
 
-vector<Person *>&					Server::getUsers() { return (this->users); }
+vector<Person *>					 Server::getUsers() { 
+	vector<Person *> persons;
+
+	for (int i = 0; i < users.size(); i++){
+		if (this->users[i])
+			persons.push_back(this->users[i]);
+		else
+			persons.push_back(NULL);
+	}
+	return persons;
+}
 
 string&							Server::getRawString() { return (raw_string); }
 
@@ -63,9 +72,9 @@ Person *			Server::getUserNick(string nick)
 {
 	if (users.size() == 0)
 		return (NULL);
-	for (int i = 4; i < users.size(); i++)
+	for (int i = 0; i < users.size(); i++)
 	{
-		if (users[i]->getNickName() == nick)
+		if (users[i] && users[i]->getNickName() == nick)
 			return (users[i]);
 	}
 	return (NULL);
@@ -76,7 +85,7 @@ Person *   Server::getOrCreateUser(int fd)
 	cout << fd << endl;
 	cout << users.size() << endl;
 	if (users.size() <= fd || users[fd] == 0)
-		users.insert(users.begin() + fd, new Person(fd));
+		users[fd] = new Person(fd);
 	return (users[fd]);
 }
 

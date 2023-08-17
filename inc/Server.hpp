@@ -11,7 +11,7 @@ class Server
 		int								port;
 		string							password;
 		map < string, vector<Person*> >	channels;
-		vector <Person*>				users;
+		map < int, Person *>			users;
 		string							raw_string;
 	public:
 		Server();
@@ -23,7 +23,7 @@ class Server
 		void							setPort(int port);
 		void							setPassword(string pass);
 		map< string, vector<Person*> >	&getChannels();
-		vector<Person*>					&getUsers();
+		vector<Person*>					getUsers();
 		Person*							getUserNick(string nick);
 		vector<Person*>					&getChannel(const string &channel);
 		string							&getRawString();

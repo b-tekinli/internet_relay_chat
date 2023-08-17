@@ -14,12 +14,9 @@ int cmd::quit(const vector <string> &input, Person &user)
 
 		//write(user.getFd(), reason.c_str(), reason.size());
 	}
-	Response::create().to(user).code(RPL_WELCOME).content("GOOD BYE!!").send();
+	Response::createMessage().to(user).content("QUIT :Gone to have lunch").send();
 	start.deleteUser(user.getFd());
 	close(user.getFd());
-	
-	delete &user;
-	
 	return 0;
 }
 
