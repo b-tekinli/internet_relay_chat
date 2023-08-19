@@ -5,7 +5,6 @@ Server::Server() {}
 
 void	Server::toBegin()
 {
-	
 	setUpSocket();
 }
 
@@ -62,15 +61,25 @@ void							Server::addUserTo(const string &group, Person &user)
 		send.push_back("NOTICE");
 		send.push_back(group);
 		send.push_back("JOIN " + user.getNickName() + " in the " + group);
-		cmd::notice(send, user); //everyone take a message
+		Response::createMessage().from(user).to(*channels[group][0]).content("JOIN").addContent(group).send();
+		cmd::notice(send, user);
 	}
-	cout << "channel before: " << channels[group].size() << "." << endl;
 	channels[group].push_back((Person *)&user);
-	cout << "channel after: " << channels[group].size() << "." << endl;
-	cout << "channel name: " << group << "." << endl;
+	string nickname = user.getNickName();
+	vector<Person *> users = channels[group];
+	for (int i = 0; i != users.size(); i++)
+	{
+		int toSend = users[i]->getFd();
+
+		if (toSend != user.getFd())
+			Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
+	}
+	Response::createReply(RPL_NAMEREPLY).from(user).to(user).content("=").addContent("#biz :" + user.getNickName()).send();
+	Response::createReply(RPL_ENDOFNAMES).from(user).to(user).content(group + " :End of /NAMES list").send();
+	//numeric::sendNumeric(RPL_ENDOFNAMES(nickname, channelName), user, server);
 }
 
-Person *			Server::getUserNick(string nick)
+Person*			Server::getUserNick(string nick)
 {
 	if (users.size() == 0)
 		return (NULL);
@@ -82,7 +91,7 @@ Person *			Server::getUserNick(string nick)
 	return (NULL);
 }
 
-Person *   Server::getOrCreateUser(int fd)
+Person*   Server::getOrCreateUser(int fd)
 {
 	cout << fd << endl;
 	cout << users.size() << endl;

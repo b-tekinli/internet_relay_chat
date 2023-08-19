@@ -22,7 +22,6 @@ int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var
 		return (-1);
 	}
 	string	who = input[1];
-	string	msg = just_text();
 
 	if (who[0] == '#')
 		sendGroup(from, who, join_input(input));
@@ -30,8 +29,7 @@ int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var
 	{
 		Person *to = start.getUserNick(input[1]);
 
-		if (sendUser(&from, *to, input[0] + " " + input[1] + " " + input[2]) > 0)
-			Response::withCode(RPL_AWAY).to(from).content("Message sent to " + to->getNickName()).send();
+		sendUser(&from, *to, input[0] + " " + input[1] + " " + input[2]);
 	}
 	return (0);
 }

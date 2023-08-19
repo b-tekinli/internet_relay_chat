@@ -101,7 +101,10 @@ Response& Response::content(const string &content){
 }
 
 Response& Response::addContent(const string &content){
-	mContentExtra << " " << content;
+	if (!content.empty())
+		mContentExtra << " " << content;
+	else
+		mContentExtra << "";
 	return *this;
 }
 

@@ -81,8 +81,6 @@ static int get_line(int fd, string &line){
 	return total_read;
 }
 
-// const string& generateReply(int code, User, string message);
-
 void	Server::setUpSocket()
 {
 	Socket clientSocket;
