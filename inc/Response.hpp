@@ -23,10 +23,8 @@ enum Reply
 	RPL_INFO = 371,
 	RPL_BOUNCE = 5,
 	RPL_TOPIC = 332,
+	RPL_NOTOPIC = 331,
 	RPL_AWAY = 301,
-	RPL_LISTSTART = 321,
-	RPL_LIST = 322,
-	RPL_LISTEND = 323,
 	RPL_WHOREPLY = 352,
 	RPL_ENDOFWHO = 315,
 	ERR_NOSUCHNICK = 401,
@@ -58,13 +56,15 @@ enum Reply
 	ERR_WILDTOPLEVEL = 414,
 	ERR_TOOMANYTARGETS = 407,
 	ERR_PASSWDMISMATCH = 464,
-	ERR_UNKNOWNCOMMAND = 421
+	ERR_UNKNOWNCOMMAND = 421,
+	ERR_USERONCHANNEL = 443
 
 };
 
 enum ResponseType {
 	REPLY,
-	MESSAGE
+	MESSAGE,
+	SET
 };
 
 /// @brief Response class (Chain of responsibility)
@@ -108,8 +108,7 @@ class Response {
 		/// @param reply RPL code or ERR code that will be send to client
 		/// @example Response::createReply(RPL_WELCOME).to(target).content("Welcome!").send();
 		/// @return Response instance that represents replies
-		static Response createReply(const Reply &reply);
-		
+		static Response createReply(const Reply &reply);		
 
 		/// @brief Sets the origin of response. Do not call if you want to set server as origin.
 		/// @param Person: Origin of the response

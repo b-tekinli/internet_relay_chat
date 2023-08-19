@@ -6,6 +6,7 @@
 #define NO_PASS			"Your Connections Is Restricted "
 #define CH_NAME			"Channel name fist characther must be '#' "
 #define NOT_ENOUGH		"Not enough parameters "
+#define	NO_TOPIC		" :No topic is set"
 #define ND_ACTIVE		"You need to be active "
 #define A_REGIST		"Unauthorized command "
 #define NO_SUCH			"No such nick/channel "
@@ -16,7 +17,7 @@
 
 #define KICK_TO			"Kick by the operator"
 #define ER_NICK_USED	" :Nickname is already in use"
-#define ER_ALREADY_JOIN	"Error: You already joined this channel"
+#define ER_ALREADY_JOIN	" :is already on channel"
 #define FIRST_USERSET	"Error: First you have to set user setting"
 
 //not enough param

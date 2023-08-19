@@ -1,6 +1,6 @@
 #include <Commands.hpp>
 
-int cmd::user(const vector<string> &input, Person & user) // boşluk olunca farklı sonuç
+int cmd::user(const vector<string> &input, Person & user)
 {
 	if (input.size() != 5)
 	{

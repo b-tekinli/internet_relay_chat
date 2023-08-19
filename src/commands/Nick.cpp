@@ -33,8 +33,8 @@ int cmd::nick(const vector<string> &input, Person & user)
 	if (user.getActive() == U_HALF)
 	{
 		Response::create().to(user).code(RPL_WELCOME).content(WELCOME + user.getNickName() + "!" + user.getUserName() + "@127.0.0.1").send();
-
 		user.setActive(ACTIVE);
 	}
+	Response::createMessage().to(user).from(user).content("NICK").addContent(input[1]).send();
 	return (0);
 }

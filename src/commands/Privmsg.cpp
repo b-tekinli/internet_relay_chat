@@ -25,10 +25,7 @@ int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var
 	string	msg = just_text();
 
 	if (who[0] == '#')
-	{
-		cout << "Message will be sent to the channel: " << input[1] << endl;
-		sendGroup(from, who, join_input(input)); //ERR_NORECIPIENT = look at this
-	}
+		sendGroup(from, who, join_input(input));
 	else
 	{
 		Person *to = start.getUserNick(input[1]);

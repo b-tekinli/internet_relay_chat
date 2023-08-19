@@ -8,8 +8,8 @@
  */
 fp_command	selCommand(vector<string> &input, const Person &user)
 {
-	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KICK", "PING", "PONG", "LIST", "PRIVMSG"};
-	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kick, cmd::ping, cmd::pong, cmd::list, cmd::privmsg,  NULL};
+	string		str[] = {"PASS", "USER", "NICK", "JOIN", "QUIT", "KICK", "PING", "PONG", "PRIVMSG", "NOTICE"};
+	fp_command	result[] = {cmd::pass, cmd::user, cmd::nick, cmd::join, cmd::quit, cmd::kick, cmd::ping, cmd::pong, cmd::privmsg, cmd::notice, NULL};
 	int			i;
 
 	for (i = -1; i < 10; ++i)
@@ -17,11 +17,7 @@ fp_command	selCommand(vector<string> &input, const Person &user)
 				isEqual(input[1], str[i], input.size() >= 2))
 			break;
 	if ((user.getActive() == FALSE || user.getActive() == HALF || user.getActive() == U_HALF) && i > 2)
-	{
-		cout << input[0] << endl;
-		Response::create().to(user).content(ND_ACTIVE).send();
 		return (0);
-	}
 	return result[i];
 }
 
@@ -63,8 +59,8 @@ void	Server::handleInput(int fd, const string &input)
 
 	commands = split_input(input);
 	
-	//start.setRawString(input);
 	cout << "INPUT: " << input << endl;
+	cout << "INPUT (size): " << commands.size() << endl;
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 			func(commands, *(users[fd]));
 }

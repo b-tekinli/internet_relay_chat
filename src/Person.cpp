@@ -1,6 +1,6 @@
 #include <Person.hpp>
 
-Person::Person() {}
+Person::Person(): fd(0), active(FALSE), oper(false) {}
 
 Person::Person(int fd): fd(fd), active(FALSE), oper(false)
 {

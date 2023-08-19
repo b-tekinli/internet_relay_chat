@@ -56,7 +56,6 @@ Response Response::create()
 	return response;
 }
 
-
 Response Response::createMessage()
 {
 	Response response;
@@ -112,7 +111,7 @@ string Response::generateMessage(){
 	if (!mFrom.empty())
 		stream << ":" << mFrom << " "; // prefix
 	stream << mContent;
-	stream << mContentExtra.str();
+	stream << mContentExtra.str() << "\r\n";
 	return stream.str();
 }
 
@@ -123,7 +122,7 @@ string Response::generateReply(){
 	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
 	stream << mTo; // Target
 	stream << " :" << mContent << endl; // Content
-	stream << mContentExtra.str();
+	stream << mContentExtra.str() << "\r\n";
 	return stream.str();
 }
 
@@ -142,7 +141,7 @@ void Response::send(){
 			break;
 	}
 	
-	cout << "this is message =  " << message << endl;
+	cout << "this is message =" << message << endl;
 	::send(mFd, message.c_str(), message.length(),0);
 }
 
