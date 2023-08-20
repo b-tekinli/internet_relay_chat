@@ -66,7 +66,6 @@ enum Reply
 enum ResponseType {
 	REPLY,
 	MESSAGE,
-	SET
 };
 
 /// @brief Response class (Chain of responsibility)

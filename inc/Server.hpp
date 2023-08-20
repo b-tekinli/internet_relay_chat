@@ -13,6 +13,7 @@ class Server
 		map < string, vector<Person*> >	channels;
 		map < int, Person *>			users;
 		string							raw_string;
+		string							hostname;
 	public:
 		Server();
 		~Server();
@@ -27,7 +28,9 @@ class Server
 		Person*							getUserNick(string nick);
 		vector<Person*>					&getChannel(const string &channel);
 		string							&getRawString();
+		string							&getHostname();
 		void							setRawString(string set);
+		void							setHostname();
 		/// @brief gets user from list or creates new one and inserts into the list
 		/// @param fd 
 		/// @return User in the system
