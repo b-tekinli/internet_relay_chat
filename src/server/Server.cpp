@@ -102,11 +102,7 @@ void	Server::addUserTo(const string &group, Person &user)
 	}
 	
 	if (channels[group].size() == 0)
-	{
-		cout << "Channel Name: " << group << "." <<endl;
-		user.setOper(true);
 		Response::createMessage().from(user).to(user).content("MODE").addContent(group + " +o " + user.getNickName()).send();
-	}
 	else
 	{
 		vector<string>	send;

@@ -44,7 +44,7 @@ int cmd::nick(const vector<string> &input, Person & user)
 			Response::createMessage().to(*users[i]).from(user).content("NICK").addContent(nickname).send();
 		}
 	}
-	
+
 	user.setNickName(input[1]);
 	if (user.getActive() == U_HALF)
 	{

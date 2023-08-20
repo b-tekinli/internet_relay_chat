@@ -22,7 +22,6 @@ class Person
 		int				grade;
 		int				fd;
 		e_active		active;
-		bool			oper;
 		vector<string>	wh_op;
 	public:
 		Person();
@@ -46,7 +45,6 @@ class Person
 		void			setServName(const string& set);
 		void			setRealName(const string& set);
 		void			setNickName(const string& set);
-		void			setOper(bool ch);
 		void			addOperator(const string &str);
 		void			delOperator(const string str);
 		string			message;
