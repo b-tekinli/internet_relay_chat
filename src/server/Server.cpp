@@ -105,7 +105,6 @@ void	Server::addUserTo(const string &group, Person &user)
 	{
 		cout << "Channel Name: " << group << "." <<endl;
 		user.setOper(true);
-		user.addOperator(group);
 		Response::createMessage().from(user).to(user).content("MODE").addContent(group + " +o " + user.getNickName()).send();
 	}
 	else
@@ -118,6 +117,7 @@ void	Server::addUserTo(const string &group, Person &user)
 		Response::createMessage().from(user).to(*channels[group][0]).content("JOIN").addContent(group).send();
 		cmd::notice(send, user);
 	}
+	user.addOperator(group);
 	channels[group].push_back((Person *)&user);
 	string nickname = user.getNickName();
 	vector<Person *> users = channels[group];

@@ -59,8 +59,8 @@ void	Server::handleInput(int fd, const string &input)
 
 	commands = split_input(input);
 	
-	cout << "INPUT: " << input << endl;
-	cout << "INPUT (size): " << commands.size() << endl;
+	//cout << "INPUT: " << input << endl;
+	//cout << "INPUT (size): " << commands.size() << endl;
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 			func(commands, *(users[fd]));
 }
