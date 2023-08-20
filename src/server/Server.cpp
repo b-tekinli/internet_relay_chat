@@ -74,8 +74,8 @@ void							Server::addUserTo(const string &group, Person &user)
 		if (toSend != user.getFd())
 			Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
 	}
-	Response::createReply(RPL_NAMEREPLY).from(user).to(user).content("=").addContent("#biz :" + user.getNickName()).send();
-	Response::createReply(RPL_ENDOFNAMES).from(user).to(user).content(group + " :End of /NAMES list").send();
+	Response::createReply(RPL_NAMEREPLY).to(user).addContent("=" + group + " :" + channels[group][0]->getNickName() + " " +user.getNickName()).send();
+	Response::createReply(RPL_ENDOFNAMES).to(user).content(group + " :End of /NAMES list").send();
 	//numeric::sendNumeric(RPL_ENDOFNAMES(nickname, channelName), user, server);
 }
 

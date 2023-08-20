@@ -124,7 +124,8 @@ string Response::generateReply(){
 	stream << ":" << mFrom << " "; // prefix
 	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
 	stream << mTo; // Target
-	stream << " :" << mContent << endl; // Content
+	if (!mContent.empty())
+		stream << " :" << mContent;
 	stream << mContentExtra.str() << "\r\n";
 	return stream.str();
 }
