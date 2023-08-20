@@ -26,8 +26,9 @@ static string getServerHostName(){
 	return string(address);
 }
 
-Response::Response(){
-	this->mFrom = getServerHostName();
+Response::Response()
+{
+	this->mFrom = start.getHostname();
 	this->mCode = NONE;
 	this->mTo = "";
 	this->mContent = "";
