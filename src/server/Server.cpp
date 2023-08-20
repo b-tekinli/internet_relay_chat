@@ -13,7 +13,7 @@ vector<Person *>&					Server::getChannel(const string &channel) { return (this->
 
 string&								Server::getRawString() { return (raw_string); }
 
-string								Server::&getHostname() { return (hostname); }
+string&								Server::getHostname() { return (hostname); }
 
 vector<Person *>					Server::getUsers() 
 { 

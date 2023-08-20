@@ -1,4 +1,4 @@
-#include <Server.hpp>
+#include <Error.hpp>
 
 void    error(string msg)
 {
