@@ -107,7 +107,6 @@ void	Server::addUserTo(const string &group, Person &user)
 		user.setOper(true);
 		user.addOperator(group);
 		Response::createMessage().from(user).to(user).content("MODE").addContent(group + " +o " + user.getNickName()).send();
-		//Response::withCode(RPL_NOTOPIC).from(user).content(group + NO_TOPIC).send();
 	}
 	else
 	{
@@ -131,7 +130,6 @@ void	Server::addUserTo(const string &group, Person &user)
 	}
 	Response::createReply(RPL_NAMEREPLY).to(user).addContent("= " + group + " :@" + channels[group][0]->getNickName() + " " +user.getNickName()).send();
 	Response::createReply(RPL_ENDOFNAMES).to(user).addContent(group + " :End of /NAMES list").send();
-	//numeric::sendNumeric(RPL_ENDOFNAMES(nickname, channelName), user, server);
 }
 
 void	Server::toBegin()

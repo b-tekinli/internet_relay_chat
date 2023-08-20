@@ -9,5 +9,4 @@ void	sendGroup(Person & user, const string n_channel, const string msg)
 		if (user.getNickName() != group[i]->getNickName())
 			Response::createMessage().from(user).to(*group[i]).content(msg).send();
 	}
-	Response::withCode(RPL_AWAY).to(user).content("Message sent").send();
 }
