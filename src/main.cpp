@@ -18,9 +18,7 @@ bool	control(char **av)
 	return false;
 }
 
-
-
-int	main(int ac, char **av) // 8080 emakas
+int	main(int ac, char **av)
 {
 	if (ac != 3 || !control(av))
 	{
@@ -31,15 +29,5 @@ int	main(int ac, char **av) // 8080 emakas
 	start.setPort(atoi(av[1]));
 	start.setPassword(av[2]);
 	start.toBegin();
-
-
-
 	return (0);
 }
-
-
-
-//komutları yazacağız
-//private message check işlemlerini halletmem gerekiyor.
-//numeric bir şekilde kodu göndereceğiz
-//Kvirc'de test edeceğiz

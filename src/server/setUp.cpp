@@ -43,7 +43,7 @@ vector<string>	split_input(const string &str){
 }
 
 void print_args(vector<string> &args){
-	for (int i = 0; i < args.size(); i++){
+	for (int i = 0; i < int(args.size()); i++){
 		cout << "ARG: " << args[i] << endl;
 	}
 }
@@ -58,9 +58,6 @@ void	Server::handleInput(int fd, const string &input)
 	vector<string>	commands;
 
 	commands = split_input(input);
-	
-	//cout << "INPUT: " << input << endl;
-	//cout << "INPUT (size): " << commands.size() << endl;
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 	{
 		printClient(input, *(users[fd]));
@@ -73,7 +70,7 @@ static int get_line(int fd, string &line){
 	char chr[2] = {0};
 	int readed = 0;
 	int total_read = 0;;
-	while ((readed = recv(fd,chr,1,0)) > 0){
+	while ((readed = recv(fd,chr, 1, 0)) > 0){
 		total_read += readed;
 		string append(chr);
 		line += append;
@@ -93,7 +90,7 @@ void	Server::setUpSocket()
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
 	while (poll(&pollfds[0], pollfds.size(), -1)) //alınan inputların durumunu söyler
 	{
-		for (int i = 0; i < pollfds.size(); i++)
+		for (int i = 0; i < int(pollfds.size()); i++)
 		{
 			if(pollfds[i].revents & POLLIN)
 			{
@@ -106,7 +103,7 @@ void	Server::setUpSocket()
 					int	 clientFd =  clientSocket.Accept();
 
 					fcntl(clientFd, F_SETFL, O_NONBLOCK);
-					pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT} );
+					pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT, 0} );
 					getOrCreateUser(clientFd);
 				}
 				else

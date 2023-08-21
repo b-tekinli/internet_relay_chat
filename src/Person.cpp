@@ -43,9 +43,9 @@ const string&	Person::getRealName() const { return (real_name);	}
 
 const string&	Person::getNickName() const { return (nick_name); }
 
-const int		Person::getActive() const { return (active); }
+int				Person::getActive() const { return (active); }
 
-const int		Person::getFd() const { return (fd); }
+int				Person::getFd() const { return (fd); }
 
 void			Person::setActive(e_active choose)	 { active = choose; }
 
@@ -65,7 +65,7 @@ void			Person::delOperator(const string str)
 {
 	int	i = 0;
 
-	for (; i < wh_op.size(); i++)
+	for (; i < int(wh_op.size()); i++)
 	{
 		if (wh_op[i] == str)
 		{

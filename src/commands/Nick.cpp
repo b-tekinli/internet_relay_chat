@@ -4,7 +4,7 @@ bool	nameInUse(string name, int _size)
 {
 	vector<Person *>	users = start.getUsers();
 
-	for (int i = 0; i < users.size() && i < _size; i++)
+	for (int i = 0; i < int(users.size()) && i < _size; i++)
 	{
 		if (users[i] && name == users[i]->getNickName())
 			return (true);
@@ -33,16 +33,13 @@ int cmd::nick(const vector<string> &input, Person & user)
 	string							nickname = input[1];
 	map< string, vector<Person*> >&	channels = start.getChannels();
 
-	for (int j = 0; j < wh_channels.size(); j++)
+	for (int j = 0; j < int(wh_channels.size()); j++)
 	{
 		string				group	= wh_channels[j];
 		vector<Person *>	users = channels[group];
 
-		for (int i = 0; i < users.size(); i++)
-		{
-			int toSend = users[i]->getFd();
+		for (int i = 0; i < int(users.size()); i++)
 			Response::createMessage().to(*users[i]).from(user).content("NICK").addContent(nickname).send();
-		}
 	}
 
 	user.setNickName(input[1]);

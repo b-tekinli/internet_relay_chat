@@ -11,7 +11,7 @@ bool	find_channel(string target, Person &from)
 	{
 		if (isEqual(it->first, target, 1))
 		{
-			for (int i = 0; i < it->second.size(); i++)
+			for (int i = 0; i < int(it->second.size()); i++)
 			{
 				if (isEqual(it->second[i]->getNickName(), from.getNickName(), 1))
 				{
@@ -28,7 +28,7 @@ bool	find_channel(vector <Person *> group, string name)
 {
 	if (group.size() == 0)
 		return (false);
-	for (int i = 0; i < group.size(); i++)
+	for (int i = 0; i < int(group.size()); i++)
 	{
 		if (group[i]->getNickName() == name)
 			return (true);

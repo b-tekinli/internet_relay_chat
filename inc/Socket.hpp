@@ -19,10 +19,6 @@ class Socket
 		bool	Bind();
 		bool	Listen();
 		int		Accept();
-		bool	Connect(string &ipAdress);
-		bool	Send(string &message);
-		void	SetNonBlocking(bool isNonBlocking);
-		int		Receive(string &message);
 		void	Close();
 
 		int	 getSocketFd();

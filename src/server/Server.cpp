@@ -19,7 +19,7 @@ vector<Person *>					Server::getUsers()
 { 
 	vector<Person *> persons;
 
-	for (int i = 0; i < users.size(); i++){
+	for (int i = 0; i < int(users.size()); i++){
 		if (this->users[i])
 			persons.push_back(this->users[i]);
 		else
@@ -32,7 +32,7 @@ Person*		Server::getUserNick(string nick)
 {
 	if (users.size() == 0)
 		return (NULL);
-	for (int i = 0; i < users.size(); i++)
+	for (int i = 0; i < int(users.size()); i++)
 	{
 		if (users[i] && users[i]->getNickName() == nick)
 			return (users[i]);
@@ -44,7 +44,7 @@ Person*   Server::getOrCreateUser(int fd)
 {
 	cout << fd << endl;
 	cout << users.size() << endl;
-	if (users.size() <= fd || users[fd] == 0)
+	if (int(users.size()) <= fd || users[fd] == 0)
 		users[fd] = new Person(fd);
 	return (users[fd]);
 }
@@ -71,7 +71,7 @@ void	Server::deleteUser(int fd)
 	{
 		vector<string>&	wh_op = this->users[fd]->getWhichChannel();
 
-		for (int i = 0; i < wh_op.size(); i++)
+		for (int i = 0; i < int(wh_op.size()); i++)
 		{
 			removeUserFrom(wh_op[i], *this->users[fd]);
 		}
@@ -85,7 +85,7 @@ void	Server::removeUserFrom(const string &channel, Person &user)
 	int fd = user.getFd();
 	int i = 0;
 
-	for (; i < channels[channel].size(); i++)
+	for (; i < int(channels[channel].size()); i++)
 		if (channels[channel][i]->getFd() == fd)
 			break;
 	channels[channel].erase(channels[channel].begin() + i);
@@ -117,7 +117,7 @@ void	Server::addUserTo(const string &group, Person &user)
 	channels[group].push_back((Person *)&user);
 	string nickname = user.getNickName();
 	vector<Person *> users = channels[group];
-	for (int i = 0; i != users.size(); i++)
+	for (int i = 0; i != int(users.size()); i++)
 	{
 		int toSend = users[i]->getFd();
 

@@ -7,9 +7,10 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-
-static string getServerHostName(){
-	struct addrinfo hints = {0};
+/*
+static string getServerHostName()
+{
+	struct addrinfo hints = { 0 };
 	struct addrinfo *res;
 	char address[INET_ADDRSTRLEN];
 	char host[] = "localhost";
@@ -24,7 +25,7 @@ static string getServerHostName(){
 	}
 	else return "Undefined";
 	return string(address);
-}
+}*/
 
 Response::Response()
 {

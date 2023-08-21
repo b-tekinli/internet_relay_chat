@@ -2,7 +2,7 @@
 
 static string join_input(const vector<string> &input) {
 	string str = "";
-	for (int i = 0; i < input.size(); i++){
+	for (int i = 0; i < int(input.size()); i++){
 		str += input[i] + " ";
 	}
 	return str;

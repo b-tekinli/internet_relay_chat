@@ -68,38 +68,6 @@ int Socket::Accept()
 	return (accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize));
 }
 
-bool Socket::Connect(string &ipAdress)
-{
-	inet_pton(AF_INET, ipAdress.c_str(), &(connect_int.sin_addr)); //verilen Ip adresini binary formatına çevirir
-//inet_pton için bir izin göremedim //inet_ntoa bu kod kullanılabilir
-	return (connect(fd_socket, (sockaddr *)&connect_int, sizeof(connect_int)) != -1);
-}
-
-bool Socket::Send(string &message)
-{
-	int sendResult = send(fd_socket, message.c_str(), message.size(), 0);
-
-	return (sendResult != -1);
-}
-
-// emin değiliz çalıştırılması gerek
-// The poll() function identifies those file descriptors on which an application can read or write data, or on which an error event has occurred.
-void Socket::SetNonBlocking(bool isNonBlocking)
-{
-	struct pollfd pfd;
-
-	pfd.fd = fd_socket;
-	pfd.events = POLLIN | POLLOUT; // dinleme ve yazma olaylarını kontrol etmek için
-
-	int timeout = 0; // zaman aşımı olmadan poll çağırmak için
-
-	if (isNonBlocking)
-		pfd.revents = 0; // eğer geri dönen olayları burada sıfırlamazsak poll'un bir önceki çağrısından kalan eventleri saklıyor.
-
-   // if (poll(&pfd, 1, timeout) == -1)
-	 //   perror("poll() fail");
-}
-
 /*
 soketten veri almak için kullanılır. gelen verileri message parametresine atar
 ve alınan bayt sayısını döndürür.
@@ -122,17 +90,6 @@ bool Socket::init(int port)
 	Bind();
 	Listen();
 	return true;
-}
-
-int Socket::Receive(string &message)
-{
-	char buffer[4096] = {0};
-
-	int bytesRead = recv(fd_socket, buffer, sizeof(buffer) - 1, 0);
-
-	if (bytesRead > 0)
-		message = buffer;
-	return bytesRead;
 }
 
 void Socket::Close()
