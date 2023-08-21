@@ -110,21 +110,21 @@ void	Server::addUserTo(const string &group, Person &user)
 		send.push_back("NOTICE");
 		send.push_back(group);
 		send.push_back("JOIN " + user.getNickName() + " in the " + group);
-		Response::createMessage().from(user).to(*channels[group][0]).content("JOIN").addContent(group).send();
 		cmd::notice(send, user);
 	}
 	user.addOperator(group);
 	channels[group].push_back((Person *)&user);
 	string nickname = user.getNickName();
 	vector<Person *> users = channels[group];
+
 	for (int i = 0; i != int(users.size()); i++)
 	{
 		int toSend = users[i]->getFd();
 
-		if (toSend != user.getFd())
-			Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
+		
+		Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
 	}
-	Response::createReply(RPL_NAMEREPLY).to(user).addContent("= " + group + " :@" + channels[group][0]->getNickName() + " " +user.getNickName()).send();
+	Response::createReply(RPL_NAMEREPLY).to(user).addContent("= " + group + showInChannelNames(channels[group])).send();
 	Response::createReply(RPL_ENDOFNAMES).to(user).addContent(group + " :End of /NAMES list").send();
 }
 

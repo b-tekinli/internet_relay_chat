@@ -23,6 +23,7 @@ void	printServer(string msg);
 bool	find_channel(string target, Person &from);
 bool	find_channel(vector <Person *> group, string name);
 bool	isEqual(const string &test, const string &aim, int enter);
+string	showInChannelNames(vector<Person *>& persons);
 string	to_str(int	number);
 string	getColor(int fd);
 string	getTime();
