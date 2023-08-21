@@ -42,12 +42,6 @@ vector<string>	split_input(const string &str){
 	return strings;
 }
 
-void print_args(vector<string> &args){
-	for (int i = 0; i < int(args.size()); i++){
-		cout << "ARG: " << args[i] << endl;
-	}
-}
-
 /// @brief handles input
 /// @param fd 
 /// @param input 
@@ -60,11 +54,10 @@ void	Server::handleInput(int fd, const string &input)
 	commands = split_input(input);
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 	{
-		printClient(input, *(users[fd]));
+		//printClient(input, *(users[fd]));
 		func(commands, *(users[fd]));
 	}
 }
-
 
 static int get_line(int fd, string &line){
 	char chr[2] = {0};

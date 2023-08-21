@@ -38,10 +38,9 @@ int	cmd::kick(const vector<string> &input, Person & from)
 	Person							*to = start.getUserNick(input[2]);
 	vector<Person *>				&channel = start.getChannel(input[1]);
 
-	Response::createMessage().from(from).to(*to).content("KICK").addContent(input[1] + " " + input[2]);	
-	//we will work notice
 	for (int i = 0; i < int(channel.size()); i++)
-	{
+	{	
+		Response::createMessage().from(from).to(*channel[i]).content("KICK ").addContent(input[1] + " " + input[2]).send();	
 		if (channel[i]->getNickName() == to->getNickName())
 		{
 			from.delOperator(input[1]);
