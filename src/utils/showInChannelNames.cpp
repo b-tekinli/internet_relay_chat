@@ -1,6 +1,5 @@
 #include <Utils.hpp>
 
-//" :@" + channels[group][0]->getNickName() + " " +user.getNickName()
 string	showInChannelNames(vector<Person *>& persons)
 {
 	string	result = " :@";
