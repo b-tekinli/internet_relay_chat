@@ -5,6 +5,8 @@
 #include <Global.hpp>
 #include <Response.hpp>
 
+#define VERSION "v1.0.0"
+
 class Server
 {
 	private:

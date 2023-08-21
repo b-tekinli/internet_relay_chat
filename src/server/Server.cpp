@@ -130,5 +130,7 @@ void	Server::addUserTo(const string &group, Person &user)
 
 void	Server::toBegin()
 {
+	setHostname();
+	printServer("Server started ");
 	setUpSocket();
 }

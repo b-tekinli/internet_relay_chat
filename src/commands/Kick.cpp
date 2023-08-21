@@ -9,7 +9,7 @@ bool	inChannel(vector<Person *> users, string name)
     return false;
 }
 
-int cmd::kick(const vector<string> &input, Person & from)
+int	cmd::kick(const vector<string> &input, Person & from)
 {
 	if (input.size() != 3)
 	{

@@ -2,9 +2,10 @@
 #define Commands_HPP
 
 #include <Server.hpp>
-#include <DefineMod.hpp>
 #include <Message.hpp>
+#include <DefineMod.hpp>
 #include <Global.hpp>
+#include <Utils.hpp>
 
 typedef int (*fp_command)(const vector<string> &input, Person& user);
 
@@ -23,9 +24,4 @@ namespace cmd
 	int user(const vector<string> &input, Person &user);
 }
 
-bool	isEqual(const string &test, const string &aim, int enter);
-void	sendGroup(Person& user, const string n_channel, const string msg);
-bool	find_channel(string target, Person &from);
-bool	find_channel(vector <Person*> group, string name);
-string	to_str(int	number);
 #endif

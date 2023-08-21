@@ -62,7 +62,10 @@ void	Server::handleInput(int fd, const string &input)
 	//cout << "INPUT: " << input << endl;
 	//cout << "INPUT (size): " << commands.size() << endl;
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
-			func(commands, *(users[fd]));
+	{
+		printClient(input, *(users[fd]));
+		func(commands, *(users[fd]));
+	}
 }
 
 
