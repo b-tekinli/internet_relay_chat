@@ -130,6 +130,8 @@ void	Server::addUserTo(const string &group, Person &user)
 
 void	Server::toBegin()
 {
+	cout << "Port: " << port << endl;
+	cout << "Password: " << password << endl;
 	setHostname();
 	printServer("Server started ");
 	setUpSocket();

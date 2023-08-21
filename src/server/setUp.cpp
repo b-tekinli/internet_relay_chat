@@ -52,6 +52,7 @@ void	Server::handleInput(int fd, const string &input)
 	vector<string>	commands;
 
 	commands = split_input(input);
+	cout << "INPUT : " << input << endl;
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 	{
 		//printClient(input, *(users[fd]));
@@ -101,7 +102,7 @@ void	Server::setUpSocket()
 				}
 				else
 				{
-					string line;
+					string	line;
 					int readed = get_line(pollfds[i].fd,line);
 					if (readed > 0)
 						handleInput(pollfds[i].fd,line);

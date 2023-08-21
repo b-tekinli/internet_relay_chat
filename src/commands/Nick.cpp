@@ -46,6 +46,8 @@ int cmd::nick(const vector<string> &input, Person & user)
 	if (user.getActive() == U_HALF)
 	{
 		Response::create().to(user).code(RPL_WELCOME).content(WELCOME + user.getNickName() + "!" + user.getUserName() + "@127.0.0.1").send();
+		Response::createReply(RPL_YOURHOST).to(user).content("Your host is " + start.getHostname() + ", running " + VERSION).send();
+		Response::createReply(RPL_CREATED).to(user).content("This server was created " + getTime()).send();
 		user.setActive(ACTIVE);
 	}
 	return (0);
