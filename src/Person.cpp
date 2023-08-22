@@ -16,7 +16,7 @@ Person::Person(int fd): fd(fd), active(FALSE)
 
 Person::Person(const Person &user) { *this = user; }
 
-Person::~Person() { cout << "Destructor is work" << endl; }
+Person::~Person() { cout << "User disconnected" << endl; }
 
 Person &			Person::operator=(const Person &user)
 {

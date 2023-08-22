@@ -4,7 +4,6 @@
 static std::string trimString(const std::string& str) {
     std::string trimmed = str;
     
-    // Trim leading whitespace
     std::string::size_type pos = trimmed.find_first_not_of(" \t\r\n");
     if (pos != std::string::npos) {
         trimmed.erase(0, pos);
@@ -53,9 +52,6 @@ vector<string>	split_input(const string &str){
 	if (last_index != string::npos){
 		strings.push_back(str.substr(last_index));
 	}
-	for (int i = 0; i < strings.size(); i++){
-		cout << strings[i] << endl;
-	}
 	return strings;
 }
 
@@ -98,18 +94,14 @@ void	Server::setUpSocket()
 
 	clientSocket.init(port);
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
-	while (poll(&pollfds[0], pollfds.size(), -1)) //alınan inputların durumunu söyler
+	while (poll(&pollfds[0], pollfds.size(), -1))
 	{
 		for (int i = 0; i < int(pollfds.size()); i++)
 		{
 			if(pollfds[i].revents & POLLIN)
 			{
-				if (pollfds[i].fd == clientSocket.getSocketFd())// Connected to socket
-				{   /**
-					* yeni bir bağlantı oluşturulup oluşturulmadığını kontorl edecek ve eğer yeni
-					* bir bağlantı varsa fonsiyonun içerisine girip acceptleyecek
-					* yeni bağlnatı olduğunu nasıl anlıyor? 
-					*/
+				if (pollfds[i].fd == clientSocket.getSocketFd())
+				{
 					int	 clientFd =  clientSocket.Accept();
 
 					fcntl(clientFd, F_SETFL, O_NONBLOCK);

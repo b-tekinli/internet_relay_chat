@@ -8,7 +8,7 @@ class Socket
 {
 	private:
 		int			fd_socket;
-		sockaddr_in	connect_int; // soketin bağlanacağı adres ve port bilgilerini almak için
+		sockaddr_in	connect_int;
 
 	public:
 		Socket();

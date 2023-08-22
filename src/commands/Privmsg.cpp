@@ -8,7 +8,7 @@ static string join_input(const vector<string> &input) {
 	return str;
 }
 
-int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var mı && kullanıcı mı var mı
+int cmd::privmsg(const vector<string> &input, Person & from)
 {
 	if (input.size() < 3)
 	{

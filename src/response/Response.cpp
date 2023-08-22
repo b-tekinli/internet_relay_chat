@@ -7,26 +7,6 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-/*
-static string getServerHostName()
-{
-	struct addrinfo hints = { 0 };
-	struct addrinfo *res;
-	char address[INET_ADDRSTRLEN];
-	char host[] = "localhost";
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_CANONNAME;
-
-	if (getaddrinfo(host,NULL,&hints,&res) == 0){
-		inet_ntop(res->ai_family, &((struct sockaddr_in *)res->ai_addr)->sin_addr, address, INET_ADDRSTRLEN);
-		freeaddrinfo(res);
-		return string(address);
-	}
-	else return "Undefined";
-	return string(address);
-}*/
-
 Response::Response()
 {
 	this->mFrom = start.getHostname();
@@ -114,7 +94,7 @@ string Response::generateMessage(){
 	std::stringstream stream;
 
 	if (!mFrom.empty())
-		stream << ":" << mFrom << " "; // prefix
+		stream << ":" << mFrom << " ";
 	stream << mContent;
 	stream << mContentExtra.str() << "\r\n";
 	return stream.str();
@@ -123,17 +103,15 @@ string Response::generateMessage(){
 string Response::generateReply(){
 	std::stringstream stream;
 
-	stream << ":" << mFrom << " "; // prefix
-	stream << std::setw(3) << std::setfill('0') << mCode << " "; // 3 digit numeric Code
-	stream << mTo; // Target
+	stream << ":" << mFrom << " ";
+	stream << std::setw(3) << std::setfill('0') << mCode << " ";
+	stream << mTo;
 	if (!mContent.empty())
 		stream << " :" << mContent;
 	stream << mContentExtra.str() << "\r\n";
 	return stream.str();
 }
 
-//TODO: generalize responses
-/// General stucture of responses: ":"
 void Response::send(){
 	std::stringstream stream;
 	string message;
@@ -149,7 +127,6 @@ void Response::send(){
 	::send(mFd, message.c_str(), message.length(),0);
 }
 
-// "PRIVMSG kaan :Merhaba Kaan"
 int sendUser(const Person *origin, const Person &target, const string &message){
 	string buffer = "";
 	if (origin != NULL){

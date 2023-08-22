@@ -2,13 +2,6 @@
 
 Server	start;
 
-/*
-	Negatif bir değere sahip bir port numarası kullanmak,
-	ağ iletişimi standartlarına uygun olmadığı için hatalara
-	neden olur ve beklenmedik sonuçlara yol açar.
-	Bu nedenle, port numaraları her zaman pozitif tam sayı
-	değerleri olarak kabul edilir.
-*/
 bool	control(char **av)
 {
 	int port = atoi(av[1]);

@@ -19,7 +19,6 @@ class Person
 		string			serv_name;
 		string			real_name;
 		string			nick_name;
-		int				grade;
 		int				fd;
 		e_active		active;
 		vector<string>	wh_op;

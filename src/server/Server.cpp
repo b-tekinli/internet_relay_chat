@@ -98,28 +98,16 @@ void	Server::addUserTo(const string &group, Person &user)
 		Response::withCode(ERR_USERONCHANNEL).to(user).content(user.getNickName() + " " + group + ER_ALREADY_JOIN).send();
 		return ;
 	}
-	
 	if (channels[group].size() == 0)
 		Response::createMessage().from(user).to(user).content("MODE").addContent(group + " +o " + user.getNickName()).send();
-	else
-	{
-		//vector<string>	send;
 
-		//send.push_back("NOTICE");
-		//send.push_back(group);
-		//send.push_back("JOIN " + user.getNickName() + " in the " + group);
-		//cmd::notice(send, user);
-	}
 	user.addOperator(group);
 	channels[group].push_back((Person *)&user);
 	string nickname = user.getNickName();
 	vector<Person *> users = channels[group];
 
 	for (int i = 0; i != int(users.size()); i++)
-	{
-		int toSend = users[i]->getFd();
-
-		
+	{		
 		Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
 	}
 	Response::createReply(RPL_NAMEREPLY).to(user).addContent("= " + group + showInChannelNames(channels[group])).send();

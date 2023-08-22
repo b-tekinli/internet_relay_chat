@@ -19,7 +19,7 @@ int cmd::notice(const vector<string> &input, Person &origin)
 	
 	if (input[1].c_str()[0] == '#'){
 		vector<Person*> users = start.getChannel(input[1]);
-		for (int i = 0; i < users.size(); i++){
+		for (int i = 0; i < int(users.size()); i++){
 			Person *target = users[i];
 			if (target->getNickName() != origin.getNickName())
 				Response::createMessage().from(origin).to(*target).content(join_input(input)).send();

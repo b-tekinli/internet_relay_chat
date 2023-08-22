@@ -16,7 +16,7 @@ HOBJS			=	$(INCS:inc/%.hpp)
 
 CC				=	c++
 RM				=	rm -rf
-CPPFLAGS		=	-std=c++98 -g #-Wall -Wextra -Werror 
+CPPFLAGS		=	-std=c++98 -Wall -Wextra -Werror 
 
 all:			$(NAME)
 
@@ -43,7 +43,5 @@ $(BIN)%.o: src/%.cpp
 	@mkdir -p $(shell dirname $@)
 	@$(CC) $(CPPFLAGS) -c $< -o $@ -I$(INC)
 
-norm:			
-				norminette *.[ch]
 
 .PHONY:			all clean fclean re bonus

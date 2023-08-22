@@ -48,7 +48,6 @@ int	cmd::kick(const vector<string> &input, Person & from)
 	}
 	Person							*to = start.getUserNick(input[2]);
 	vector<Person *>				&channel = start.getChannel(input[1]);
-	int								ctch = -1;
 	string							msg = "";
 
 	if (input.size() > 3)
@@ -68,10 +67,6 @@ int	cmd::kick(const vector<string> &input, Person & from)
 				sendModeNotice(channel, input[1], channel[i]->getNickName());
 			i--;
 		}
-		/**
-		 * Channel delete: kanaldan biri silinir ve kanal yok edilebilirni kullanıcıdanda silinir kanal
-		 * User delete: kişi doğrudan silinir 
-		*/
 	}
 	
 	return (0);

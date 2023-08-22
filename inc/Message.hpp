@@ -1,7 +1,6 @@
 #ifndef MESSAGE_HPP
 #define MESSAGE_HPP
 
-//error
 #define WR_PASS			"Incorrect Password "
 #define NO_PASS			"Your Connections Is Restricted "
 #define CH_NAME			"Channel name fist characther must be '#' "
@@ -20,7 +19,6 @@
 #define ER_ALREADY_JOIN	" :is already on channel"
 #define FIRST_USERSET	"Error: First you have to set user setting"
 
-//not enough param
 #define KICK_USE	"KICK usage 'KICK <channel> <user> <text>'"
 #define JOIN_USE	"JOIN usage 'JOIN #<channel>'"
 #define NICK_USE	"NICK usage 'NICK <nick name>"
@@ -29,7 +27,6 @@
 #define PRIVMSG_USE	"PRIVMSG usage 'PRIVMSG <target> <text>'"
 #define USER_USE	"USER usage 'USER <user name> <host name> <serv name> <real name>'"
 
-//success
 #define WELCOME			"Welcome to the Internet Relay Network "
 #define CORRECT_PASS	"Password is correct"
 #define INCORRECT_PASS	"Incorrect Password!"
