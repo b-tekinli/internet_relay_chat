@@ -28,8 +28,7 @@ int cmd::privmsg(const vector<string> &input, Person & from) // kanallmı ve var
 	else
 	{
 		Person *to = start.getUserNick(input[1]);
-
-		sendUser(&from, *to, input[0] + " " + input[1] + " " + input[2]);
+		Response::createMessage().from(from).to(*to).content(join_input(input)).send();
 	}
 	return (0);
 }

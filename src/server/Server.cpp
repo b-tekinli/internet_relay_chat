@@ -105,12 +105,12 @@ void	Server::addUserTo(const string &group, Person &user)
 		Response::createMessage().from(user).to(user).content("MODE").addContent(group + " +o " + user.getNickName()).send();
 	else
 	{
-		vector<string>	send;
+		//vector<string>	send;
 
-		send.push_back("NOTICE");
-		send.push_back(group);
-		send.push_back("JOIN " + user.getNickName() + " in the " + group);
-		cmd::notice(send, user);
+		//send.push_back("NOTICE");
+		//send.push_back(group);
+		//send.push_back("JOIN " + user.getNickName() + " in the " + group);
+		//cmd::notice(send, user);
 	}
 	user.addOperator(group);
 	channels[group].push_back((Person *)&user);

@@ -1,5 +1,13 @@
 #include <Commands.hpp>
 
+static string join_input(const vector<string> &input) {
+	string str = "";
+	for (int i = 3; i < int(input.size()); i++){
+		str += input[i] + " ";
+	}
+	return str;
+}
+
 void	sendModeNotice(vector<Person *> &channel, string group, string nickname)
 {
 	Person	&king = *channel[0];
@@ -18,7 +26,7 @@ bool	inChannel(vector<Person *> users, string name)
 
 int	cmd::kick(const vector<string> &input, Person & from)
 {
-	if (input.size() != 3)
+	if (input.size() < 3)
 	{
 		Response::withCode(ERR_NEEDMOREPARAMS).to(from).content(KICK_USE).send();
 		return (-1);
@@ -38,14 +46,18 @@ int	cmd::kick(const vector<string> &input, Person & from)
 		Response::withCode(ERR_USERNOTINCHANNEL).to(from).content(input[2] + " " + input[1] + USER_NOT_IN).send();
 		return (-1);
 	}
-
 	Person							*to = start.getUserNick(input[2]);
 	vector<Person *>				&channel = start.getChannel(input[1]);
 	int								ctch = -1;
+	string							msg = "";
 
+	if (input.size() > 3)
+		msg = join_input(input);
+	else
+		msg = "User '" + to->getNickName() + "' left the channel";
 	for (int i = 0; i < int(channel.size()); i++)
 	{	
-		Response::createMessage().from(from).to(*channel[i]).content("KICK ").addContent(input[1] + " " + input[2]).send();	
+		Response::createMessage().from(from).to(*channel[i]).content("KICK ").addContent(input[1] + " " + input[2] + " :" + msg).send();	
 		if (channel[i]->getNickName() == to->getNickName())
 		{
 			from.delOperator(input[1]);

@@ -16,8 +16,10 @@ fp_command	selCommand(vector<string> &input, const Person &user)
 		if (isEqual(input[0], str[i], input.size() >= 1) || 
 				isEqual(input[1], str[i], input.size() >= 2))
 			break;
-	if ((user.getActive() == FALSE || user.getActive() == HALF || user.getActive() == U_HALF) && i > 2)
+	if ((user.getActive() == FALSE || user.getActive() == HALF || user.getActive() == U_HALF) && i > 2){
+		Response::createReply(ERR_NOTREGISTERED).to(user).content(ND_ACTIVE).send();
 		return (0);
+	}
 	return result[i];
 }
 
@@ -55,9 +57,12 @@ void	Server::handleInput(int fd, const string &input)
 	cout << "INPUT : " << input << endl;
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 	{
+		std::cout << "Selected command" << std::endl;
 		//printClient(input, *(users[fd]));
 		func(commands, *(users[fd]));
 	}
+	std::cout << "un selected" << std::endl;
+	
 }
 
 static int get_line(int fd, string &line){
@@ -98,7 +103,10 @@ void	Server::setUpSocket()
 
 					fcntl(clientFd, F_SETFL, O_NONBLOCK);
 					pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT, 0} );
-					getOrCreateUser(clientFd);
+					Person *person = getOrCreateUser(clientFd);
+					if (person != NULL)
+						Response::createMessage().to(*person)
+							.from(*person).content("NICK").addContent(person->getNickName()).send();
 				}
 				else
 				{

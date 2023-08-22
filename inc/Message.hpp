@@ -21,7 +21,7 @@
 #define FIRST_USERSET	"Error: First you have to set user setting"
 
 //not enough param
-#define KICK_USE	"KICK usage 'KICK <channel> <user>'"
+#define KICK_USE	"KICK usage 'KICK <channel> <user> <text>'"
 #define JOIN_USE	"JOIN usage 'JOIN #<channel>'"
 #define NICK_USE	"NICK usage 'NICK <nick name>"
 #define NOTICE_USE	"NOTICE usage 'NOTICE <target> <text>'"

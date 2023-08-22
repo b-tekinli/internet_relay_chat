@@ -43,7 +43,7 @@ bool Socket::Create(int port)
 		exit(EXIT_FAILURE);
 	}
 	connect_int.sin_family = AF_INET;
-	connect_int.sin_addr.s_addr = inet_addr("127.0.0.1"); 
+	connect_int.sin_addr.s_addr = INADDR_ANY;
 	connect_int.sin_port = htons(port);
 	return (fd_socket != -1);
 }
