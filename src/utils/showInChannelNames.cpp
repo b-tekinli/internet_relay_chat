@@ -10,6 +10,5 @@ string	showInChannelNames(vector<Person *>& persons)
 		if (i < int(persons.size()) - 1)
 			result += " ";
 	}
-	cout << "result" << endl;
 	return (result);
 }

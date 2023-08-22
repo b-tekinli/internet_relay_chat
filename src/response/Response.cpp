@@ -146,8 +146,6 @@ void Response::send(){
 			message = generateReply();
 			break;
 	}
-	
-	cout << "this is message =" << message << endl;
 	::send(mFd, message.c_str(), message.length(),0);
 }
 

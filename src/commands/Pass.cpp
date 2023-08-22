@@ -14,7 +14,6 @@ int cmd::pass(const vector<string> &input, Person & from)
 	}
 	else if (!isEqual(input[1], start.getPassword(), 1))
 	{
-		cout << "incorrect" << endl;
 		Response::withCode(ERR_PASSWDMISMATCH).to(from).content(INCORRECT_PASS).send();
 		return (-1);
 	}
@@ -22,9 +21,7 @@ int cmd::pass(const vector<string> &input, Person & from)
 	{
 		from.setActive(HALF);
 		Response::withCode(RPL_INFO).to(from).content(CORRECT_PASS).send();
-		cout << "correct" << endl;
-		return 1;
+		return (-1);
 	}
-	
 	return (0);
 }

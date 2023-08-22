@@ -1,6 +1,18 @@
 #include <Server.hpp>
 #include <Commands.hpp>
 
+static std::string trimString(const std::string& str) {
+    std::string trimmed = str;
+    
+    // Trim leading whitespace
+    std::string::size_type pos = trimmed.find_first_not_of(" \t\r\n");
+    if (pos != std::string::npos) {
+        trimmed.erase(0, pos);
+    }
+    
+    return trimmed;
+}
+
 /**
  * selcommand used for select command for given input
  * @param input: Input string
@@ -24,7 +36,7 @@ fp_command	selCommand(vector<string> &input, const Person &user)
 }
 
 vector<string>	split_input(const string &str){
-	std::size_t		last_index =  str.find_last_of(':');
+	std::size_t		last_index =  str.find(" :");
 	stringstream	sstream(str.substr(0,last_index != string::npos ? last_index : str.length()));
 	string			new_str;
 	vector<string>	strings;
@@ -41,6 +53,9 @@ vector<string>	split_input(const string &str){
 	if (last_index != string::npos){
 		strings.push_back(str.substr(last_index));
 	}
+	for (int i = 0; i < strings.size(); i++){
+		cout << strings[i] << endl;
+	}
 	return strings;
 }
 
@@ -53,16 +68,12 @@ void	Server::handleInput(int fd, const string &input)
 	string			str;
 	vector<string>	commands;
 
-	commands = split_input(input);
-	cout << "INPUT : " << input << endl;
+	commands = split_input(trimString(input));
 	if ((func = selCommand(commands, *(users[fd]))) != NULL)
 	{
-		std::cout << "Selected command" << std::endl;
-		//printClient(input, *(users[fd]));
+		printClient(input, *(users[fd]));
 		func(commands, *(users[fd]));
 	}
-	std::cout << "un selected" << std::endl;
-	
 }
 
 static int get_line(int fd, string &line){

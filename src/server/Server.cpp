@@ -42,8 +42,6 @@ Person*		Server::getUserNick(string nick)
 
 Person*   Server::getOrCreateUser(int fd)
 {
-	cout << fd << endl;
-	cout << users.size() << endl;
 	if (int(users.size()) <= fd || users[fd] == 0)
 		users[fd] = new Person(fd);
 	return (users[fd]);
