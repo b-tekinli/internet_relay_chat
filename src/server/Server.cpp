@@ -73,9 +73,11 @@ void	Server::deleteUser(int fd)
 		{
 			removeUserFrom(wh_op[i], *this->users[fd]);
 		}
-		delete this->users[fd];
+		if (!this->users[fd])
+			delete this->users[fd];
 		this->users[fd] = 0;
 	}
+	else
 }
 
 void	Server::removeUserFrom(const string &channel, Person &user)
@@ -84,9 +86,13 @@ void	Server::removeUserFrom(const string &channel, Person &user)
 	int i = 0;
 
 	for (; i < int(channels[channel].size()); i++)
+	{
 		if (channels[channel][i]->getFd() == fd)
+		{
+			channels[channel].erase(channels[channel].begin() + i);
 			break;
-	channels[channel].erase(channels[channel].begin() + i);
+		}
+	}
 }
 
 void	Server::addUserTo(const string &group, Person &user) 

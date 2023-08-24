@@ -3,6 +3,8 @@
 static string join_input(const vector<string> &input) {
 	string str = "";
 	for (int i = 0; i < int(input.size()); i++){
+		if (i == 2 && input[i][0] != ':')
+			str += ":";
 		str += input[i] + " ";
 	}
 	return str;
