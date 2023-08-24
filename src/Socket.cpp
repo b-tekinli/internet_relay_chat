@@ -1,6 +1,6 @@
 #include <../inc/Socket.hpp>
 
-int MAX_CLIENT = 1000;
+int MAX_CLIENT = 250;
 
 Socket::Socket() : fd_socket(0) {}
 
