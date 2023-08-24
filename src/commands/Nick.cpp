@@ -39,7 +39,8 @@ int cmd::nick(const vector<string> &input, Person & user)
 		vector<Person *>	users = channels[group];
 
 		for (int i = 0; i < int(users.size()); i++)
-			Response::createMessage().to(*users[i]).from(user).content("NICK ").addContent(nickname).send();
+			if (users[i] != NULL)
+				Response::createMessage().to(*users[i]).from(user).content("NICK ").addContent(nickname).send();
 	}
 
 	user.setNickName(input[1]);
