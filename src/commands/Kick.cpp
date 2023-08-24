@@ -12,7 +12,8 @@ void	sendModeNotice(vector<Person *> &channel, string group, string nickname)
 {
 	Person	&king = *channel[0];
 	for (int i = 0; i < int(channel.size()); i++)
-		Response::createMessage().from(king).to(*channel[i]).content("MODE").addContent(group + " +o " + nickname).send();
+		if (channel[i] != NULL)
+			Response::createMessage().from(king).to(*channel[i]).content("MODE").addContent(group + " +o " + nickname).send();
 }
 
 bool	inChannel(vector<Person *> users, string name)
@@ -56,7 +57,8 @@ int	cmd::kick(const vector<string> &input, Person & from)
 		msg = "User '" + to->getNickName() + "' left the channel";
 	for (int i = 0; i < int(channel.size()); i++)
 	{	
-		Response::createMessage().from(from).to(*channel[i]).content("KICK ").addContent(input[1] + " " + input[2] + " :" + msg).send();	
+		if (channel[i] != NULL)
+			Response::createMessage().from(from).to(*channel[i]).content("KICK ").addContent(input[1] + " " + input[2] + " :" + msg).send();	
 		if (channel[i]->getNickName() == to->getNickName())
 		{
 			from.delOperator(input[1]);
