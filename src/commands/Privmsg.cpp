@@ -30,7 +30,8 @@ int cmd::privmsg(const vector<string> &input, Person & from)
 	else
 	{
 		Person *to = start.getUserNick(input[1]);
-		Response::createMessage().from(from).to(*to).content(join_input(input)).send();
+		if (to != NULL)
+			Response::createMessage().from(from).to(*to).content(join_input(input)).send();
 	}
 	return (0);
 }

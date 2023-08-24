@@ -21,7 +21,7 @@ int cmd::notice(const vector<string> &input, Person &origin)
 		vector<Person*> users = start.getChannel(input[1]);
 		for (int i = 0; i < int(users.size()); i++){
 			Person *target = users[i];
-			if (target->getNickName() != origin.getNickName())
+			if (target != NULL && target->getNickName() != origin.getNickName())
 				Response::createMessage().from(origin).to(*target).content(join_input(input)).send();
 		}
 	}

@@ -124,8 +124,9 @@ void	Server::addUserTo(const string &group, Person &user)
 	vector<Person *> users = channels[group];
 
 	for (int i = 0; i != int(users.size()); i++)
-	{		
-		Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
+	{	
+		if (users[i] != NULL)
+			Response::createMessage().from(user).to(*users[i]).content("JOIN").addContent(group).send();
 	}
 	Response::createReply(RPL_NAMEREPLY).to(user).addContent("= " + group + showInChannelNames(channels[group])).send();
 	Response::createReply(RPL_ENDOFNAMES).to(user).addContent(group + " :End of /NAMES list").send();
