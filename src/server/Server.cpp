@@ -98,21 +98,12 @@ void	Server::removeUserFrom(const string &channel, Person &user)
 	cout << "in remove funcition " << endl;
 	for (; i < int(channels[channel].size()); i++)
 	{
-		cout << "ben buradayim" << endl;
-		cout << "FD: " << channels[channel][i]->getFd() << "-----" << fd << endl;
-		if (channels[channel][i]->getFd() == fd)
+		if (channels[channel][i] && channels[channel][i]->getFd() == fd)
 		{
 			channels[channel].erase(channels[channel].begin() + i);
-			cout << "kor musun" << endl;
 			break;
 		}
-		cout << "sen neredesin" << endl;
 	}
-	cout << "Channel name : " << channel << endl;
-	cout << "channel(size) : " << channels.size() << endl;
-	cout << "index : " << i << endl;
-	cout << "ciktim" << endl;
-	cout << "bittim amk" << endl;
 }
 
 void	Server::addUserTo(const string &group, Person &user) 
