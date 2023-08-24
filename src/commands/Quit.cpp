@@ -24,7 +24,8 @@ int cmd::quit(const vector <string> &input, Person &user)
 		
 		for (int j = 0; j < int(channel.size()); j++)
 		{
-			Response::createMessage().from(user).to(*channel[i]).content(reason).send();
+			if (channel[i] != NULL)
+				Response::createMessage().from(user).to(*channel[i]).content(reason).send();
 		}
 	}
 	Response::createMessage().to(user).content(reason).send();
