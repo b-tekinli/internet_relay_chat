@@ -19,13 +19,16 @@ Person::Person(const Person &user) { *this = user; }
 
 Person::~Person() { 
 	if (this->getWhichChannel().size() > 0){
-		for (int i = 0; i < this->getWhichChannel().size(); i++){
-			vector<string> channel = this->getWhichChannel()[i];
-			for (j = 0; j < start.getChannel(channel).size(); j++){
-				Person *target = start.get
+		for (vector<string>::size_type i = 0; i < this->getWhichChannel().size(); i++){
+			vector<Person *> targets = start.getChannel(this->getWhichChannel()[i]);
+			for (vector<Person*>::size_type j = 0; j < targets.size(); j++){
+				Person *target = targets[i];
+				if (target != NULL)
+					Response::createMessage().from(*this).to(*target).addContent("Quit").addContent(": User " + this->getNickName()+ " left.").send();
 			}
 		}
 	}
+	close(fd);
  }
 
 Person &			Person::operator=(const Person &user)
