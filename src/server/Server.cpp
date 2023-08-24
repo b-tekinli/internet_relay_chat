@@ -69,15 +69,25 @@ void	Server::deleteUser(int fd)
 	{
 		vector<string>&	wh_op = this->users[fd]->getWhichChannel();
 
+		cout << "fora girecek" << endl;
 		for (int i = 0; i < int(wh_op.size()); i++)
 		{
+			cout << "for icine girdi" << endl;
 			removeUserFrom(wh_op[i], *this->users[fd]);
+			cout << "removeUserFrom bitti" << endl;
 		}
+		cout << "this is image" << endl;
 		if (!this->users[fd])
+		{
+			cout << "before delete users" << endl;
 			delete this->users[fd];
-		this->users[fd] = 0;
+			cout << "after delete users" << endl;
+		}
+		cout << "end of the image" << endl;
+		this->users[fd] = NULL;
 	}
 	else
+		cout << "bana dahi ugramadi" << endl;
 }
 
 void	Server::removeUserFrom(const string &channel, Person &user)
@@ -85,14 +95,24 @@ void	Server::removeUserFrom(const string &channel, Person &user)
 	int fd = user.getFd();
 	int i = 0;
 
+	cout << "in remove funcition " << endl;
 	for (; i < int(channels[channel].size()); i++)
 	{
+		cout << "ben buradayim" << endl;
+		cout << "FD: " << channels[channel][i]->getFd() << "-----" << fd << endl;
 		if (channels[channel][i]->getFd() == fd)
 		{
 			channels[channel].erase(channels[channel].begin() + i);
+			cout << "kor musun" << endl;
 			break;
 		}
+		cout << "sen neredesin" << endl;
 	}
+	cout << "Channel name : " << channel << endl;
+	cout << "channel(size) : " << channels.size() << endl;
+	cout << "index : " << i << endl;
+	cout << "ciktim" << endl;
+	cout << "bittim amk" << endl;
 }
 
 void	Server::addUserTo(const string &group, Person &user) 

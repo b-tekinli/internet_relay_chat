@@ -1,4 +1,5 @@
 #include <Person.hpp>
+#include <Server.hpp>
 
 Person::Person(): fd(0), active(FALSE) {}
 
@@ -16,7 +17,16 @@ Person::Person(int fd): fd(fd), active(FALSE)
 
 Person::Person(const Person &user) { *this = user; }
 
-Person::~Person() { cout << "User disconnected" << endl; }
+Person::~Person() { 
+	if (this->getWhichChannel().size() > 0){
+		for (int i = 0; i < this->getWhichChannel().size(); i++){
+			vector<string> channel = this->getWhichChannel()[i];
+			for (j = 0; j < start.getChannel(channel).size(); j++){
+				Person *target = start.get
+			}
+		}
+	}
+ }
 
 Person &			Person::operator=(const Person &user)
 {
