@@ -1,6 +1,6 @@
 #include <../inc/Socket.hpp>
 
-int MAX_CLIENT = 50;
+int MAX_CLIENT = 1000;
 
 Socket::Socket() : fd_socket(0) {}
 
@@ -39,9 +39,12 @@ bool Socket::Listen()
 
 int Socket::Accept()
 {
-	socklen_t clientSize = sizeof(connect_int);
+	socklen_t	clientSize = sizeof(connect_int);
+	int			fd = accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize);
 
-	return (accept(fd_socket, (struct sockaddr *)&connect_int, (socklen_t *)&clientSize));
+	if (fd > MAX_CLIENT)
+		MAX_CLIENT *= 2;
+	return (fd);
 }
 
 bool Socket::init(int port)
