@@ -2,7 +2,9 @@
 
 bool	isEqual(const string &test, const string &aim, int enter)
 {
-	if (enter == 0)
+	if (test.length() != aim.length())
+		return (false);
+	else if (enter == 0)
 		return (false);
 	int size = aim.size();
 	int i;

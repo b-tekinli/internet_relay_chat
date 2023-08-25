@@ -29,8 +29,8 @@ fp_command	selCommand(vector<string> &input, const Person &user)
 	int			i;
 
 	for (i = -1; i < 10; ++i)
-		if (isEqual(input[0], str[i], input.size() >= 1) || 
-				isEqual(input[1], str[i], input.size() >= 2))
+		if (isEqual(str[i], input[0], str[i].size() >= 1) || 
+				isEqual(str[i], input[1], str[i].size() >= 2))
 			break;
 	if ((user.getActive() == FALSE || user.getActive() == HALF || user.getActive() == U_HALF) && i > 2){
 		Response::createReply(ERR_NOTREGISTERED).to(user).content(ND_ACTIVE).send();
