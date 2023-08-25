@@ -12,6 +12,11 @@ static std::string trimString(const std::string& str) {
     return trimmed;
 }
 
+static bool endsWith(const std::string &str1, const std::string &str2){
+	string end(str1.end() - str2.size(), str1.end());
+	return (str1.size() >= str2.size() && end == str2);
+}
+
 /**
  * selcommand used for select command for given input
  * @param input: Input string
@@ -93,6 +98,7 @@ void	Server::setUpSocket()
 {
 	Socket					clientSocket;
 	vector<struct pollfd>	pollfds;
+	string	lines[MAX_CLIENT];
 
 	clientSocket.init(port);
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
@@ -113,14 +119,15 @@ void	Server::setUpSocket()
 				{
 					string	line;
 					int readed = get_line(pollfds[i].fd, line);
-					if (readed > 0)
-						handleInput(pollfds[i].fd, line);
+					if (readed > 0){
+						lines[pollfds[i].fd] += line;
+						if (endsWith(lines[pollfds[i].fd],"\n")){
+							handleInput(pollfds[i].fd, lines[pollfds[i].fd]);
+							lines[pollfds[i].fd] = "";
+						}
+					}
 					else if (readed <= 0 && users[pollfds[i].fd] != NULL){
 						vector<string> str;
-
-						//str.push_back("QUIT :");
-						//str.push_back("Server is not connected");
-						//cmd::quit(str, *users[pollfds[i].fd]);
 						cout << "i: " << i << endl;
 						pollfds.erase(pollfds.begin() + i);
 						cout << "poll (size): " << pollfds.size() << endl;
