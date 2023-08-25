@@ -18,6 +18,7 @@
 #define ER_NICK_USED	" :Nickname is already in use"
 #define ER_ALREADY_JOIN	" :is already on channel"
 #define FIRST_USERSET	"Error: First you have to set user setting"
+#define FIRST_PASSWORD	"Error: First you have to enter your password"
 
 #define KICK_USE	"KICK usage 'KICK <channel> <user> <text>'"
 #define JOIN_USE	"JOIN usage 'JOIN #<channel>'"

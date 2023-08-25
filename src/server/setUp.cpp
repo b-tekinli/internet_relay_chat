@@ -89,8 +89,8 @@ static int get_line(int fd, string &line){
 
 void	Server::setUpSocket()
 {
-	Socket clientSocket;
-	vector<struct pollfd> pollfds;
+	Socket					clientSocket;
+	vector<struct pollfd>	pollfds;
 
 	clientSocket.init(port);
 	pollfds.push_back( (struct pollfd){clientSocket.getSocketFd(), POLLIN, 0} );
@@ -114,12 +114,18 @@ void	Server::setUpSocket()
 				else
 				{
 					string	line;
-					int readed = get_line(pollfds[i].fd,line);
+					int readed = get_line(pollfds[i].fd, line);
 					if (readed > 0)
-						handleInput(pollfds[i].fd,line);
+						handleInput(pollfds[i].fd, line);
 					else if (readed <= 0){
-						deleteUser(pollfds[i].fd);
-						close(pollfds[i].fd);
+						int	fd = pollfds[i].fd;
+
+						cout << "i: " << i << endl;
+						pollfds.erase(pollfds.begin() + i);
+						delete users[fd];
+						cout << "poll (size): " << pollfds.size() << endl;
+						//deleteUser(pollfds[i].fd);
+						//close(pollfds[i].fd);
 					}
 				}
 			}
