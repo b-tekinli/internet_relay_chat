@@ -115,7 +115,6 @@ string Response::generateReply(){
 void Response::send(){
 	std::stringstream stream;
 	string message;
-	pollfd pollFd;
 	switch(this->responseType){
 		case MESSAGE:
 			message = generateMessage();
@@ -124,11 +123,7 @@ void Response::send(){
 			message = generateReply();
 			break;
 	}
-
-	pollFd.fd = mFd;
-	pollFd.events = POLLOUT;
-	if (poll(&pollFd,1,100) > 0 && pollFd.revents == POLLOUT)
-		::send(mFd, message.c_str(), message.length(), 0);
+	::send(mFd, message.c_str(), message.length(), 0);
 }
 
 int sendUser(const Person *origin, const Person &target, const string &message){
