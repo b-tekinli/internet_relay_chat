@@ -102,7 +102,7 @@ void	Server::addUserTo(const string &group, Person &user)
 		Response::createMessage().from(user).to(user).content("JOIN").addContent(group).send();
 	else
 	{
-		Response::withCode(ERR_USERONCHANNEL).to(user).content(user.getNickName() + " " + group + ER_ALREADY_JOIN).send();
+		Response::withCode(ERR_USERONCHANNEL).to(user).addContent(group + ER_ALREADY_JOIN).send();
 		return ;
 	}
 	if (channels[group].size() == 0)
