@@ -34,5 +34,5 @@ using std::stringstream;
 using std::map;
 using std::ostringstream;
 using std::cerr;
-
+#define MAX_CLIENT  1000
 #endif
