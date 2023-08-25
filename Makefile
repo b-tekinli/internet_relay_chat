@@ -16,7 +16,7 @@ HOBJS			=	$(INCS:inc/%.hpp)
 
 CC				=	c++
 RM				=	rm -rf
-CPPFLAGS		=	-std=c++98 -Wall -Wextra -Werror -g #-fsanitizer=address
+CPPFLAGS		=	-std=c++98 -Wall -Wextra -Werror
 
 all:			$(NAME)
 
