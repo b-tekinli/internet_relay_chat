@@ -115,7 +115,7 @@ void	Server::setUpSocket()
 					int readed = get_line(pollfds[i].fd, line);
 					if (readed > 0)
 						handleInput(pollfds[i].fd, line);
-					else if (readed <= 0){
+					else if (readed <= 0 && users[pollfds[i].fd] != NULL){
 						vector<string> str;
 
 						//str.push_back("QUIT :");
@@ -126,6 +126,8 @@ void	Server::setUpSocket()
 						cout << "poll (size): " << pollfds.size() << endl;
 						deleteUser(pollfds[i].fd);
 					}
+					else
+						close(pollfds[i].fd);
 				}
 			}
 		}
