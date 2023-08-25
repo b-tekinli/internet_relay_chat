@@ -27,17 +27,17 @@ int	cmd::kick(const vector<string> &input, Person & from)
 	}
 	else if (!find_channel(input[1], from))
 	{
-		Response::withCode(ERR_NOSUCHCHANNEL).to(from).content(input[1] + NO_CHANNEL).send();
+		Response::withCode(ERR_NOSUCHNICK).to(from).addContent(input[1] + NO_SUCH).send();
 		return (-1);
 	}
 	else if (!isEqual(start.getChannel(input[1])[0]->getNickName(), from.getNickName(), 1))
 	{
-		Response::withCode(ERR_NOTONCHANNEL).to(from).content(input[0] + NO_OPER).send();
+		Response::withCode(ERR_CHANOPRIVSNEEDED).to(from).addContent(input[1] + " " + NO_OPER).send();
 		return (-1);
 	}
 	else if (!inChannel(start.getChannel(input[1]), input[2]))
 	{
-		Response::withCode(ERR_USERNOTINCHANNEL).to(from).content(input[2] + " " + input[1] + USER_NOT_IN).send();
+		Response::withCode(ERR_NOSUCHNICK).to(from).addContent(input[1] + NO_SUCH).send();
 		return (-1);
 	}
 	Person							*to = start.getUserNick(input[2]);
