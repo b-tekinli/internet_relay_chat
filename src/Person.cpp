@@ -26,6 +26,7 @@ Person::Person(const Person &user) { *this = user; }
 Person::~Person() { 
 	if (this->getWhichChannel().size() > 0){
 		for (vector<string>::size_type i = 0; i < this->getWhichChannel().size(); i++){
+			sendGroup(*this, this->getWhichChannel()[i], "QUIT : Disconnected from server");
 			start.removeUserFrom(this->getWhichChannel()[i],*this);
 		}
 	}

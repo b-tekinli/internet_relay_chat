@@ -4,6 +4,7 @@
 #include <DefineMod.hpp>
 #include <Global.hpp>
 #include <Response.hpp>
+#include <Commands.hpp>
 
 #define VERSION "v1.0.0"
 

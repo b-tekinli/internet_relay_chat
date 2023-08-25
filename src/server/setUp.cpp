@@ -116,6 +116,11 @@ void	Server::setUpSocket()
 					if (readed > 0)
 						handleInput(pollfds[i].fd, line);
 					else if (readed <= 0){
+						vector<string> str;
+
+						//str.push_back("QUIT :");
+						//str.push_back("Server is not connected");
+						//cmd::quit(str, *users[pollfds[i].fd]);
 						cout << "i: " << i << endl;
 						pollfds.erase(pollfds.begin() + i);
 						cout << "poll (size): " << pollfds.size() << endl;
