@@ -49,8 +49,10 @@ vector<string>	split_input(const string &str){
 			strings.push_back(new_str);
 		i++;
 	}
-	if (last_index != string::npos){
-		strings.push_back(str.substr(last_index));
+	if (last_index != string::npos && last_index < str.size() - 1){
+		stringstream trail(str.substr(last_index + 2));
+		getline(trail,new_str);
+		strings.push_back(new_str);
 	}
 	return strings;
 }
@@ -63,12 +65,12 @@ void	Server::handleInput(int fd, const string &input)
 	fp_command 		func;
 	string			str;
 	vector<string>	commands;
-
+	Person			*person = getOrCreateUser(fd);
 	commands = split_input(trimString(input));
-	if ((func = selCommand(commands, *(users[fd]))) != NULL)
+	if ((func = selCommand(commands, *person)) != NULL)
 	{
-		printClient(input, *(users[fd]));
-		func(commands, *(users[fd]));
+		printClient(input, *person);
+		func(commands, *person);
 	}
 }
 
@@ -106,10 +108,6 @@ void	Server::setUpSocket()
 
 					fcntl(clientFd, F_SETFL, O_NONBLOCK);
 					pollfds.push_back( (struct pollfd){clientFd, POLLIN | POLLOUT, 0} );
-					Person *person = getOrCreateUser(clientFd);
-					if (person != NULL)
-						Response::createMessage().to(*person)
-							.from(*person).content("NICK").addContent(person->getNickName()).send();
 				}
 				else
 				{
@@ -118,14 +116,10 @@ void	Server::setUpSocket()
 					if (readed > 0)
 						handleInput(pollfds[i].fd, line);
 					else if (readed <= 0){
-						int	fd = pollfds[i].fd;
-
 						cout << "i: " << i << endl;
 						pollfds.erase(pollfds.begin() + i);
-						delete users[fd];
 						cout << "poll (size): " << pollfds.size() << endl;
-						//deleteUser(pollfds[i].fd);
-						//close(pollfds[i].fd);
+						deleteUser(pollfds[i].fd);
 					}
 				}
 			}

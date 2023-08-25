@@ -42,8 +42,11 @@ Person*		Server::getUserNick(string nick)
 
 Person*   Server::getOrCreateUser(int fd)
 {
-	if (int(users.size()) <= fd || users[fd] == 0)
+	if (users[fd] == NULL)
+	{
 		users[fd] = new Person(fd);
+		Response::createMessage().to(*users[fd]).from(*users[fd]).content("NICK").addContent(users[fd]->getNickName()).send();
+	}
 	return (users[fd]);
 }
 
@@ -65,44 +68,38 @@ void	Server::setHostname()
 
 void	Server::deleteUser(int fd)
 {
-	if (this->users[fd] != 0)
+	if (this->users[fd] != NULL)
 	{
-		vector<string>&	wh_op = this->users[fd]->getWhichChannel();
+		vector<string>&	channels = this->users[fd]->getWhichChannel();
 
-		cout << "fora girecek" << endl;
-		for (int i = 0; i < int(wh_op.size()); i++)
+		for (vector<string>::size_type i = 0; i < channels.size(); i++)
 		{
-			cout << "for icine girdi" << endl;
-			removeUserFrom(wh_op[i], *this->users[fd]);
-			cout << "removeUserFrom bitti" << endl;
+			removeUserFrom(channels[i], *this->users[fd]);
 		}
-		cout << "this is image" << endl;
 		if (!this->users[fd])
 		{
-			cout << "before delete users" << endl;
 			delete this->users[fd];
-			cout << "after delete users" << endl;
 		}
-		cout << "end of the image" << endl;
 		this->users[fd] = NULL;
 	}
-	else
-		cout << "bana dahi ugramadi" << endl;
 }
 
 void	Server::removeUserFrom(const string &channel, Person &user)
 {
 	int fd = user.getFd();
-	int i = 0;
-
-	cout << "in remove funcition " << endl;
-	for (; i < int(channels[channel].size()); i++)
+	vector<Person *> &channelList = this->getChannel(channel);
+	cout << "user " << user.getNickName() << " wants to quit" << endl;
+	for (vector<Person *>::size_type i = 0; i < channelList.size(); i++)
 	{
-		if (channels[channel][i] && channels[channel][i]->getFd() == fd)
+		Person *target = channelList[i];
+		if (target != NULL)
 		{
-			channels[channel].erase(channels[channel].begin() + i);
-			break;
+			cout << "sending message to: " << target->getNickName() << endl;
+			Response::createMessage().from(user).to(*target).addContent("Quit").addContent(": User " + user.getNickName() + " left.").send();
 		}
+		if (target && target->getFd() == fd)
+			channelList.erase(channelList.begin() + i);
+		
 	}
 }
 

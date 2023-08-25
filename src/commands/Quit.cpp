@@ -16,18 +16,7 @@ int cmd::quit(const vector <string> &input, Person &user)
 		reason += join_input(input);
 	else
 		reason += "Gone to have lunch";
-	vector<string>& whChannel = user.getWhichChannel();
-
-	for (int i = 0; i < int(whChannel.size()); i++)
-	{
-		vector<Person*>	channel = start.getChannel(whChannel[i]);
-		
-		for (int j = 0; j < int(channel.size()); j++)
-		{
-			if (channel[i] != NULL)
-				Response::createMessage().from(user).to(*channel[i]).content(reason).send();
-		}
-	}
+	
 	Response::createMessage().to(user).content(reason).send();
 	start.deleteUser(user.getFd());
 	close(user.getFd());
