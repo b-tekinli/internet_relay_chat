@@ -8,17 +8,11 @@ Person::Person(int fd): fd(fd), active(FALSE)
 	stringstream convert;
 
 	convert << fd;
-	cout << "Creating user ("<< fd <<"):" << endl;
 	this->user_name= "kvirc" + convert.str();
-	cout << "\t" << this->user_name << endl;
 	this->host_name = this->user_name;
-	cout << "\t" << this->user_name << endl;
 	this->serv_name = this->user_name;
-	cout << "\t" << this->user_name << endl;
 	this->real_name = this->user_name;
-	cout << "\t" << this->user_name << endl;
 	this->nick_name = this->user_name;
-	cout << "\t" << this->user_name << endl;
 }
 
 Person::Person(const Person &user) { *this = user; }

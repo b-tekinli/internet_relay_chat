@@ -8,7 +8,7 @@
 #define	NO_TOPIC		" :No topic is set"
 #define ND_ACTIVE		"You need to be active "
 #define A_REGIST		"Unauthorized command "
-#define NO_SUCH			"No such nick/channel "
+#define NO_SUCH			" No such nick/channel "
 #define NO_MEM			"You are not a memeber this channel => "
 #define NO_OPER			" :You're not channel operator"
 #define NO_CHANNEL		" :No such channel"
