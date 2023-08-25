@@ -17,6 +17,7 @@
 #define WHITE "\033[37m"
 #define DEFAULT "\033[0m"
 
+void	sendModeNotice(vector<Person *> &channel, string group, string nickname);
 void	sendGroup(Person & user, const string n_channel, const string msg);
 void	printClient(string msg, Person &server);
 void	printServer(string msg);

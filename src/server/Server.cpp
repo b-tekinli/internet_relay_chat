@@ -62,8 +62,6 @@ void	Server::setHostname()
 	int		return_number = gethostname(hostname_c, 1024);
 	checkSocket(return_number, "gethostname");
 	this->hostname = hostname_c;
-
-
 }
 
 void	Server::deleteUser(int fd)
@@ -79,17 +77,21 @@ void	Server::removeUserFrom(const string &channel, Person &user)
 {
 	int fd = user.getFd();
 	vector<Person *> &userList = this->getChannel(channel);
-	cout << "user " << user.getNickName() << " wants to quit" << endl;
 	for (vector<Person *>::size_type i = 0; i < userList.size(); i++)
 	{
 		Person *target = userList[i];
-		if (target != NULL)
-		{
-			cout << "sending message to: " << target->getNickName() << endl;
-			Response::createMessage().from(user).to(*target).addContent("Quit").addContent(": User " + user.getNickName() + " left.").send();
+		if (i == 0 && target == &user){ // this man is mod, drop the moderator
+
 		}
 		if (target && target->getFd() == fd)
+		{
 			userList.erase(userList.begin() + i);
+			if (userList.size() == 0)
+				start.getChannels().erase(channel);
+			else if (i == 0)
+				sendModeNotice(userList, channel, userList[i]->getNickName());
+			
+		}	
 		
 	}
 }

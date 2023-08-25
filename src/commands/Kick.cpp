@@ -8,13 +8,6 @@ static string join_input(const vector<string> &input) {
 	return str;
 }
 
-void	sendModeNotice(vector<Person *> &channel, string group, string nickname)
-{
-	Person	&king = *channel[0];
-	for (int i = 0; i < int(channel.size()); i++)
-		if (channel[i] != NULL)
-			Response::createMessage().from(king).to(*channel[i]).content("MODE").addContent(group + " +o " + nickname).send();
-}
 
 bool	inChannel(vector<Person *> users, string name)
 {
