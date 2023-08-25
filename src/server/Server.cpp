@@ -70,35 +70,26 @@ void	Server::deleteUser(int fd)
 {
 	if (this->users[fd] != NULL)
 	{
-		vector<string>&	channels = this->users[fd]->getWhichChannel();
-
-		for (vector<string>::size_type i = 0; i < channels.size(); i++)
-		{
-			removeUserFrom(channels[i], *this->users[fd]);
-		}
-		if (!this->users[fd])
-		{
-			delete this->users[fd];
-		}
-		this->users[fd] = NULL;
+		delete this->users[fd];
+		this->users.erase(fd);
 	}
 }
 
 void	Server::removeUserFrom(const string &channel, Person &user)
 {
 	int fd = user.getFd();
-	vector<Person *> &channelList = this->getChannel(channel);
+	vector<Person *> &userList = this->getChannel(channel);
 	cout << "user " << user.getNickName() << " wants to quit" << endl;
-	for (vector<Person *>::size_type i = 0; i < channelList.size(); i++)
+	for (vector<Person *>::size_type i = 0; i < userList.size(); i++)
 	{
-		Person *target = channelList[i];
+		Person *target = userList[i];
 		if (target != NULL)
 		{
 			cout << "sending message to: " << target->getNickName() << endl;
 			Response::createMessage().from(user).to(*target).addContent("Quit").addContent(": User " + user.getNickName() + " left.").send();
 		}
 		if (target && target->getFd() == fd)
-			channelList.erase(channelList.begin() + i);
+			userList.erase(userList.begin() + i);
 		
 	}
 }
