@@ -1,8 +1,11 @@
 #ifndef	UTILS_HPP
 #define	UTILS_HPP
 
+#include <Server.hpp>
+#include <Message.hpp>
 #include <DefineMod.hpp>
 #include <Global.hpp>
+#include <DefineMod.hpp>
 
 #define BLACK "\033[30m"
 #define RED "\033[31m"
