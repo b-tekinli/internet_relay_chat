@@ -2,6 +2,22 @@
 
 IRC, internet üzerindeki metin tabanlı iletişim protokolüdür ve gerçek zamanlı iletişim sağlar. IRC kullanıcıları, doğrudan mesaj alışverişi yapabilir ve grup kanallarına katılabilir. IRC istemcileri, IRC sunucusuna bağlanarak kanallara katılır. IRC sunucuları, bir ağ oluşturmak için birbirine bağlanır.
 
+## Çalıştırma
+- Proje dosyalarını bilgisayarınıza ya da sunucunuza indirdikten sonra terminal üzerinden projenin bulunduğu dizine gelin ve `make` komutunu çalıştırın. <br>
+	`make` komutu çalıştırıldıktan sonra `ircserv` adında bir çalıştırılabilir dosya oluşturulur. Bu dosyayı iki adet parametre ile çalıştırmanız gerekir
+- terminalinizde  `./ircserv <port> <şifre>` komutunu &lt;port&gt; değerini bir port numarası, &lt;şifre&gt; değerini de istediğiniz bir gizli kelime şeklinde belirleyerek çalıştırın.
+- En sevdiğiniz irc istemcisini (biz bunun için [kvirc](https://www.kvirc.net/) 'i seçtik) çalıştırın
+- Artık istemci ekranından sunucunuzun ya da bilgisayarınızın IP adresini ve belirttiğiniz port adresini girerek sunucuya bağlanabilir ve IRC ile çetleşmenin tadını çıkartabilirsiniz :D
+
+## Desteklenen IRC Komutları
+- **PASS**
+- **USER**
+- **NICK**
+- **JOIN**
+- **KICK**
+- **PRIVMSG**
+- **NOTICE**
+- **QUIT**
 
 ## Soket Programlama Nedir?
 
