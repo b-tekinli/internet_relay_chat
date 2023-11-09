@@ -279,7 +279,7 @@ Dynamic Array yapısını temsil eder. Arraylere göre daha esnek ve güvenli bi
 Özelliklerinden biri dinamik boyuta sahip olmasıdır. Yani Vector'ün boyu otomatik olarak ayarlanır ve ihtiyaç duyuldukça büyütüp küçültüleiblir. Aynı zamanda elemanlara indeks kullanarak erişebiliriz.
 
 `push_back` :arrow_rigth: Eleman eklemek için kullanılır.
-`pop_back` :arrow_right: Eleman silmek için kullanılır.
+`pop_back` :arrow_rigth: Eleman silmek için kullanılır.
 
 Vector elemanlarına döngü kullanarak veya iteratorlerle erişebiliriz.
 
